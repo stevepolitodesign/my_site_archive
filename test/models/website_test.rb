@@ -1,23 +1,35 @@
 require 'test_helper'
 
 class WebsiteTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @website = Website.new(title: "title", url: "https://www.example.com")
+  end
 
   test "should be valid" do
-    skip
+    assert @website.valid?
   end
 
   test "should have a title" do
-    skip
+    @website.title = ""
+    assert_not @website.valid?
   end
 
   test "should have a url" do
-    skip
+    @website.url = ""
+    assert_not @website.valid?
+  end
+
+  test "should have a valid url" do
+    invalid_urls = %w(example.com www http:\/\/)
+    invalid_urls.each do |invalid_url|
+      @website.url = invalid_urls
+      assert_not @website.valid?
+    end
   end
 
   test "should only save subdomain and domain as url" do
-    skip
+    @website.url = "https://www.example.com/some/path"
+    @website.save
+    assert_equal "https://www.example.com/", @website.reload.url
   end
 end

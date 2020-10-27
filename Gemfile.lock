@@ -180,6 +180,9 @@ GEM
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     uniform_notifier (1.13.0)
+    validate_url (1.0.13)
+      activemodel (>= 3.0.0)
+      public_suffix
     web-console (4.0.4)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -220,6 +223,7 @@ DEPENDENCIES
   strong_migrations (~> 0.7.1)
   turbolinks (~> 5)
   tzinfo-data
+  validate_url (~> 1.0)
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
