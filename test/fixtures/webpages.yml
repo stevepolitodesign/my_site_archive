@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  website: one
+  title: Interior Page
+  url: https://www.example.com/page/1
+
+two:
+  website: two
+  title: Contact Page
+  url: http://app.example.com/contact

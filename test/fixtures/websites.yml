@@ -2,8 +2,8 @@
 
 one:
   title: Website One
-  url: https://www.example.com
+  url: https://www.example.com/
 
-one:
+two:
   title: Website Two
-  url: http://app.example.com
+  url: http://app.example.com/
