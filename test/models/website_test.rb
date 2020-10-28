@@ -40,4 +40,12 @@ class WebsiteTest < ActiveSupport::TestCase
       @website.destroy
     end
   end
+
+  test "should destroy associated zone_files" do
+    @website.save
+    @website.zone_files.create
+    assert_difference("ZoneFile.count", -1) do
+      @website.destroy
+    end
+  end  
 end
