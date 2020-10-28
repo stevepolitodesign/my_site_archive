@@ -1,5 +1,6 @@
 class Webpage < ApplicationRecord
   belongs_to :website
+  has_many :screenshots, dependent: :destroy
 
   validates :title, :url, presence: true
   validates :url, url: true
