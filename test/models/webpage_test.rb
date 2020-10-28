@@ -41,5 +41,13 @@ class WebpageTest < ActiveSupport::TestCase
       @webpage.destroy
     end
   end
+
+  test "should destroy associated html_documents" do
+    @webpage.save
+    @webpage.html_documents.create(source_code: "source code")
+    assert_difference("HtmlDocument.count", -1) do
+      @webpage.destroy
+    end
+  end  
   
 end
