@@ -33,5 +33,13 @@ class WebpageTest < ActiveSupport::TestCase
     @webpage.save
     assert_equal "#{@website.url}some/path", @webpage.reload.url
   end
+
+  test "should destroy associated screenshots" do
+    @webpage.save
+    @webpage.screenshots.create
+    assert_difference("Screenshot.count", -1) do
+      @webpage.destroy
+    end
+  end
   
 end
