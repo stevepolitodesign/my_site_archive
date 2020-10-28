@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: Website One
+  url: https://www.example.com
+
+one:
+  title: Website Two
+  url: http://app.example.com
