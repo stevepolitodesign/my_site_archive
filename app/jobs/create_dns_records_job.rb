@@ -11,10 +11,10 @@ class CreateDnsRecordsJob < ApplicationJob
 
   private
 
-    def retreive_dns_records(address, record_type)
+    def retreive_dns_records(zone_file_id, address, record_type)
       result = DnsRecordRetriever.new(address, record_type)
       if result.success?
-        CreateDnsRecord.perform_later(result)
+        CreateDnsRecord.perform_later(zone_file_id, result)
       else
         return
       end
