@@ -1,5 +1,3 @@
-require "resolv"
-
 class DnsRecordCreator
     def initialize(zone_file, resource)
         @zone_file      = zone_file
