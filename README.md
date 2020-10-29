@@ -30,14 +30,27 @@
 - `belongs_to :webpage`
 - `source_code:text`
 
-### DNS Record
+### Zone File
 
 - `belongs_to :website`
 - `has_many :records`
 
-### Record
+### DNS Record
 
-- `belongs_to :dns_record`
+- `belongs_to :zone_file`
+- `content:text`
+- `priority:integer`
 - `type:integer`
-    - enum (MX, NS, A, AAA, CNAME, TXT)
-- `value:string`
+    - CNAME
+        - name
+    - A
+        - address
+    - AAAA
+        - address
+    - MX
+        - exchange
+        - preference
+    - NS
+        - name
+    - TXT 
+        - strings
