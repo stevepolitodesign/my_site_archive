@@ -10,7 +10,7 @@ class WebsitesController < ApplicationController
             if result.success?
                 redirect_to @website, notice: "Website created."
                 @zone_file = result.payload
-                CreateDnsRecordJob.perform_later(@zone_file)
+                CreateDnsRecordsJob.perform_later(@zone_file.id)
             else
                 @website.destroy
                 render "new", notice: result.error  
