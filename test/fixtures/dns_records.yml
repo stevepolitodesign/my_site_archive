@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  zone_file: one
+  content: MyText
+  priority: 1
+  record_type: 1
+
+two:
+  zone_file: two
+  content: MyText
+  priority: 1
+  record_type: 1
