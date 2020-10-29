@@ -1,0 +1,6 @@
+<%= form_with model: @website, local: true do |f| %>
+    <%= render partial: "shared/form_errors", locals: { object: f.object } %>
+    <%= f.text_field :title, required: true %>
+    <%= f.url_field :url, required: true %>
+    <%= f.submit %>
+<% end %>

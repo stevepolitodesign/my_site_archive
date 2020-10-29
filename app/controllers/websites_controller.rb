@@ -1,4 +1,6 @@
 class WebsitesController < ApplicationController
+    before_action :set_website, only: [:show]
+
     def new
         @website = Website.new
     end
@@ -20,9 +22,17 @@ class WebsitesController < ApplicationController
         end
     end
 
+    def show
+        raise
+    end
+
     private
 
         def website_params
             params.require(:website).permit(:title, :url)
+        end
+
+        def set_website
+            @website = Website.find(params[:id])
         end
 end
