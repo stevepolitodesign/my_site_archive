@@ -23,7 +23,6 @@ class WebsitesController < ApplicationController
     end
 
     def show
-        raise
     end
 
     private

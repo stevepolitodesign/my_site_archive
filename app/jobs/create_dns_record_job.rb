@@ -4,6 +4,6 @@ class CreateDnsRecordJob < ApplicationJob
   def perform(zone_file_id, resources)
     @zone_file = ZoneFile.find_by(id: zone_file_id)
     return if @zone_file.nil?
-    raise
+    byebug
   end
 end
