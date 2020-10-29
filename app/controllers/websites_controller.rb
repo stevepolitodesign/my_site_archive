@@ -7,7 +7,14 @@ class WebsitesController < ApplicationController
         @website = Website.create(website_params)
         if @website.save
             redirect_to @website, notice: "Website created."
-            CreateZoneFileJob.perform_later(@website.id)
+            result = ZoneFileCreator.new(@website).call
+            if result.success?
+                @zone_file = result.payload
+                CreateDnsRecordJob.perform_later(@zone_file)
+            else
+                @website.destroy
+                render "new", notice: result.error  
+            end
         else
             render "new"
         end
