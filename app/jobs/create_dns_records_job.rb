@@ -1,3 +1,5 @@
+require 'uri/http'
+
 class CreateDnsRecordsJob < ApplicationJob
   queue_as :default
 
@@ -5,7 +7,12 @@ class CreateDnsRecordsJob < ApplicationJob
     @zone_file = ZoneFile.find_by(id: zone_file_id)
     return if @zone_file.nil?
     DnsRecord.record_types.keys.each do |record_type|
-      retrieve_dns_records(@zone_file.id, @zone_file.website.url, record_type)
+      case record_type
+      when "cname"
+        retrieve_dns_records(@zone_file.id, url_with_subdomain_without_protocol(@zone_file.website.url), record_type)
+      else
+        retrieve_dns_records(@zone_file.id, url_without_protocol(@zone_file.website.url), record_type)
+      end
     end
   end
 
@@ -19,5 +26,15 @@ class CreateDnsRecordsJob < ApplicationJob
       else
         return
       end
+    end
+
+    def url_with_subdomain_without_protocol(url)
+      uri = URI.parse(url)
+      domain = PublicSuffix.parse(uri.host)
+    end
+
+    def url_without_protocol(url)
+      url = url_with_subdomain_without_protocol(url)
+      url.domain
     end
 end
