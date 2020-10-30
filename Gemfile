@@ -54,5 +54,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "bullet", "~> 6.1"
+gem "sidekiq", "~> 6.1"
 gem "strong_migrations", "~> 0.7.1"
 gem "validate_url", "~> 1.0"
