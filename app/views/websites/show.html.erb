@@ -1,1 +1,21 @@
-<%= debug(@website) %>
+<h1><%= @website.title %></h1>
+<%= link_to @website.url, @website.url, target: "_blank" %>
+<h2>DNS Records</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Record Type</th>
+            <th>Content</th>
+            <th>Priority</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @website.latest_zone_file.dns_records.each do |dns_record| %>
+            <tr>
+                <td><%= dns_record.record_type %></td>
+                <td><%= dns_record.content %></td>
+                <td><%= dns_record.priority %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
