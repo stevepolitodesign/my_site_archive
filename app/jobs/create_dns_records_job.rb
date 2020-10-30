@@ -9,9 +9,17 @@ class CreateDnsRecordsJob < ApplicationJob
     DnsRecord.record_types.keys.each do |record_type|
       case record_type
       when "cname"
-        retrieve_dns_records(@zone_file.id, url_with_subdomain_without_protocol(@zone_file.website.url), record_type)
+        retrieve_dns_records(
+          @zone_file.id,
+          url_with_subdomain_without_protocol(@zone_file.website.url),
+          record_type
+        )
       else
-        retrieve_dns_records(@zone_file.id, url_without_protocol(@zone_file.website.url), record_type)
+        retrieve_dns_records(
+          @zone_file.id,
+          url_without_protocol(@zone_file.website.url),
+          record_type
+        )
       end
     end
   end
