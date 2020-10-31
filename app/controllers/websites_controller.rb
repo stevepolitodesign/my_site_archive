@@ -24,6 +24,7 @@ class WebsitesController < ApplicationController
     end
 
     def show
+        @webpage = @website.webpages.build
     end
 
     private

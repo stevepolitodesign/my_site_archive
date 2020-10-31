@@ -1,0 +1,2 @@
+module WebpagesHelper
+end
