@@ -13,6 +13,7 @@ class Webpage < ApplicationRecord
 
   private
 
+	# TODO: Refactor, or consider setting the  self.website.url in the form.
 	def set_url
 		if self.url.present?
 			begin
