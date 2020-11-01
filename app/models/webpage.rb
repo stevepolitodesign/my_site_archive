@@ -14,9 +14,9 @@ class Webpage < ApplicationRecord
 
 	def url_should_match_website_url
 		begin
-			errors.add(:url, "The URL should start with #{self.website.url}.") if URI.join(self.url, "/").to_s != self.website.url
+			errors.add(:url, "should start with #{self.website.url}.") if URI.join(self.url, "/").to_s != self.website.url
 		rescue URI::InvalidURIError => exception
-			errors.add(:url, "URL is not valid")
+			errors.add(:url, "not valid")
 		end
     end
 end

@@ -11,7 +11,7 @@ class WebpagesController < ApplicationController
             redirect_to website_webpage_path(@website, @webpage), notice: "Webpage saved."
             CreateHtmlDocumentJob.perform_now(@webpage.id)
         else
-            redirect_to @website, notice: "There was an error saving this webpage."
+            redirect_to @website, notice: @webpage.errors.full_messages.to_sentence
         end
     end
 
