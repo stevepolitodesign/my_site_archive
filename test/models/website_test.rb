@@ -35,7 +35,7 @@ class WebsiteTest < ActiveSupport::TestCase
 
   test "should destroy associated webpages" do
     @website.save
-    @website.webpages.create(title: "title", url: "some/path")
+    @website.webpages.create(title: "title", url: @website.reload.url)
     assert_difference("Webpage.count", -1) do
       @website.destroy
     end

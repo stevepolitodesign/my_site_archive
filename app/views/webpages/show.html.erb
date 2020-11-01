@@ -1,0 +1,8 @@
+<%= debug(@webpage) %>
+<% if @webpage.latest_html_document.present? %>
+    <pre>
+        <code>
+            <%= @webpage.latest_html_document.source_code %>
+        </code>
+    </pre>
+<% end %>

@@ -29,7 +29,6 @@ class CreateDnsRecordsJob < ApplicationJob
     def retrieve_dns_records(zone_file_id, address, record_type)
       result = DnsRecordRetriever.new(address, record_type).call
       if result.success?
-        # CreateDnsRecordJob.perform_later(zone_file_id, result.payload)
         CreateDnsRecordJob.perform_now(zone_file_id, result.payload)
       else
         return
