@@ -9,7 +9,7 @@ class CreateHtmlDocumentJob < ApplicationJob
     return if @webpage.nil?
     begin
       document = Nokogiri::HTML(URI.open(@webpage.url))
-      @webpage.html_documents.create(source_code: document.content.to_s)
+      @webpage.html_documents.create(source_code: document.inner_html.to_s)
     rescue => exception
       logger.fatal exception
     end
