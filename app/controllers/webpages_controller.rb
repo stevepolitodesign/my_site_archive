@@ -9,7 +9,7 @@ class WebpagesController < ApplicationController
         @webpage = @website.webpages.create(webpage_params)
         if @webpage.save
             redirect_to website_webpage_path(@website, @webpage), notice: "Webpage saved."
-            CreateHtmlDocumentJob.perform_now(@webpage.id)
+            CreateHtmlDocumentJob.perform_later(@webpage.id)
         else
             redirect_to @website, notice: @webpage.errors.full_messages.to_sentence
         end
