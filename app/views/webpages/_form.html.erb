@@ -3,6 +3,6 @@
     <%= f.label :title %>
     <%= f.text_field :title, required: true %>
     <%= f.label :url %>
-    <%= f.text_field :url %>
+    <%= f.url_field :url, required: true, value: @website.url %>
     <%= f.submit %>
 <% end %>

@@ -8,22 +8,15 @@ class Webpage < ApplicationRecord
 
   	validates :title, :url, presence: true
   	validates :url, url: true
-
-  	before_validation :set_url
+	validate :url_should_match_website_url
 
   private
 
-	# TODO: Refactor, or consider setting the  self.website.url in the form.
-	def set_url
-		if self.url.present?
-			begin
-				uri = URI::parse(self.url)
-				self.url = self.website.url + uri.path
-			rescue URI::InvalidURIError => exception
-				self.url = self.website.url + self.url
-			end
-      	else
-        	self.url = self.website.url
-      	end
+	def url_should_match_website_url
+		begin
+			errors.add(:url, "The URL should start with #{self.website.url}.") if URI.join(self.url, "/").to_s != self.website.url
+		rescue URI::InvalidURIError => exception
+			errors.add(:url, "URL is not valid")
+		end
     end
 end

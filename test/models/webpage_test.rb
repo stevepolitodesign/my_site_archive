@@ -28,10 +28,9 @@ class WebpageTest < ActiveSupport::TestCase
     end
   end
 
-  test "should set url based on associated website url" do
-    @webpage.url = "some/path"
-    @webpage.save
-    assert_equal "#{@website.url}some/path", @webpage.reload.url
+  test "url should match website.url" do
+    @webpage.url = "https://www.foo.com/"
+    assert_not @webpage.valid?
   end
 
   test "should destroy associated screenshots" do
