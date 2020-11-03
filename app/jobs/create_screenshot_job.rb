@@ -3,20 +3,22 @@ require 'capybara/dsl'
 class CreateScreenshotJob < ApplicationJob
   include Capybara::DSL
 
-  around_enqueue :configure_capybara
+  after_perform :configure_capybara
 
   queue_as :default
 
   def perform(webpage_id)
     @webpage = Webpage.find_by(id: webpage_id)
     return if @webpage.nil?
+    # TODO: Break these up into smaller methods.
     visit @webpage.url
+    directory = File.join(Rails.root, 'tmp', 'screenshots')
+    Dir.mkdir(directory) unless File.directory?(directory)
+    file_name = "#{@webpage.url.parameterize}.png"
+    file_path = page.save_screenshot("#{directory}/#{@webpage.url.parameterize}.png")
     # TODO: Make this a service object.
-    path = File.join Rails.root, 'tmp', 'screenshots'
-    FileUtils.mkdir_p(path) unless File.exist?(path)
-    file_path = page.save_screenshot(path)
     @screenshot = @webpage.screenshots.build
-    @screenshot.image.attach(io: file_path)
+    @screenshot.image.attach(io: File.open(file_path), filename: file_name)
     @screenshot.save
     # TODO: Delete file after save
   end
