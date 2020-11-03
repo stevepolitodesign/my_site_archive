@@ -6,11 +6,7 @@ class CreateScreenshotJob < ApplicationJob
     return if @webpage.nil?
     result = ScreenshotCapturer.new(@webpage.url).call
     if result.success?
-      # TODO: Make this a service object.
-      file_name = @webpage.url.parameterize
-      @screenshot = @webpage.screenshots.build
-      @screenshot.image.attach(io: File.open(result.payload), filename: file_name)
-      @screenshot.save
+      result = ScreenshotCreator.new(webpage_id, result.payload).call
       # TODO: Delete temporary screenshot.
     else
       return
