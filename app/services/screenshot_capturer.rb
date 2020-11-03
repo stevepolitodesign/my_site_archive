@@ -36,7 +36,8 @@ class ScreenshotCapturer
         def visit_url
             visit url
         end
-
+        
+        # TODO: Make screenshot full page, and wider.
         def take_screenshot(directory)
             file_name = "#{url.parameterize}.png"
             page.save_screenshot("#{directory}/#{url.parameterize}.png")
