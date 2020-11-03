@@ -1,4 +1,8 @@
-<%= debug(@webpage) %>
+<h1><%= @webpage.title %></h1>
+<%= link_to @webpage.url, @webpage.url, target: "_blank" %>
+<% if @webpage.latest_screenshot.present? %>
+    <%= image_tag @webpage.latest_screenshot.image%>
+<% end %>
 <% if @webpage.latest_html_document.present? %>
     <pre>
         <code>
