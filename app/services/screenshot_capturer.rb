@@ -39,8 +39,8 @@ class ScreenshotCapturer
         
         # TODO: Make screenshot full page, and wider.
         def take_screenshot(directory)
-            file_name = "#{url.parameterize}.png"
-            page.save_screenshot("#{directory}/#{url.parameterize}.png")
+            file_name = "#{url.parameterize}-#{Time.zone.now.to_s.parameterize}.png"
+            page.save_screenshot("#{directory}/#{file_name}")
         end
         
 end

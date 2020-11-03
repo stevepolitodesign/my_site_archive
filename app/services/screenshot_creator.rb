@@ -27,7 +27,7 @@ class ScreenshotCreator
         end
 
         def attach_screenshot
-            @screenshot.image.attach(io: File.open(@file), filename: "#{@webpage.url.parameterize}.png")
+            @screenshot.image.attach(io: File.open(@file), filename: @file.split("/").last)
         end
 
         def save_screenshot
