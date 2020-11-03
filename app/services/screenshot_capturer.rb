@@ -6,7 +6,7 @@ class ScreenshotCapturer
     def initialize(url)
         @url = url
     end
-
+    
     def call
         begin
             configure_capybara
@@ -42,10 +42,6 @@ class ScreenshotCapturer
         def take_screenshot(directory)
             file_name = "#{url.parameterize}.png"
             page.save_screenshot("#{directory}/#{url.parameterize}.png")
-        end
-
-        def delete_screenshot
-            # TODO
         end
         
 end

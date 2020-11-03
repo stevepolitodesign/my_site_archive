@@ -11,6 +11,7 @@ class CreateScreenshotJob < ApplicationJob
       @screenshot = @webpage.screenshots.build
       @screenshot.image.attach(io: File.open(result.payload), filename: file_name)
       @screenshot.save
+      # TODO: Delete temporary screenshot.
     else
       return
     end
