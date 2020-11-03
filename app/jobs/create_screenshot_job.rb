@@ -6,8 +6,9 @@ class CreateScreenshotJob < ApplicationJob
     return if @webpage.nil?
     result = ScreenshotCapturer.new(@webpage.url).call
     if result.success?
-      result = ScreenshotCreator.new(webpage_id, result.payload).call
-      # TODO: Delete temporary screenshot.
+      screenshot = result.payload
+      ScreenshotCreator.new(webpage_id, screenshot).call
+      TmpFileRemover.new(screenshot).call
     else
       return
     end

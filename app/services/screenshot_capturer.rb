@@ -8,15 +8,13 @@ class ScreenshotCapturer
     end
     
     def call
-        begin
-            configure_capybara
-            create_directory
-            visit_url
-            screenshot = take_screenshot(create_directory)
-            OpenStruct.new({ success?: true, payload: screenshot })
-        rescue => error
-            OpenStruct.new({ success?: false, error: error })
-        end
+        configure_capybara
+        create_directory
+        visit_url
+        screenshot = take_screenshot(create_directory)
+        OpenStruct.new({ success?: true, payload: screenshot })
+    rescue => error
+        OpenStruct.new({ success?: false, error: error })
     end
 
     private
