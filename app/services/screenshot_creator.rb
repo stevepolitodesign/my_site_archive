@@ -5,15 +5,13 @@ class ScreenshotCreator
     end
 
     def call
-        begin
-            set_webpage
-            build_screenshot
-            attach_screenshot
-            @screenshot = save_screenshot
-            OpenStruct.new({ success?: true, payload: @screenshot })
-        rescue => error
-            OpenStruct.new({ success?: false, error: error })
-        end
+        set_webpage
+        build_screenshot
+        attach_screenshot
+        @screenshot = save_screenshot
+        OpenStruct.new({ success?: true, payload: @screenshot })
+    rescue => error
+        OpenStruct.new({ success?: false, error: error })
     end
 
     private

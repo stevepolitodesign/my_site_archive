@@ -8,6 +8,7 @@ class WebsitesController < ApplicationController
     def create
         @website = Website.create(website_params)
         if @website.save
+            # TODO: Make this a job instead
             result = ZoneFileCreator.new(@website).call
             if result.success?
                 redirect_to @website, notice: "Website created."
