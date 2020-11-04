@@ -5,7 +5,7 @@ class WebsiteFlowsTest < ApplicationSystemTestCase
     visit new_website_path
 
     fill_in "Title", with: "Title"
-    fill_in "Url", with: "https://www.google.com"
+    fill_in "Url", with: "https://www.example.com"
     click_button "Create Website"
     
     assert_text "Website created"

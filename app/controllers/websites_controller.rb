@@ -8,15 +8,8 @@ class WebsitesController < ApplicationController
     def create
         @website = Website.create(website_params)
         if @website.save
-            result = ZoneFileCreator.new(@website).call
-            if result.success?
-                redirect_to @website, notice: "Website created."
-                @zone_file = result.payload
-                CreateDnsRecordsJob.perform_later(@zone_file.id)
-            else
-                @website.destroy
-                render "new", notice: result.error  
-            end
+            redirect_to @website, notice: "Website created."
+            CreateZoneFileJob.perform_later(@website.id)
         else
             render "new"
         end

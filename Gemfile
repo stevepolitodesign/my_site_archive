@@ -43,17 +43,17 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  gem "vcr", "~> 6.0"
+  gem "webmock", "~> 3.9"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "bullet", "~> 6.1"
+gem 'capybara', '>= 2.15'
 gem "sidekiq", "~> 6.1"
+gem 'selenium-webdriver'
 gem "strong_migrations", "~> 0.7.1"
 gem "validate_url", "~> 1.0"
+gem 'webdrivers'

@@ -4,6 +4,7 @@ cache:
   - yarn
 services:
   - postgresql
+  - redis-server
 before_install:
   - nvm install --lts
 before_script:

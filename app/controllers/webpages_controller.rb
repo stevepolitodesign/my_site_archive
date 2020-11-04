@@ -10,6 +10,7 @@ class WebpagesController < ApplicationController
         if @webpage.save
             redirect_to website_webpage_path(@website, @webpage), notice: "Webpage saved."
             CreateHtmlDocumentJob.perform_later(@webpage.id)
+            CreateScreenshotJob.perform_later(@webpage.id)
         else
             redirect_to @website, notice: @webpage.errors.full_messages.to_sentence
         end
