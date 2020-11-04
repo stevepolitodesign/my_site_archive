@@ -50,6 +50,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem "aws-sdk-s3", require: false
 gem "bullet", "~> 6.1"
 gem 'capybara', '>= 2.15'
 gem "sidekiq", "~> 6.1"
