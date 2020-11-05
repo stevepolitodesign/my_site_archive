@@ -2,13 +2,13 @@ class ScreenshotCreator
     def initialize(webpage_id, file)
         @webpage_id = webpage_id
         @file       = file
+        @webpage    = set_webpage
+        @screenshot = build_screenshot
     end
 
     def call
-        set_webpage
-        build_screenshot
         attach_screenshot
-        @screenshot = save_screenshot
+        @screenshot = @screenshot.save
         OpenStruct.new({ success?: true, payload: @screenshot })
     rescue => error
         OpenStruct.new({ success?: false, error: error })
@@ -19,11 +19,11 @@ class ScreenshotCreator
         attr_reader :webpage_id
 
         def set_webpage
-            @webpage = Webpage.find_by(id: webpage_id)
+            Webpage.find_by(id: webpage_id)
         end
 
         def build_screenshot
-            @screenshot = @webpage.screenshots.build
+            @webpage.screenshots.build
         end
 
         def attach_screenshot
