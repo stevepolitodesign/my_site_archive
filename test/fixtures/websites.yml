@@ -3,7 +3,9 @@
 one:
   title: Website One
   url: https://www.example.com/
+  user: confirmed_user_with_websites
 
 two:
   title: Website Two
   url: http://app.example.com/
+  user: confirmed_user_with_websites
