@@ -1,4 +1,5 @@
 class WebpagesController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_webpage, only: [:show]
     before_action :set_website, only: [:create]
 

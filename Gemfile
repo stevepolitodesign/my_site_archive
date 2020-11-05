@@ -55,7 +55,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "aws-sdk-s3", require: false
 gem "bullet", "~> 6.1"
+gem "data_migrate", "~> 6.5"
+gem "devise", "~> 4.7"
 gem "ferrum", "~> 0.9"
+gem "sendgrid-ruby", "~> 6.3"
 gem "sidekiq", "~> 6.1"
 gem "strong_migrations", "~> 0.7.1"
 gem "validate_url", "~> 1.0"
