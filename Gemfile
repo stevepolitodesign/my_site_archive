@@ -53,6 +53,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "aws-sdk-s3", require: false
 gem "bullet", "~> 6.1"
 gem 'capybara', '>= 2.15'
+gem "ferrum", "~> 0.9"
 gem "sidekiq", "~> 6.1"
 gem 'selenium-webdriver'
 gem "strong_migrations", "~> 0.7.1"

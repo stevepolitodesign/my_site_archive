@@ -1,18 +1,17 @@
-require 'capybara/dsl'
-
 class ScreenshotCapturer
-    include Capybara::DSL
    
     def initialize(url)
-        @url = url
+        @url        = url
+        @directory  = create_directory
+        @screenshot = path_to_screenshot(@directory)
     end
     
     def call
-        configure_capybara
-        create_directory
-        visit_url
-        screenshot = take_screenshot(create_directory)
-        OpenStruct.new({ success?: true, payload: screenshot })
+        browser = Ferrum::Browser.new
+        browser.goto(@url)
+        browser.screenshot(path: @screenshot)
+        browser.quit
+        OpenStruct.new({ success?: true, payload: @screenshot })
     rescue => error
         OpenStruct.new({ success?: false, error: error })
     end
@@ -20,27 +19,16 @@ class ScreenshotCapturer
     private
 
         attr_reader :url
-
-        def configure_capybara
-            Capybara.run_server = false
-            Capybara.current_driver = :selenium_chrome_headless
-            Capybara.app_host = url
-        end
         
         def create_directory
             directory = File.join(Rails.root, 'tmp', 'screenshots')
             Dir.mkdir(directory) unless File.directory?(directory)
             return directory
         end
-
-        def visit_url
-            visit url
-        end
         
         # TODO: Make screenshot full page, and wider.
-        def take_screenshot(directory)
-            file_name = "#{url.parameterize}-#{Time.zone.now.to_s.parameterize}.png"
-            page.save_screenshot("#{directory}/#{file_name}")
+        def path_to_screenshot(directory)
+            "#{directory}/#{url.parameterize}-#{Time.zone.now.to_s.parameterize}.png"
         end
         
 end
