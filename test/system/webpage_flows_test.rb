@@ -10,5 +10,9 @@ class WebpageFlowsTest < ApplicationSystemTestCase
 
     fill_in "Title", with: "Title"
     click_button "Create Webpage"
+
+    sleep 3
+    
+    take_screenshot
   end
 end
