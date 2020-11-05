@@ -1,6 +1,7 @@
 require 'uri'
 
 class Website < ApplicationRecord
+    belongs_to :user
     has_many :webpages, dependent: :destroy
     has_many :zone_files, dependent: :destroy
     has_one :latest_zone_file, -> { order('created_at') }, class_name: "ZoneFile"

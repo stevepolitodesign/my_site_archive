@@ -1,12 +1,13 @@
 class WebsitesController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_website, only: [:show]
 
     def new
-        @website = Website.new
+        @website = current_user.websites.build
     end
 
     def create
-        @website = Website.create(website_params)
+        @website = current_user.websites.create(website_params)
         if @website.save
             redirect_to @website, notice: "Website created."
             CreateZoneFileJob.perform_later(@website.id)
