@@ -1,0 +1,92 @@
+<%= javascript_tag do -%>
+var stripe = Stripe(
+  "<%= escape_javascript Rails.application.credentials.dig(:stripe, :public_key) %>"
+);
+var elements = stripe.elements();
+var style = {
+  base: {
+    color: "#32325d",
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: "antialiased",
+    fontSize: "16px",
+    "::placeholder": {
+      color: "#aab7c4",
+    },
+  },
+  invalid: {
+    color: "#fa755a",
+    iconColor: "#fa755a",
+  },
+};
+
+var cardElement = elements.create("card", { style: style });
+cardElement.mount("#card-element");
+cardElement.on("change", function (event) {
+  var displayError = document.getElementById("card-errors");
+  if (event.error) {
+    displayError.textContent = event.error.message;
+  } else {
+    displayError.textContent = "";
+  }
+});
+var form = document.getElementById("subscription-form");
+
+form.addEventListener("submit", function (ev) {
+  ev.preventDefault();
+
+  // If a previous payment was attempted, get the latest invoice
+  const latestInvoicePaymentIntentStatus = localStorage.getItem(
+    "latestInvoicePaymentIntentStatus"
+  );
+
+  if (latestInvoicePaymentIntentStatus === "requires_payment_method") {
+    const invoiceId = localStorage.getItem("latestInvoiceId");
+    const isPaymentRetry = true;
+    // create new payment method & retry payment on invoice with new payment method
+    createPaymentMethod({
+      card,
+      isPaymentRetry,
+      invoiceId,
+    });
+  } else {
+    // create new payment method & create subscription
+    createPaymentMethod({ card });
+  }
+});
+
+function createPaymentMethod({ card, isPaymentRetry, invoiceId }) {
+  // Set up payment method for recurring usage
+  let billingName = document.querySelector("#name").value;
+
+  stripe
+    .createPaymentMethod({
+      type: "card",
+      card: card,
+      billing_details: {
+        name: billingName,
+      },
+    })
+    .then((result) => {
+      if (result.error) {
+        displayError(result);
+      } else {
+        if (isPaymentRetry) {
+          // Update the payment method and retry invoice payment
+          retryInvoiceWithNewPaymentMethod({
+            customerId: customerId,
+            paymentMethodId: result.paymentMethod.id,
+            invoiceId: invoiceId,
+            priceId: priceId,
+          });
+        } else {
+          // Create the subscription
+          createSubscription({
+            customerId: customerId,
+            paymentMethodId: result.paymentMethod.id,
+            priceId: priceId,
+          });
+        }
+      }
+    });
+}    
+<% end -%>
