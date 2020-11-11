@@ -147,6 +147,8 @@ GEM
     public_suffix (4.0.6)
     puma (4.3.6)
       nio4r (~> 2.0)
+    pundit (2.1.0)
+      activesupport (>= 3.0.0)
     rack (2.2.3)
     rack-proxy (0.6.5)
       rack
@@ -282,6 +284,7 @@ DEPENDENCIES
   pay (~> 2.2)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
+  pundit (~> 2.1)
   rails (~> 6.0.3, >= 6.0.3.4)
   redis (~> 4.0)
   sass-rails (>= 6)
