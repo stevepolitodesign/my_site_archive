@@ -5,6 +5,7 @@ class WebsitesController < ApplicationController
 
     def new
         @website = current_user.websites.build
+        authorize @website
     end
 
     def create
