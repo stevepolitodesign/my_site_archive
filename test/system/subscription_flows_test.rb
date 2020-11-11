@@ -20,4 +20,8 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
   test "preventing suplicate subscriptions" do
     skip
   end
+
+  test "updating a card" do
+    skip
+  end
 end
