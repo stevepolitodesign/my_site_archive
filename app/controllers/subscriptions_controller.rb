@@ -1,8 +1,8 @@
 class SubscriptionsController < ApplicationController
     before_action :authenticate_user!
 
-    # TODO: Prohibit a user from accessing this route if they have a subscription.
     def new
+        authorize Pay::Subscription.new, policy_class: SubscriptionPolicy
     end
 
     def create
@@ -15,6 +15,7 @@ class SubscriptionsController < ApplicationController
     end
 
     def edit
+        authorize Pay::Subscription.new, policy_class: SubscriptionPolicy
     end
 
     def update

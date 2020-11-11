@@ -46,4 +46,11 @@ class ApplicationPolicy
       scope.all
     end
   end
+
+  private
+
+    def user_subscribed?
+      user.subscriptions.active.present?
+    end
+
 end
