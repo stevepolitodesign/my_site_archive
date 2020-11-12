@@ -1,1 +1,2 @@
 <p><strong>Current Plan:</strong> <%= @current_plan.formatted_name %></p>
+<%= link_to "Cancel My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" } %>
