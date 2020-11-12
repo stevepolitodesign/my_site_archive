@@ -1,8 +1,11 @@
 class SubscriptionsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_subscription, only: [:edit, :update]
+    before_action :set_subscription, only: [:show, :edit, :update]
     before_action :set_available_plans, only: [:edit]
-    before_action :set_current_plan, only: [:edit, :update]
+    before_action :set_current_plan, only: [:show, :edit, :update]
+
+    def show
+    end
 
     def new
         authorize Pay::Subscription.new, policy_class: SubscriptionPolicy
