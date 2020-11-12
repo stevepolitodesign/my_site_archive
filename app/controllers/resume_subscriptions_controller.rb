@@ -8,6 +8,6 @@ class ResumeSubscriptionsController < ApplicationController
         current_user.subscription.resume
         redirect_to root_path, notice: "Your subscription has been re-activated."
     rescue Pay::Error
-        redirect_to edit_subscription_path, notice: "There was an error resuming your subscription."
+        redirect_to edit_subscription_path, alert: "There was an error resuming your subscription."
     end
 end

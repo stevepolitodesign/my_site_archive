@@ -20,7 +20,7 @@ class SubscriptionsController < ApplicationController
         current_user.subscribe(plan: params[:plan])
         redirect_to root_path, notice: "Subscribed"
     rescue Pay::Error
-        redirect_to new_subscription_path, notice: "There was an error creating your subscription."
+        redirect_to new_subscription_path, alert: "There was an error creating your subscription."
     end
 
     def edit
@@ -31,14 +31,14 @@ class SubscriptionsController < ApplicationController
         current_user.subscription.swap(params[:plan])
         redirect_to root_path, notice: "Your subscription has been updated."
     rescue Pay::Error
-        redirect_to edit_subscription_path, notice: "There was an error updating your subscription."
+        redirect_to edit_subscription_path, alert: "There was an error updating your subscription."
     end
 
     def destroy
         current_user.subscription.cancel
         redirect_to root_path, notice: "Your subscription has been canceled. You will lose access in #{time_ago_in_words current_user.subscription.ends_at}"
     rescue Pay::Error
-        redirect_to subscription_path, notice: "There was an error canceling your subscription."
+        redirect_to subscription_path, alert: "There was an error canceling your subscription."
     end
 
 end
