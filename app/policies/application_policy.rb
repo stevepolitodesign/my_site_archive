@@ -50,7 +50,7 @@ class ApplicationPolicy
   private
 
     def user_subscribed?
-      user.subscriptions.active.present?
+      user.subscribed?
     end
 
     def user_unsubscribed?
