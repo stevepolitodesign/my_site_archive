@@ -1,1 +1,12 @@
-<%= debug @subscription %>
+<p><strong>Current Plan:</strong> <%= @current_plan.formatted_name %></p>
+<p><strong>Available Plans:</strong></p>
+<ul>
+    <% @available_plans.each do |available_plan| %>
+        <li>
+            <%= form_with url: subscription_path, local: true, method: :put do |f| %>
+                <%= f.hidden_field :plan, value: available_plan.processor_id %>
+                <%= f.submit available_plan.formatted_name %>
+            <% end %>
+        </li>
+    <% end %>
+</ul>

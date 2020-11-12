@@ -1,6 +1,8 @@
 class SubscriptionsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_subscription, only: [:edit]
+    before_action :set_subscription, only: [:edit, :update]
+    before_action :set_available_plans, only: [:edit]
+    before_action :set_current_plan, only: [:edit, :update]
 
     def new
         authorize Pay::Subscription.new, policy_class: SubscriptionPolicy
@@ -8,8 +10,7 @@ class SubscriptionsController < ApplicationController
 
     def create
         current_user.update(processor: "stripe", card_token: params[:card_token])
-        # TODO: Correctly set name:
-        current_user.subscribe(name: params[:plan], plan: params[:plan])
+        current_user.subscribe(plan: params[:plan])
         redirect_to root_path, notice: "Subscribed"
     rescue Pay::Error
         redirect_to new_subscription_path, notice: "There was an error creating your subscription."
@@ -20,6 +21,10 @@ class SubscriptionsController < ApplicationController
     end
 
     def update
+        current_user.subscription.swap(params[:plan])
+        redirect_to root_path, notice: "Your subscription has been updated."
+    rescue Pay::Error
+        redirect_to edit_subscription_path, notice: "There was an error updating your subscription."
     end
 
     def destroy
@@ -28,11 +33,15 @@ class SubscriptionsController < ApplicationController
     private
 
         def set_subscription
-            @subscription = Pay::Subscription.find_by(
-                owner_type: "User",
-                owner_id: current_user.id,
-                status: "active",
-            )
+            @subscription = current_user.subscription
+        end
+
+        def set_available_plans
+            @available_plans = Plan.where.not(processor_id: @subscription.processor_plan)
+        end
+
+        def set_current_plan
+            @current_plan = Plan.find_by(processor_id: @subscription.processor_plan)
         end
 
 end
