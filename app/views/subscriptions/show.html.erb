@@ -5,3 +5,5 @@
     <p>Your subscription is set to end on <%= current_user.subscription.ends_at %></p>
     <%= link_to "Resume My Subscription", resume_subscription_path, method: :put %>    
 <% end %>
+<hr/>
+<%= render "credit_cards/form" %>
