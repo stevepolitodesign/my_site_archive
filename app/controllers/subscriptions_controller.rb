@@ -8,7 +8,7 @@ class SubscriptionsController < ApplicationController
 
     def create
         current_user.update(processor: "stripe", card_token: params[:card_token])
-        # TODO: Set these values through a Plan model
+        # TODO: Correctly set name:
         current_user.subscribe(name: params[:plan], plan: params[:plan])
         redirect_to root_path, notice: "Subscribed"
     rescue Pay::Error
