@@ -1,10 +1,10 @@
 class SubscriptionPolicy < ApplicationPolicy
   def new?
-    return true unless user_subscribed?
+    user_unsubscribed?
   end
 
   def edit?
-    return true if user_subscribed?
+    user_subscribed?
   end
 
   class Scope < Scope

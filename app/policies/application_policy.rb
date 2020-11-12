@@ -53,4 +53,8 @@ class ApplicationPolicy
       user.subscriptions.active.present?
     end
 
+    def user_unsubscribed?
+      !user_subscribed?
+    end
+
 end
