@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
     include ActionView::Helpers::DateHelper
+    include Subscribable
 
     before_action :authenticate_user!
     before_action :set_subscription, only: [:show, :edit, :update, :destroy]
@@ -7,6 +8,7 @@ class SubscriptionsController < ApplicationController
     before_action :set_current_plan, only: [:show, :edit, :update]
 
     def show
+        authorize @subscription, policy_class: SubscriptionPolicy
     end
 
     def new
@@ -38,19 +40,5 @@ class SubscriptionsController < ApplicationController
     rescue Pay::Error
         redirect_to subscription_path, notice: "There was an error canceling your subscription."
     end
-
-    private
-
-        def set_subscription
-            @subscription = current_user.subscription
-        end
-
-        def set_available_plans
-            @available_plans = Plan.where.not(processor_id: @subscription.processor_plan)
-        end
-
-        def set_current_plan
-            @current_plan = Plan.find_by(processor_id: @subscription.processor_plan)
-        end
 
 end

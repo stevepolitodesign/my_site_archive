@@ -1,2 +1,7 @@
 <p><strong>Current Plan:</strong> <%= @current_plan.formatted_name %></p>
-<%= link_to "Cancel My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" } %>
+<% unless current_user.subscription.ends_at.present? %>
+    <%= link_to "Cancel My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" } %>
+<% else %>
+    <p>Your subscription is set to end on <%= current_user.subscription.ends_at %></p>
+    <%= link_to "Resume My Subscription", resume_subscription_path, method: :put %>    
+<% end %>

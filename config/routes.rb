@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "static_pages#home"
   devise_for :users
   resource :subscription
+  resource :resume_subscription, only: [:update]
   resources :html_ducuments, only: [:show]
   resources :websites do
     resources :webpages, only: [:show, :create] do
