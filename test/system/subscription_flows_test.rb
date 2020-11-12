@@ -1,6 +1,8 @@
 require "application_system_test_case"
 
 class SubscriptionFlowsTest < ApplicationSystemTestCase
+  # TODO: Use VCR
+
   test "creating a subscription" do
     skip
   end
@@ -22,6 +24,10 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
   end
 
   test "updating a card" do
+    skip
+  end
+
+  test "resuming a subscription" do
     skip
   end
 end
