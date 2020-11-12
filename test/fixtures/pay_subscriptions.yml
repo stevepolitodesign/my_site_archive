@@ -1,0 +1,8 @@
+subscribed_user_subscription:
+  owner_type: User
+  owner_id: <%= ActiveRecord::FixtureSet.identify(:subscribed_user_with_websites) %>
+  name: default
+  processor: stripe
+  processor_id: sub_123
+  processor_plan: price_1HkrqzIZ6Y8BQ2bm4CJfzmno
+  status: active

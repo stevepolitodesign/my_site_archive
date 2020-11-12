@@ -2,7 +2,7 @@ require 'test_helper'
 
 class WebsiteTest < ActiveSupport::TestCase
   def setup
-    @user = users(:confirmed_user_with_websites)
+    @user = users(:subscribed_user_with_websites)
     @website = @user.websites.build(title: "title", url: "https://www.example.com")
   end
 
