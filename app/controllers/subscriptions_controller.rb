@@ -9,6 +9,7 @@ class SubscriptionsController < ApplicationController
 
     def show
         authorize @subscription, policy_class: SubscriptionPolicy
+        @charges = current_user.charges
     end
 
     def new
