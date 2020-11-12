@@ -17,7 +17,7 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
     skip
   end
 
-  test "preventing suplicate subscriptions" do
+  test "preventing duplicate subscriptions" do
     skip
   end
 
