@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "static_pages#home"
   devise_for :users
-  resources :subscriptions, except: [:index, :show]
+  resource :subscription
   resources :html_ducuments, only: [:show]
   resources :websites do
     resources :webpages, only: [:show, :create] do
