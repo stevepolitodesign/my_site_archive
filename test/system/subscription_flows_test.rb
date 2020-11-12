@@ -2,6 +2,8 @@ require "application_system_test_case"
 
 class SubscriptionFlowsTest < ApplicationSystemTestCase
   # TODO: Use VCR
+  # TODO: Test failing payments and/or expired cards
+  # TODO: Test expired subscriptions
 
   test "creating a subscription" do
     skip
