@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
     before_action :authenticate_user!
+    before_action :set_subscription, only: [:edit]
 
     def new
         authorize Pay::Subscription.new, policy_class: SubscriptionPolicy
@@ -15,7 +16,7 @@ class SubscriptionsController < ApplicationController
     end
 
     def edit
-        authorize Pay::Subscription.new, policy_class: SubscriptionPolicy
+        authorize @subscription, policy_class: SubscriptionPolicy
     end
 
     def update
@@ -23,5 +24,15 @@ class SubscriptionsController < ApplicationController
 
     def destroy
     end
+
+    private
+
+        def set_subscription
+            @subscription = Pay::Subscription.find_by(
+                owner_type: "User",
+                owner_id: current_user.id,
+                status: "active",
+            )
+        end
 
 end
