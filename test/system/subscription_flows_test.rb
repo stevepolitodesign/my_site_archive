@@ -4,9 +4,17 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
   # TODO: Use VCR
   # TODO: Test failing payments and/or expired cards
   # TODO: Test expired subscriptions
+  def setup
+    @unsubscribed_user = users(:unsubscribed_user)
+  end
 
   test "creating a subscription" do
-    skip
+    sign_in @unsubscribed_user
+
+    visit new_subscription_path
+    sleep 15
+    find_field("cardnumber", visible: :all).send_keys("42424424244242442424")
+    take_screenshot
   end
 
   test "updating a subscription" do
