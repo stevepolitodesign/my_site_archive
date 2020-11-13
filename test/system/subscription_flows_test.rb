@@ -9,12 +9,18 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
   end
 
   test "creating a subscription" do
-    sign_in @unsubscribed_user
+    VCR.use_cassette("stripe") do
+      sign_in @unsubscribed_user
 
-    visit new_subscription_path
-    sleep 15
-    find_field("cardnumber", visible: :all).send_keys("42424424244242442424")
-    take_screenshot
+      visit new_subscription_path
+
+      assert_difference("Pay::Subscription.count") do
+        fill_out_subscription_form
+        click_button "Save"
+        sleep 5
+      end
+
+    end
   end
 
   test "updating a subscription" do
