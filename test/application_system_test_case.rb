@@ -4,11 +4,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
 
   def fill_out_subscription_form(
-    card_number = "4242 4242 4242 4242",
-    exp_date = (1.year.from_now).strftime("%m%y"),
-    cvc = "123",
-    postal = "01234",
-    name = "John Q. Sample"
+    card_number: "4242 4242 4242 4242",
+    exp_date: (1.year.from_now).strftime("%m%y"),
+    cvc: "123",
+    postal: "01234",
+    name: "John Q. Sample"
   )
     frame = find("iframe")
     within_frame(frame) do
