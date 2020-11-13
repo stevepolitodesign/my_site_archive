@@ -1,7 +1,6 @@
 require "application_system_test_case"
 
 class SubscriptionFlowsTest < ApplicationSystemTestCase
-  # TODO: Use VCR
   # TODO: Test failing payments and/or expired cards
   # TODO: Test expired subscriptions
   def setup
@@ -9,18 +8,13 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
   end
 
   test "creating a subscription" do
-    VCR.use_cassette("stripe") do
-      sign_in @unsubscribed_user
-
-      visit new_subscription_path
-
-      assert_difference("Pay::Subscription.count") do
-        fill_out_subscription_form
-        click_button "Save"
-        sleep 5
-      end
-
-    end
+    sign_in @unsubscribed_user
+    visit new_subscription_path
+    fill_out_subscription_form
+    click_button "Save"
+    sleep 5
+    assert_text "You are now subscribed."
+    assert @unsubscribed_user.subscribed?
   end
 
   test "updating a subscription" do
