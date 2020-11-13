@@ -5,6 +5,8 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
   # TODO: Test expired subscriptions
   def setup
     @unsubscribed_user = users(:unsubscribed_user)
+    @subscribed_user = users(:subscribed_user_with_websites)
+    @yearly_plan = plans(:yearly_plan)
   end
 
   test "creating a subscription" do
@@ -18,7 +20,12 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
   end
 
   test "updating a subscription" do
-    skip
+    sign_in @subscribed_user
+    visit edit_subscription_path
+    click_button @yearly_plan.formatted_name
+    sleep 5
+    assert_text "Your subscription has been updated."
+    assert_equal @yearly_plan.processor_id, @subscribed_user.subscription.processor_plan
   end
 
   test "deleting a subscription" do
