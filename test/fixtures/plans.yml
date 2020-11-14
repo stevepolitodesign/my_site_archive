@@ -4,8 +4,16 @@ monthly_plan:
   name: Monthly
   price_in_cents: 2000
   processor_id: price_1HkrqzIZ6Y8BQ2bm4CJfzmno
+  interval: monthly
+  job_schedule_frequency: 0
+  public: true
+  uuid: 123
 
 yearly_plan:
   name: Yearly
   price_in_cents: 20000
   processor_id: price_1HkrrfIZ6Y8BQ2bmJksMXPQ8
+  interval: yearly
+  job_schedule_frequency: 0
+  public: true
+  uuid: 456

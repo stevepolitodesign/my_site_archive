@@ -88,8 +88,15 @@ ActiveRecord::Schema.define(version: 2020_11_11_121606) do
     t.string "name", null: false
     t.integer "price_in_cents"
     t.string "processor_id"
+    t.integer "interval", default: 0, null: false
+    t.boolean "public", default: false, null: false
+    t.integer "website_limit"
+    t.integer "webpage_limit"
+    t.integer "job_schedule_frequency", default: 0, null: false
+    t.string "uuid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["uuid"], name: "index_plans_on_uuid", unique: true
   end
 
   create_table "screenshots", force: :cascade do |t|
