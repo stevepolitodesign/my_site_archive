@@ -15,10 +15,10 @@ module Subscribable
         end
 
         def set_available_plans
-            @available_plans = Plan.where.not(processor_id: @subscription.processor_plan)
+            @available_plans = Plan.available.where.not(processor_id: current_user.current_plan.try(:processor_plan))
         end
 
         def set_current_plan
-            @current_plan = Plan.find_by(processor_id: @subscription.processor_plan)
+            @current_plan = current_user.current_plan
         end
 end

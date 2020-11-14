@@ -12,4 +12,8 @@ class User < ApplicationRecord
     rescue Pay::Error
     super
   end
+
+  def current_plan
+    Plan.find_by(processor_id: self.subscription.processor_plan) unless self.subscription.nil?
+  end
 end
