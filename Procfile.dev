@@ -1,4 +1,4 @@
 web: bundle exec rails server
 worker: bundle exec sidekiq
 webpack: bundle exec bin/webpack-dev-server
-stripe: stripe listen --forward-to localhost:5000/webhooks/stripe
+stripe: stripe listen --forward-to localhost:5000/pay/webhooks/stripe
