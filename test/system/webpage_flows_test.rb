@@ -18,4 +18,8 @@ class WebpageFlowsTest < ApplicationSystemTestCase
     
     take_screenshot
   end
+
+  test "preventing a user from viewing another's webpage" do
+    skip
+  end  
 end

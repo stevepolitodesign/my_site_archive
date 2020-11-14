@@ -17,4 +17,12 @@ class WebsiteFlowsTest < ApplicationSystemTestCase
     
     take_screenshot
   end
+
+  test "preventing a user from editing another's website" do
+    skip
+  end
+
+  test "preventing a user from viewing another's website" do
+    skip
+  end
 end
