@@ -10,6 +10,7 @@ module Subscribable
     private
 
         def set_subscription
+            redirect_to new_subscription_path if current_user.subscription.nil? 
             @subscription = current_user.subscription
         end
 
