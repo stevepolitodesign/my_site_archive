@@ -48,5 +48,11 @@ class WebsiteTest < ActiveSupport::TestCase
     assert_difference("ZoneFile.count", -1) do
       @website.destroy
     end
-  end  
+  end
+  
+  test "associated user should have an active subscription" do
+    @unsubscribed_user = users(:unsubscribed_user)
+    @website = @unsubscribed_user.websites.build(title: "title", url: "https://www.example.com")
+    assert_not @website.valid?
+  end
 end
