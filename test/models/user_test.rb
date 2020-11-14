@@ -15,9 +15,9 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "should destroy associated websites" do
-    @user.save
-    @website = @user.websites.create(title: "title", url: "http://www.example.com")
-    assert_difference("Website.count", -1) do
+    @user = users(:subscribed_user_with_websites)
+    count = @user.websites.count
+    assert_difference("Website.count", -count) do
       @user.destroy
     end
   end

@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class WebpageFlowsTest < ApplicationSystemTestCase
   def setup
-    @user = users(:confirmed_user_with_websites)
+    @user = users(:subscribed_user_with_websites)
     @website = websites(:one)
   end
 
