@@ -2,7 +2,6 @@ require "application_system_test_case"
 
 class SubscriptionFlowsTest < ApplicationSystemTestCase
   # TODO: Test failing payments and/or expired cards
-  # TODO: Test expired subscriptions
   def setup
     @unsubscribed_user = users(:unsubscribed_user)
     @subscribed_user = users(:subscribed_user_with_websites)
@@ -32,7 +31,13 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
   end
 
   test "canceling an account" do
-    skip
+    create_subscription
+    visit edit_user_registration_path
+    accept_confirm do
+      click_button "Cancel my account"
+    end
+    sleep 5
+    assert_not @unsubscribed_user.subscribed?
   end
 
   test "preventing duplicate subscriptions" do
