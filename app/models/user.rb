@@ -6,4 +6,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable, :trackable
 
   has_many :websites, dependent: :destroy
+
+  def destroy
+    self.subscription.cancel_now! if self.subscribed?
+    super
+  end
 end
