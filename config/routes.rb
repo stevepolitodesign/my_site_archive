@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resource :credit_card, only: [:update]
   resource :subscription
   resource :resume_subscription, only: [:update]
-  resources :html_ducuments, only: [:show]
   resources :websites do
     resources :webpages, only: [:show, :create] do
       resources :html_ducuments, only: [:show]
