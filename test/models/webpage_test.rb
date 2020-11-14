@@ -47,6 +47,17 @@ class WebpageTest < ActiveSupport::TestCase
     assert_difference("HtmlDocument.count", -1) do
       @webpage.destroy
     end
+  end
+
+  test "should limit the amount of webpages a user has based on their plan" do
+    @user = users(:subscribed_user_with_no_websites)
+    @website = @user.websites.create(title: "title", url: "https://www.example.com")
+    webpage_limit = @user.current_plan.webpage_limit 
+    webpage_limit.times do |i|
+      @website.webpages.create(title: "title", url: "https://www.example.com/#{i}")
+    end
+    @webpage = @website.webpages.create(title: "title", url: "https://www.example.com/#{webpage_limit+1}")
+    assert_not @webpage.valid?
   end  
   
 end

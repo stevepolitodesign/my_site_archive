@@ -55,4 +55,14 @@ class WebsiteTest < ActiveSupport::TestCase
     @website = @unsubscribed_user.websites.build(title: "title", url: "https://www.example.com")
     assert_not @website.valid?
   end
+
+  test "should limit the amount of websites a user has based on their plan" do
+    @user = users(:subscribed_user_with_no_websites)
+    website_limit = @user.current_plan.website_limit 
+    website_limit.times do |i|
+      @user.websites.create(title: "title", url: "https://www.#{i}.com")
+    end
+    @website = @user.websites.build(title: "title", url: "https://www.#{website_limit+1}.com")
+    assert_not @website.valid?
+  end
 end

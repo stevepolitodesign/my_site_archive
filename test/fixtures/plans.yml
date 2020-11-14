@@ -5,6 +5,8 @@ monthly_plan:
   price_in_cents: 2000
   processor_id: price_1HkrqzIZ6Y8BQ2bm4CJfzmno
   interval: monthly
+  website_limit: 10
+  webpage_limit: 10
   job_schedule_frequency: 0
   public: true
   uuid: 123
@@ -14,6 +16,8 @@ yearly_plan:
   price_in_cents: 20000
   processor_id: price_1HkrrfIZ6Y8BQ2bmJksMXPQ8
   interval: yearly
+  website_limit: 10
+  webpage_limit: 10  
   job_schedule_frequency: 0
   public: true
   uuid: 456

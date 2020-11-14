@@ -10,6 +10,7 @@ class Webpage < ApplicationRecord
   	validates :title, :url, presence: true
   	validates :url, url: true
 	validate :url_should_match_website_url
+	validate :user_webpage_limit
 
   private
 
@@ -19,5 +20,11 @@ class Webpage < ApplicationRecord
 		rescue URI::InvalidURIError => exception
 			errors.add(:url, "not valid")
 		end
-    end
+	end
+	
+	def user_webpage_limit
+		if self.website.user.current_plan.present? && self.website.user.current_plan.webpage_limit.present?
+			errors.add(:base, "You have reached your website limit.") if self.website.webpages.count >= self.website.user.current_plan.webpage_limit
+		end
+	end
 end
