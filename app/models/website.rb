@@ -13,6 +13,13 @@ class Website < ApplicationRecord
 
     before_save :remove_path_from_url
 
+    def capture_new_zone_file(duration)
+        @zone_file = self.latest_zone_file
+        if @zone_file.nil? || @zone_file.created_at >= 1.send(duration).from_now
+          CreateZoneFileJob.perform_later(self.id)
+        end 
+    end
+
     private
 
         def remove_path_from_url

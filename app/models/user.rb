@@ -27,12 +27,8 @@ class User < ApplicationRecord
 
   def capture_new_zone_files
     return if self.current_plan_job_schedule_frequency.nil?
-    duration = current_plan_job_schedule_frequency
     self.websites.each do |website|
-      @zone_file = website.latest_zone_file
-      if @zone_file.nil? || @zone_file.created_at >= 1.send(duration).from_now
-        CreateZoneFileJob.perform_later(website.id)
-      end
+      website.capture_new_zone_file(current_plan_job_schedule_frequency)
     end
   end
 end
