@@ -6,7 +6,7 @@ class CreateZoneFilesJob < ApplicationJob
   def perform
     @users.find_in_batches(batch_size: 100) do |group|
       group.each do |user|
-        user.update_websites_zone_file
+        user.capture_new_zone_files
       end
     end
   end

@@ -25,7 +25,7 @@ class User < ApplicationRecord
     self.current_plan.job_schedule_frequency
   end
 
-  def update_websites_zone_file
+  def capture_new_zone_files
     return if self.current_plan_job_schedule_frequency.nil?
     duration = current_plan_job_schedule_frequency
     self.websites.each do |website|
