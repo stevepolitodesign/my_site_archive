@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
   has_many :websites, dependent: :destroy
 
+  scope :with_active_subscriptions, -> { joins(:subscriptions).where({ pay_subscriptions: { status: "active" } }).distinct }
+  scope :with_websites, -> { joins(:websites).distinct }
+
   def destroy
     self.subscription.cancel_now! if self.subscribed?
     rescue Pay::Error

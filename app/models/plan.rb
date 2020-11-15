@@ -4,7 +4,7 @@ class Plan < ApplicationRecord
     include ActionView::Helpers::NumberHelper
 
     enum interval: [:monthly, :yearly]
-    enum job_schedule_frequency: [:month]
+    enum job_schedule_frequency: [:week]
 
     validates :name, presence: true
 
