@@ -1,15 +1,24 @@
 class WebsitesController < ApplicationController
-    # TODO: Authenticate subscription
     before_action :authenticate_user!
-    before_action :set_website, only: [:show]
+    before_action :set_website, only: [:show, :edit, :update, :destroy]
+
+    def show
+        authorize @website
+        @webpage = @website.webpages.build
+    end
 
     def new
         @website = current_user.websites.build
         authorize @website
     end
 
+    def edit
+        authorize @website
+    end
+
     def create
         @website = current_user.websites.create(website_params)
+        authorize @website
         if @website.save
             redirect_to @website, notice: "Website created."
             CreateZoneFileJob.perform_later(@website.id)
@@ -18,8 +27,12 @@ class WebsitesController < ApplicationController
         end
     end
 
-    def show
-        @webpage = @website.webpages.build
+    def update
+        authorize @website
+    end
+
+    def destroy
+        authorize @website
     end
 
     private

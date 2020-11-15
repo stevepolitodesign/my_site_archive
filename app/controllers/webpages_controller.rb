@@ -1,10 +1,15 @@
 class WebpagesController < ApplicationController
     # TODO: Authenticate subscription
     before_action :authenticate_user!
-    before_action :set_webpage, only: [:show]
+    before_action :set_webpage, only: [:show, :edit, :update, :destroy]
     before_action :set_website, only: [:create]
 
     def show
+        authorize @webpage
+    end
+
+    def edit
+        authorize @webpage
     end
 
     def create
@@ -16,6 +21,14 @@ class WebpagesController < ApplicationController
         else
             redirect_to @website, alert: @webpage.errors.full_messages.to_sentence
         end
+    end
+
+    def update
+        authorize @webpage
+    end
+
+    def destroy
+        authorize @webpage
     end
 
     private 

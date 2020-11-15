@@ -1,18 +1,15 @@
-class WebsitePolicy < ApplicationPolicy
+class WebpagePolicy < ApplicationPolicy
+
   def show?
     user_subscribed? && is_record_owner?
   end
 
   def new?
-    user_subscribed?
+    user_subscribed? && user_subscribed?
   end
 
   def edit?
     user_subscribed? && is_record_owner?
-  end
-
-  def create?
-    user_subscribed?
   end
 
   def update?
@@ -28,4 +25,10 @@ class WebsitePolicy < ApplicationPolicy
       scope.all
     end
   end
+
+  private
+
+    def is_record_owner?
+      user == record.website.user
+    end
 end

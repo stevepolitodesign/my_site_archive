@@ -1,8 +1,8 @@
 class HtmlDocumentsController < ApplicationController
-    # TODO: Authenticate subscription 
     before_action :set_html_ducument, only: [:show]
 
     def show
+        authorize @html_ducument
     end
 
     private

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resource :subscription
   resource :resume_subscription, only: [:update]
   resources :websites do
-    resources :webpages, only: [:show, :create] do
+    resources :webpages, only: [:show, :edit, :create, :update, :destroy] do
       resources :html_ducuments, only: [:show]
     end
   end

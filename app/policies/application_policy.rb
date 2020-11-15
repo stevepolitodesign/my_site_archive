@@ -49,6 +49,10 @@ class ApplicationPolicy
 
   private
 
+    def is_record_owner?
+      user == record.user
+    end
+
     def user_subscribed?
       user.subscribed?
     end
