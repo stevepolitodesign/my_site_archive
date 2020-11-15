@@ -13,6 +13,12 @@ class Website < ApplicationRecord
 
     before_save :remove_path_from_url
 
+    def capture_new_html_documents(duration)
+        self.webpages.each do |webpage|
+            webpage.capture_new_html_document(duration)
+        end
+    end
+
     def capture_new_zone_file(duration)
         @zone_file = self.latest_zone_file
         if @zone_file.nil? || @zone_file.created_at >= 1.send(duration).from_now

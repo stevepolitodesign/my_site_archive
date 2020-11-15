@@ -12,6 +12,13 @@ class Webpage < ApplicationRecord
 	validate :url_should_match_website_url
 	validate :user_webpage_limit
 
+	def capture_new_html_document(duration)
+		@html_document = self.latest_html_document
+        if @html_document.nil? || @html_document.created_at >= 1.send(duration).from_now
+			CreateHtmlDocumentJob.perform_later(self.id)
+        end 
+	end
+
   private
 
 	def url_should_match_website_url
