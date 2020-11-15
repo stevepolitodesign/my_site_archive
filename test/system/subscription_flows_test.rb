@@ -6,6 +6,7 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
     @unsubscribed_user = users(:unsubscribed_user)
     @subscribed_user = users(:subscribed_user_with_websites)
     @yearly_plan = plans(:yearly_plan)
+    @private_plan = plans(:private_plan)
   end
 
   test "creating a subscription" do
@@ -66,6 +67,31 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
     sleep 5
     assert_text "Your subscription has been re-activated."
     assert_not @unsubscribed_user.subscription.cancelled?
+  end
+
+  test "hiding private plans on new subscription page" do
+    sign_in @unsubscribed_user
+    visit new_subscription_path
+    assert_text @private_plan.formatted_name, count: 0
+    take_screenshot
+  end
+
+  test "hiding private plans on the edit subscription plan" do
+    create_subscription
+    visit edit_subscription_path
+    assert_text @private_plan.formatted_name, count: 0
+    take_screenshot
+  end
+
+  test "subscribing to a private plan" do
+    sign_in @unsubscribed_user
+    visit new_subscription_path + "?plan_uuid=#{@private_plan.uuid}"
+    take_screenshot
+    fill_out_subscription_form
+    click_button "Save"
+    sleep 5
+    assert_text "You are now subscribed."
+    assert @unsubscribed_user.subscribed?    
   end
 
   private

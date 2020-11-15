@@ -21,3 +21,14 @@ yearly_plan:
   job_schedule_frequency: 0
   public: true
   uuid: 456
+
+private_plan: 
+  name: Private
+  price_in_cents: 1000
+  processor_id: price_1HnYY4IZ6Y8BQ2bmHg2nr6FC
+  interval: monthly
+  website_limit: 10
+  webpage_limit: 10  
+  job_schedule_frequency: 0
+  public: false
+  uuid: 789

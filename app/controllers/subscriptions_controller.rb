@@ -6,6 +6,7 @@ class SubscriptionsController < ApplicationController
     before_action :set_subscription, only: [:show, :edit, :update, :destroy]
     before_action :set_available_plans, only: [:edit]
     before_action :set_current_plan, only: [:show, :edit, :update]
+    before_action :set_private_plan, only: [:new]
 
     def show
         authorize @subscription, policy_class: SubscriptionPolicy

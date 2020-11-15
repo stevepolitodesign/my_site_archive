@@ -1,5 +1,6 @@
 <%= form_with url: subscription_path, local: true, id: "payment-form" do |f| %>
-    <%= f.collection_select :plan, Plan.available, :processor_id, :formatted_name %>
+    <%= f.collection_select :plan, Plan.available, :processor_id, :formatted_name unless @private_plan.present? %>
+    <%= select_tag :plan, options_for_select([[@private_plan.formatted_name, @private_plan.processor_id]], @private_plan.processor_id) if @private_plan.present? %>
     <div id="card-element" class="MyCardElement"></div>
     <div id="card-errors" role="alert"></div>
     <%= f.label :name_on_card %>
