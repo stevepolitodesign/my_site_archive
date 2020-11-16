@@ -21,6 +21,10 @@ class Webpage < ApplicationRecord
 		CreateHtmlDocumentJob.perform_later(self.id)
 	end
 
+	def capture_new_screenshot
+		CreateScreenshotJob.perform_later(self.id)
+	end
+
 	def should_capture_new_html_document?
         return true if self.latest_html_document.nil?
         if duration.present?
@@ -28,7 +32,16 @@ class Webpage < ApplicationRecord
         else
             return false
         end
-    end
+	end
+	
+	def should_capture_new_screenshot?
+        return true if self.latest_screenshot.nil?
+        if duration.present?
+            return self.latest_screenshot.created_at >= 1.send(duration).from_now
+        else
+            return false
+        end
+    end	
 
   	private
 
