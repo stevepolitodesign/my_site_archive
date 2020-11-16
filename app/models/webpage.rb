@@ -12,26 +12,41 @@ class Webpage < ApplicationRecord
 	validate :url_should_match_website_url
 	validate :user_webpage_limit
 
-	def capture_new_html_document(duration)
-		@html_document = self.latest_html_document
-        if @html_document.nil? || @html_document.created_at >= 1.send(duration).from_now
-			CreateHtmlDocumentJob.perform_later(self.id)
-        end 
+	scope :with_active_subscribers, -> {
+		joins(website: [:user, user: [:subscriptions]])
+		.where({ pay_subscriptions: { status: "active" } }).distinct
+    }
+
+	def capture_new_html_document
+		CreateHtmlDocumentJob.perform_later(self.id)
 	end
 
-  private
+	def should_capture_new_html_document?
+        return true if self.latest_html_document.nil?
+        if duration.present?
+            return self.latest_html_document.created_at >= 1.send(duration).from_now
+        else
+            return false
+        end
+    end
 
-	def url_should_match_website_url
-		begin
-			errors.add(:url, "should start with #{self.website.url}.") if URI.join(self.url, "/").to_s != self.website.url
-		rescue URI::InvalidURIError => exception
-			errors.add(:url, "not valid")
+  	private
+
+		def url_should_match_website_url
+			begin
+				errors.add(:url, "should start with #{self.website.url}.") if URI.join(self.url, "/").to_s != self.website.url
+			rescue URI::InvalidURIError => exception
+				errors.add(:url, "not valid")
+			end
 		end
-	end
-	
-	def user_webpage_limit
-		if self.website.user.current_plan.present? && self.website.user.current_plan.webpage_limit.present?
-			errors.add(:base, "You have reached your website limit.") if self.website.webpages.count >= self.website.user.current_plan.webpage_limit
+		
+		def user_webpage_limit
+			if self.website.user.current_plan.present? && self.website.user.current_plan.webpage_limit.present?
+				errors.add(:base, "You have reached your website limit.") if self.website.webpages.count >= self.website.user.current_plan.webpage_limit
+			end
 		end
-	end
+
+		def duration
+            self.website.user.current_plan_job_schedule_frequency
+        end
 end
