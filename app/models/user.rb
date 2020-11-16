@@ -25,17 +25,4 @@ class User < ApplicationRecord
     self.current_plan.job_schedule_frequency
   end
 
-  def capture_new_html_documents
-    return if self.current_plan_job_schedule_frequency.nil?
-    self.websites.each do |website|
-      website.capture_new_html_documents(current_plan_job_schedule_frequency)
-    end
-  end
-
-  def capture_new_zone_files
-    return if self.current_plan_job_schedule_frequency.nil?
-    self.websites.each do |website|
-      website.capture_new_zone_file(current_plan_job_schedule_frequency)
-    end
-  end
 end

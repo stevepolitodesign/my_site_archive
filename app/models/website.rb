@@ -10,6 +10,10 @@ class Website < ApplicationRecord
     validates :url, url: true
     validate :associated_user_should_have_an_active_subscription
     validate :user_website_limit
+    
+    scope :with_active_subscribers, -> {
+        joins(user: :subscriptions).where({ pay_subscriptions: { status: "active" } }).distinct
+    }
 
     before_save :remove_path_from_url
 
@@ -19,11 +23,17 @@ class Website < ApplicationRecord
         end
     end
 
-    def capture_new_zone_file(duration)
-        @zone_file = self.latest_zone_file
-        if @zone_file.nil? || @zone_file.created_at >= 1.send(duration).from_now
-          CreateZoneFileJob.perform_later(self.id)
-        end 
+    def capture_new_zone_file
+        CreateZoneFileJob.perform_later(self.id)
+    end
+
+    def should_capture_new_zone_file?
+        return true if self.latest_zone_file.nil?
+        if duration.present?
+            return self.latest_zone_file.created_at >= 1.send(duration).from_now
+        else
+            return false
+        end
     end
 
     private
@@ -40,5 +50,9 @@ class Website < ApplicationRecord
             if self.user.current_plan.present? && self.user.current_plan.website_limit.present?
                 errors.add(:base, "You have reached your website limit.") if self.user.websites.count >= self.user.current_plan.website_limit
             end
+        end
+
+        def duration
+            self.user.current_plan_job_schedule_frequency
         end
 end
