@@ -7,5 +7,5 @@ one:
 
 two:
   title: Website Two
-  url: http://app.example.com/
+  url: http://example.com/
   user: subscribed_user_with_websites
