@@ -1,8 +1,15 @@
 require 'test_helper'
 
 class CreateHtmlDocumentsJobTest < ActiveJob::TestCase
-  # TODO: Use VCR
-  test "should create screenshots" do
+  def setup
+    VCR.insert_cassette name
+  end
+
+  def teardown
+    VCR.eject_cassette
+  end
+
+  test "should create html_documents" do
     assert_equal 2, HtmlDocument.count
     
     travel_to 1.week.from_now

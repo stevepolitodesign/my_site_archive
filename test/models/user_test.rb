@@ -8,6 +8,11 @@ class UserTest < ActiveSupport::TestCase
       password_confirmation: "password",
       confirmed_at: Time.zone.now
     )
+    VCR.insert_cassette name
+  end
+
+  def teardown
+    VCR.eject_cassette
   end
   
   test "should be valid" do

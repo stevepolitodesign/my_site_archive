@@ -1,7 +1,14 @@
 require 'test_helper'
 
 class CreateZoneFilesJobTest < ActiveJob::TestCase
-  # TODO: Use VCR
+  def setup
+    VCR.insert_cassette name
+  end
+
+  def teardown
+    VCR.eject_cassette
+  end
+
   test "should create zone files" do
     assert_equal 2, ZoneFile.count
     

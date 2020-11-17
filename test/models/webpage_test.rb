@@ -3,7 +3,12 @@ require 'test_helper'
 class WebpageTest < ActiveSupport::TestCase
   def setup
     @website = websites(:one)
-    @webpage = @website.webpages.build(title: "title", url: "https://www.example.com")
+    @webpage = @website.webpages.build(title: "title", url: @website.url)
+    VCR.insert_cassette name
+  end
+
+  def teardown
+    VCR.eject_cassette
   end
 
   test "should be valid" do
