@@ -37,7 +37,10 @@ class Webpage < ApplicationRecord
 	def should_capture_new_screenshot?
         return true if self.latest_screenshot.nil?
         if duration.present?
-            return self.latest_screenshot.created_at >= 1.send(duration).from_now
+            case duration
+            when "week"
+                return difference_beween_screenshot_dates > 7
+            end
         else
             return false
         end
@@ -61,5 +64,9 @@ class Webpage < ApplicationRecord
 
 		def duration
             self.website.user.current_plan_job_schedule_frequency
+		end
+		
+		def difference_beween_screenshot_dates
+            (1.send(duration).from_now.to_date - self.latest_screenshot.created_at.to_date).to_i
         end
 end
