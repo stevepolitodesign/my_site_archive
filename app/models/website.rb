@@ -32,7 +32,7 @@ class Website < ApplicationRecord
         if duration.present?
             case duration
             when "week"
-                return difference_beween_dates >= 7
+                return difference_beween_dates > 7
             end
         else
             return false
