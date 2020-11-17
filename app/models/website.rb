@@ -32,7 +32,7 @@ class Website < ApplicationRecord
         if duration.present?
             case duration
             when "week"
-                return difference_beween_dates > 7
+                return difference_between_dates > 7
             end
         else
             return false
@@ -59,7 +59,7 @@ class Website < ApplicationRecord
             self.user.current_plan_job_schedule_frequency
         end
 
-        def difference_beween_dates
+        def difference_between_dates
             (1.send(duration).from_now.to_date - self.latest_zone_file.created_at.to_date).to_i
         end
 end

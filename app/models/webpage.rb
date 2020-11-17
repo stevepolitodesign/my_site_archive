@@ -28,7 +28,10 @@ class Webpage < ApplicationRecord
 	def should_capture_new_html_document?
         return true if self.latest_html_document.nil?
         if duration.present?
-            return self.latest_html_document.created_at >= 1.send(duration).from_now
+            case duration
+            when "week"
+                return difference_between_html_document_dates > 7
+            end
         else
             return false
         end
@@ -39,7 +42,7 @@ class Webpage < ApplicationRecord
         if duration.present?
             case duration
             when "week"
-                return difference_beween_screenshot_dates > 7
+                return difference_between_screenshot_dates > 7
             end
         else
             return false
@@ -66,7 +69,11 @@ class Webpage < ApplicationRecord
             self.website.user.current_plan_job_schedule_frequency
 		end
 		
-		def difference_beween_screenshot_dates
+		def difference_between_html_document_dates
+            (1.send(duration).from_now.to_date - self.latest_html_document.created_at.to_date).to_i
+		end
+
+		def difference_between_screenshot_dates
             (1.send(duration).from_now.to_date - self.latest_screenshot.created_at.to_date).to_i
-        end
+		end
 end
