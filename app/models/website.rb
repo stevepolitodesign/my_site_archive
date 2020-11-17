@@ -28,11 +28,12 @@ class Website < ApplicationRecord
     end
 
     def should_capture_new_zone_file?
-        byebug
         return true if self.latest_zone_file.nil?
         if duration.present?
-            difference = 1.send(duration).from_now.to_date - self.latest_zone_file.created_at.to_date
-            return self.latest_zone_file.created_at <= 1.send(duration).from_now
+            case duration
+            when "week"
+                return difference_beween_dates >= 7
+            end
         else
             return false
         end
@@ -59,6 +60,6 @@ class Website < ApplicationRecord
         end
 
         def difference_beween_dates
-            1.send(duration).from_now.to_date - self.latest_zone_file.created_at.to_date
+            (1.send(duration).from_now.to_date - self.latest_zone_file.created_at.to_date).to_i
         end
 end
