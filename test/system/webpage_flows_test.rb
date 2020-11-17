@@ -5,6 +5,11 @@ class WebpageFlowsTest < ApplicationSystemTestCase
   def setup
     @user = users(:subscribed_user_with_websites)
     @website = websites(:one)
+    VCR.insert_cassette name
+  end
+
+  def teardown
+    VCR.eject_cassette
   end
 
   test "creating a webpage and associated html_document" do

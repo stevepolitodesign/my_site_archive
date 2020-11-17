@@ -4,6 +4,11 @@ class WebsiteFlowsTest < ApplicationSystemTestCase
   # TODO: Use VCR
   def setup
     @user = users(:subscribed_user_with_websites)
+    VCR.insert_cassette name
+  end
+
+  def teardown
+    VCR.eject_cassette
   end
 
   test "creating a website" do
