@@ -141,10 +141,14 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    pay (2.2.1)
+      rails (>= 4.2)
     pg (1.2.3)
     public_suffix (4.0.6)
     puma (4.3.6)
       nio4r (~> 2.0)
+    pundit (2.1.0)
+      activesupport (>= 3.0.0)
     rack (2.2.3)
     rack-proxy (0.6.5)
       rack
@@ -217,6 +221,10 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stripe (5.28.0)
+    stripe_event (2.3.1)
+      activesupport (>= 3.1)
+      stripe (>= 2.8, < 6)
     strong_migrations (0.7.1)
       activerecord (>= 5)
     thor (1.0.1)
@@ -243,7 +251,7 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (>= 3.0, < 4.0)
-    webmock (3.9.3)
+    webmock (3.10.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -273,8 +281,10 @@ DEPENDENCIES
   honeybadger (~> 4.7)
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  pay (~> 2.2)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
+  pundit (~> 2.1)
   rails (~> 6.0.3, >= 6.0.3.4)
   redis (~> 4.0)
   sass-rails (>= 6)
@@ -283,6 +293,8 @@ DEPENDENCIES
   sidekiq (~> 6.1)
   spring
   spring-watcher-listen (~> 2.0.0)
+  stripe (~> 5.28)
+  stripe_event (~> 2.3)
   strong_migrations (~> 0.7.1)
   turbolinks (~> 5)
   tzinfo-data
@@ -290,7 +302,7 @@ DEPENDENCIES
   vcr (~> 6.0)
   web-console (>= 3.3.0)
   webdrivers
-  webmock (~> 3.9)
+  webmock (~> 3.10)
   webpacker (~> 4.0)
 
 RUBY VERSION

@@ -4,7 +4,32 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-confirmed_user_with_websites:
+subscribed_user_with_websites:
   email: $LABEL@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   confirmed_at: <%= Time.zone.now %>
+  processor: stripe
+  processor_id: cus_123
+  card_type: Visa
+  card_last4: 4242
+  card_exp_month: 1
+  card_exp_year: <%= (1.year.from_now).strftime("%Y") %>
+  accepted_terms: true
+
+subscribed_user_with_no_websites:
+  email: $LABEL@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: <%= Time.zone.now %>
+  processor: stripe
+  processor_id: cus_123
+  card_type: Visa
+  card_last4: 4242
+  card_exp_month: 1
+  card_exp_year: <%= (1.year.from_now).strftime("%Y") %>
+  accepted_terms: true  
+
+unsubscribed_user:
+  email: $LABEL@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: <%= Time.zone.now %>
+  accepted_terms: true

@@ -2,7 +2,12 @@ require "application_system_test_case"
 
 class WebsiteFlowsTest < ApplicationSystemTestCase
   def setup
-    @user = users(:confirmed_user_with_websites)
+    @user = users(:subscribed_user_with_websites)
+    VCR.insert_cassette name
+  end
+
+  def teardown
+    VCR.eject_cassette
   end
 
   test "creating a website" do
@@ -16,5 +21,13 @@ class WebsiteFlowsTest < ApplicationSystemTestCase
     assert_text "Website created"
     
     take_screenshot
+  end
+
+  test "preventing a user from editing another's website" do
+    skip
+  end
+
+  test "preventing a user from viewing another's website" do
+    skip
   end
 end

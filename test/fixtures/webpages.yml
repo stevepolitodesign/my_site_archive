@@ -2,10 +2,10 @@
 
 one:
   website: one
-  title: Interior Page
-  url: https://www.example.com/page/1
+  title: Doctrine
+  url: https://rubyonrails.org/doctrine/
 
 two:
   website: two
-  title: Contact Page
-  url: http://app.example.com/contact
+  title: Getting Started
+  url: https://guides.rubyonrails.org/getting_started.html

@@ -2,8 +2,13 @@ require "application_system_test_case"
 
 class WebpageFlowsTest < ApplicationSystemTestCase
   def setup
-    @user = users(:confirmed_user_with_websites)
+    @user = users(:subscribed_user_with_websites)
     @website = websites(:one)
+    VCR.insert_cassette name
+  end
+
+  def teardown
+    VCR.eject_cassette
   end
 
   test "creating a webpage and associated html_document" do
@@ -18,4 +23,8 @@ class WebpageFlowsTest < ApplicationSystemTestCase
     
     take_screenshot
   end
+
+  test "preventing a user from viewing another's webpage" do
+    skip
+  end  
 end

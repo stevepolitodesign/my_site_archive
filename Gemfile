@@ -47,7 +47,7 @@ group :test do
   gem 'selenium-webdriver'
   gem "vcr", "~> 6.0"
   gem 'webdrivers'
-  gem "webmock", "~> 3.9"
+  gem "webmock", "~> 3.10"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -59,7 +59,11 @@ gem "data_migrate", "~> 6.5"
 gem "devise", "~> 4.7"
 gem "ferrum", "~> 0.9"
 gem "honeybadger", "~> 4.7"
+gem "pay", "~> 2.2"
+gem "pundit", "~> 2.1"
 gem "sendgrid-ruby", "~> 6.3"
 gem "sidekiq", "~> 6.1"
+gem "stripe", "~> 5.28"
+gem "stripe_event", "~> 2.3"
 gem "strong_migrations", "~> 0.7.1"
 gem "validate_url", "~> 1.0"
