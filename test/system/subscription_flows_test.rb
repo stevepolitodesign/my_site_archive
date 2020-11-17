@@ -19,7 +19,7 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
     create_subscription
     visit edit_subscription_path
     click_button @yearly_plan.formatted_name
-    sleep 5
+    sleep 10
     assert_text "Your subscription has been updated."
     assert_equal @yearly_plan.processor_id, @unsubscribed_user.subscription.processor_plan
   end
@@ -37,7 +37,7 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
     accept_confirm do
       click_button "Cancel my account"
     end
-    sleep 5
+    sleep 10
     assert_not @unsubscribed_user.subscribed?
   end
 
@@ -54,7 +54,7 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
       card_number: "5555 5555 5555 4444",
     )
     click_button "Save"
-    sleep 5
+    sleep 10
     assert_text "Credit card updated."
     assert_equal "Mastercard", @unsubscribed_user.reload.card_type
   end
@@ -64,7 +64,7 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
     delete_subscription
     visit subscription_path
     click_link "Resume My Subscription"
-    sleep 5
+    sleep 10
     assert_text "Your subscription has been re-activated."
     assert_not @unsubscribed_user.subscription.cancelled?
   end
@@ -89,7 +89,7 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
     take_screenshot
     fill_out_subscription_form
     click_button "Save"
-    sleep 5
+    sleep 10
     assert_text "You are now subscribed."
     assert @unsubscribed_user.subscribed?    
   end
@@ -101,7 +101,7 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
       visit new_subscription_path
       fill_out_subscription_form
       click_button "Save"
-      sleep 5
+      sleep 10
     end
 
     def delete_subscription
@@ -109,6 +109,6 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
       accept_confirm do
         click_link "Cancel My Subscription"
       end
-      sleep 5      
+      sleep 10      
     end
 end
