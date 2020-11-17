@@ -7,6 +7,10 @@ class User < ApplicationRecord
 
   has_many :websites, dependent: :destroy
 
+
+  validates :accepted_terms, inclusion: { in: [true] }
+  validates :accepted_terms, exclusion: { in: [nil,false] }
+
   scope :with_active_subscriptions, -> { joins(:subscriptions).where({ pay_subscriptions: { status: "active" } }).distinct }
   scope :with_websites, -> { joins(:websites).distinct }
 

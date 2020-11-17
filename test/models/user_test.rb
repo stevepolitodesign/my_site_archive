@@ -6,7 +6,8 @@ class UserTest < ActiveSupport::TestCase
       email: "user@example.com",
       password: "password",
       password_confirmation: "password",
-      confirmed_at: Time.zone.now
+      confirmed_at: Time.zone.now,
+      accepted_terms: true
     )
     VCR.insert_cassette name
   end
@@ -17,6 +18,13 @@ class UserTest < ActiveSupport::TestCase
   
   test "should be valid" do
     assert @user.valid?
+  end
+
+  test "should accept terms" do
+    @user.accepted_terms = false
+    assert_not @user.valid?
+    @user.accepted_terms = nil
+    assert_not @user.valid?
   end
   
   test "should destroy associated websites" do
