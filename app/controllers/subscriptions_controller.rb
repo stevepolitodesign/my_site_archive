@@ -19,7 +19,7 @@ class SubscriptionsController < ApplicationController
 
     def create
         current_user.update(processor: "stripe", card_token: params[:card_token])
-        current_user.subscribe(plan: params[:plan])
+        current_user.subscribe(plan: params[:plan], coupon: params[:coupon])
         redirect_to new_website_path, notice: "You are now subscribed."
     rescue Pay::Error
         redirect_to new_subscription_path, alert: "There was an error creating your subscription."
