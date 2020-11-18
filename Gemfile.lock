@@ -106,6 +106,8 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.9.0)
+    faker (2.14.0)
+      i18n (>= 1.6, < 2)
     ferrum (0.9)
       addressable (~> 2.5)
       cliver (~> 0.3)
@@ -277,6 +279,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   data_migrate (~> 6.5)
   devise (~> 4.7)
+  faker (~> 2.14)
   ferrum (~> 0.9)
   honeybadger (~> 4.7)
   jbuilder (~> 2.7)

@@ -9,3 +9,10 @@ two:
   title: Website Two
   url: https://guides.rubyonrails.org
   user: subscribed_user_with_websites
+
+<% 1.upto(10) do |i| %>
+sample_user_website_<%= i %>:
+  title: <%= Faker::Lorem.paragraph %>
+  url: http://example.com/
+  user: sample_user
+<% end %>

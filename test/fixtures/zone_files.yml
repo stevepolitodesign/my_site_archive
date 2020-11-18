@@ -5,3 +5,10 @@ one:
 
 two:
   website: two
+
+<% 1.upto(10) do |i| %>
+<% 1.upto(100) do |j| %>
+sample_user_website_<%= i %>_zone_file_<%= j %>:
+  website: sample_user_website_<%= i %>
+<% end %>
+<% end %>

@@ -57,6 +57,7 @@ gem "aws-sdk-s3", require: false
 gem "bullet", "~> 6.1"
 gem "data_migrate", "~> 6.5"
 gem "devise", "~> 4.7"
+gem "faker", "~> 2.14"
 gem "ferrum", "~> 0.9"
 gem "honeybadger", "~> 4.7"
 gem "pay", "~> 2.2"
