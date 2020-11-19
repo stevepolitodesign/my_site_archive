@@ -16,7 +16,8 @@
   <body class="bg-light">
     <%= render "shared/flash" %>
     <header class="container">
-      <h1 class="display-2 font-weight-bold text-center py-5"><%= yield :page_title %></h1>
+      <%= render partial: "shared/breadcrumb" %>
+      <%= render partial: "shared/page_title" %>
     </header>
     <main class="container">
       <%= yield %>

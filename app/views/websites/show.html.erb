@@ -1,4 +1,10 @@
-<h1><%= @website.title %></h1>
+<% content_for :breadcrumb do %>
+    <li class="breadcrumb-item"><%= link_to "My Websites", websites_path %></li>
+    <li class="breadcrumb-item active text-truncate" aria-current="page"><%= truncate @website.title %></li>
+<% end %>
+<% content_for :page_title do %>
+    <% @website.title %>
+<% end %>
 <%= link_to @website.url, @website.url, target: "_blank" %>
 <%= render partial: "webpages/form" %>
 <% if @website.latest_zone_file.present? %>
