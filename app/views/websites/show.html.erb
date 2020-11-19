@@ -6,6 +6,7 @@
     <% @website.title %>
 <% end %>
 <%= link_to @website.url, @website.url, target: "_blank" %>
+<%= image_tag @website.image%>
 <%= render partial: "webpages/form" %>
 <% if @website.latest_zone_file.present? %>
     <h2>DNS Records</h2>

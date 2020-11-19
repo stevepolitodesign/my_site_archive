@@ -25,6 +25,7 @@ class WebsitesController < ApplicationController
         authorize @website
         if @website.save
             redirect_to @website, notice: "Website created."
+            @website.capture_screenshot
             # TODO: Consider running @website.capture_new_zone_file
             CreateZoneFileJob.perform_later(@website.id)
         else

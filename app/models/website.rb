@@ -5,6 +5,8 @@ class Website < ApplicationRecord
     has_many :webpages, dependent: :destroy
     has_many :zone_files, dependent: :destroy
     has_one :latest_zone_file, -> { order('created_at') }, class_name: "ZoneFile"
+    # TODO: Make sure the image is deleted when the record is deleted.
+    has_one_attached :image
 
     validates :title, :url, presence: true
     validates :url, url: true
@@ -25,6 +27,11 @@ class Website < ApplicationRecord
 
     def capture_new_zone_file
         CreateZoneFileJob.perform_later(self.id)
+    end
+
+    def capture_screenshot
+        result = ScreenshotCapturer.new(self.url).call
+        ImageAttacher.new(self, result.payload, "image").call if result.success?
     end
 
     def should_capture_new_zone_file?
