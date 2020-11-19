@@ -1,0 +1,14 @@
+<%= content_for :page_title do %>
+    My Websites
+<% end %>
+<% if @websites.present? %>
+<div class="card">
+    <div class="card-body">
+        <ul class="list-group list-group-flush text-center h4 font-weight-light">
+            <%= render @websites %>
+        </ul>
+    </div>
+</div>
+<% else %>
+    <%= link_to "Add Your First Website", new_website_path, class: "btn btn-primary btn-lg" %>
+<% end %>
