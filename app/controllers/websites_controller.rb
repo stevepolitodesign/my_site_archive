@@ -3,7 +3,7 @@ class WebsitesController < ApplicationController
     before_action :set_website, only: [:show, :edit, :update, :destroy]
 
     def index
-        @websites = current_user.websites
+        @websites = current_user.websites.with_attached_image
     end
 
     def show
