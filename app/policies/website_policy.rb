@@ -2,7 +2,7 @@ class WebsitePolicy < ApplicationPolicy
   def show?
     user_subscribed? && is_record_owner?
   end
-
+  
   def new?
     user_subscribed?
   end

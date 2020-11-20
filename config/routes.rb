@@ -13,5 +13,6 @@ Rails.application.routes.draw do
     resources :webpages, only: [:show, :edit, :create, :update, :destroy] do
       resources :html_documents, only: [:index, :show]
     end
+    resources :zone_files, only: [:index, :show]
   end
 end
