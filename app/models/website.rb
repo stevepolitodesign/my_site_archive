@@ -11,7 +11,7 @@ class Website < ApplicationRecord
     validates :title, :url, presence: true
     validates :url, url: true
     validate :associated_user_should_have_an_active_subscription
-    validate :user_website_limit
+    validate :user_website_limit, on: :create
     
     scope :with_active_subscribers, -> {
         joins(user: :subscriptions).where({ pay_subscriptions: { status: "active" } }).distinct
