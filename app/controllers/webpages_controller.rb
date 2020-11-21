@@ -1,6 +1,5 @@
 class WebpagesController < ApplicationController
     # TODO: Authenticate subscription
-    before_action :authenticate_user!
     before_action :set_webpage, only: [:show, :edit, :update, :destroy]
     before_action :set_website, only: [:create]
 

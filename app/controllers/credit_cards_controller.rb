@@ -1,6 +1,4 @@
 class CreditCardsController < ApplicationController
-    before_action :authenticate_user!
-
     def update
         current_user.update_card(params[:card_token])
         redirect_to root_path, notice: "Credit card updated."

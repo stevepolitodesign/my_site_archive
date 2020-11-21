@@ -1,7 +1,6 @@
 class ResumeSubscriptionsController < ApplicationController
     include Subscribable
 
-    before_action :authenticate_user!
     before_action :set_subscription, only: [:update]
 
     def update

@@ -2,7 +2,6 @@ class SubscriptionsController < ApplicationController
     include ActionView::Helpers::DateHelper
     include Subscribable
 
-    before_action :authenticate_user!
     before_action :set_subscription, only: [:show, :edit, :update, :destroy]
     before_action :set_available_plans, only: [:edit]
     before_action :set_current_plan, only: [:show, :edit, :update]

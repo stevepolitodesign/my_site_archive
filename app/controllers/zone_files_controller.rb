@@ -1,5 +1,4 @@
 class ZoneFilesController < ApplicationController
-    before_action :authenticate_user!
     before_action :set_website, only: [:index, :show]
     before_action :set_zone_file, only: [:show]
 
