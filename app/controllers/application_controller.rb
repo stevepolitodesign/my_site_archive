@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     include Pundit
-    after_action :verify_authorized, unless: :exempt_controllers
+    after_action :verify_authorized, unless: :exempt_pundit_controllers
 
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
             controller_name == "credit_cards"
         end 
 
-        def exempt_controllers
+        def exempt_pundit_controllers
             credit_cards_controller? || devise_controller? || resume_subscriptions_controller? || static_pages_controller? || subscriptions_controller? || websites_controller?
         end
  
