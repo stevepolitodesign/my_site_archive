@@ -1,0 +1,28 @@
+<ul class="nav justify-content-center mt-5 h3">
+    <% unless current_user %>
+        <li class="nav-item">
+            <%= link_to "Home", root_path, class: "nav-link" %>
+        </li>    
+        <li class="nav-item">
+            <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+            <%= link_to "Pricing", "#", class: "nav-link" %>
+        </li>
+    <% else %>
+        <% if current_user.subscribed? %>
+            <li class="nav-item">
+                <%= link_to "My Sites", websites_path, class: "nav-link" %>
+            </li>    
+        <% end %>
+        <li class="nav-item">
+            <%= link_to "My Account", edit_user_registration_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+            <%= link_to "Billing", subscription_path, class: "nav-link" %>
+        </li>        
+        <li class="nav-item">
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>    
+    <% end %>
+</ul>
