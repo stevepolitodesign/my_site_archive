@@ -31,7 +31,10 @@ class Website < ApplicationRecord
 
     def capture_screenshot
         result = ScreenshotCapturer.new(self.url).call
-        ImageAttacher.new(self, result.payload, "image").call if result.success?
+        if result.success?
+            ImageAttacher.new(self, result.payload, "image").call
+            TmpFileRemover.new(result.payload).call
+        end
     end
 
     def should_capture_new_zone_file?
