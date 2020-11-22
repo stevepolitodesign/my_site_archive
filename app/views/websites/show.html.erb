@@ -46,3 +46,12 @@
 <% else %>
     <p>Retrieving DNS Records. Check back later.</p>
 <% end %>
+        <%= link_to "Add Your First Website", dom_id(@webpage), class: "btn btn-primary btn-lg" %>
+<% if @website.webpages.present? %>
+    <div class="card-deck justify-content-center">
+        <%= render @webpages %>
+    </div>
+<% else %>
+    <div class="text-center">
+    </div>
+<% end %>
