@@ -8,10 +8,10 @@
         </div>
         <div class="card-body">
             <% unless current_user.subscription.ends_at.present? %>
-                <%= link_to "Cancel My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                <%= link_to "Pause My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
             <% else %>
                 <p>Your subscription is set to end on <%= current_user.subscription.ends_at %></p>
-                <%= link_to "Resume My Subscription", resume_subscription_path, method: :put %>    
+                <%= link_to "Resume My Subscription", resume_subscription_path, method: :put, class: "btn btn-success" %>    
             <% end %>
         </div>
     </div>
@@ -26,6 +26,24 @@
         </div>
     </div>
 </div>
-
-<hr/>
-<%= render partial: "charges/charge", collection: @charges %>
+<% if @charges.present? %>
+    <div class="card">
+      <div class="card-header"><h2>Charges</h2></div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">Record Type</th>
+                            <th scope="col">Content</th>
+                            <th scope="col">Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%= render partial: "charges/charge", collection: @charges %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<% end %>
