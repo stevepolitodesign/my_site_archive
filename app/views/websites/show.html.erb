@@ -1,14 +1,8 @@
 <% content_for :page_title do %>
     <% @website.title %>
 <% end %>
-<div class="card mb-4">
-    <div class="card-header"><h2 class="h3 mb-0">Add a webpage to monitor</h2></div>
-    <div class="card-body">
-        <%= render partial: "webpages/form" %>
-    </div>
-</div>
 <% if @website.latest_zone_file.present? %>
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header d-flex align-items-center">
             <h2 class="h3">Current DNS Records</h2>
             <%= link_to @website.url, target: "_blank", class: "d-flex align-items-center ml-3" do  %>
@@ -51,8 +45,14 @@
         <span class="ml-3">Retrieving DNS Records. Check back later.</span>
     </div>
 <% end %>
-<% if @webpages.present? %>
+<div class="card mb-4">
+    <div class="card-header"><h2 class="h3 mb-0">Add a webpage to monitor</h2></div>
+    <div class="card-body">
+        <%= render partial: "webpages/form" %>
+    </div>
+</div>
+<div class="row">
     <div class="card-deck justify-content-center">
         <%= render @webpages %>
     </div>
-<% end %>
+</div>
