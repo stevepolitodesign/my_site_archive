@@ -1,5 +1,4 @@
 class WebpagesController < ApplicationController
-    # TODO: Authenticate subscription
     before_action :set_webpage, only: [:show, :edit, :update, :destroy]
     before_action :set_website, only: [:create]
 
@@ -12,6 +11,7 @@ class WebpagesController < ApplicationController
     end
 
     def create
+        authorize @webpage
         @webpage = @website.webpages.create(webpage_params)
         if @webpage.save
             redirect_to website_webpage_path(@website, @webpage), notice: "Webpage saved."

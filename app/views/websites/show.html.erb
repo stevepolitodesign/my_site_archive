@@ -44,14 +44,15 @@
         </div>
     </div>
 <% else %>
-    <p>Retrieving DNS Records. Check back later.</p>
+    <div class="d-flex align-items-center mb-4">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <span class="ml-3">Retrieving DNS Records. Check back later.</span>
+    </div>
 <% end %>
-        <%= link_to "Add Your First Website", dom_id(@webpage), class: "btn btn-primary btn-lg" %>
-<% if @website.webpages.present? %>
+<% if @webpages.present? %>
     <div class="card-deck justify-content-center">
         <%= render @webpages %>
-    </div>
-<% else %>
-    <div class="text-center">
     </div>
 <% end %>

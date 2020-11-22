@@ -8,6 +8,7 @@ class WebsitesController < ApplicationController
     def show
         authorize @website
         @webpage = @website.webpages.build
+        @webpages = @website.webpages
     end
 
     def new
