@@ -1,8 +1,8 @@
-<%= form_with model: [@website, @webpage], local: true do |f| %>
+<%= form_with model: [@website, @webpage], local: true, class: "form-inline" do |f| %>
     <%= render partial: "shared/form_errors", locals: { object: f.object } %>
-    <%= f.label :title %>
-    <%= f.text_field :title, required: true %>
-    <%= f.label :url %>
-    <%= f.url_field :url, required: true, value: @website.url %>
-    <%= f.submit %>
+    <%= f.label :title, class: "mr-2" %>
+    <%= f.text_field :title, required: true, class: "form-control mr-2" %>
+    <%= f.label :url, class: "mr-2" %>
+    <%= f.url_field :url, required: true, value: @website.url, class: "form-control mr-2" %>
+    <%= f.submit class: "btn btn-primary" %>
 <% end %>
