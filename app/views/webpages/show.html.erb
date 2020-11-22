@@ -1,4 +1,6 @@
-<h1><%= @webpage.title %></h1>
+<% content_for :page_title do %>
+    <% @webpage.title %>
+<% end %>
 <%= link_to @webpage.url, @webpage.url, target: "_blank" %>
 <% if @webpage.latest_screenshot.present? %>
     <%= image_tag @webpage.latest_screenshot.image%>

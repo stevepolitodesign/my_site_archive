@@ -10,7 +10,7 @@ class Webpage < ApplicationRecord
   	validates :title, :url, presence: true
   	validates :url, url: true
 	validate :url_should_match_website_url
-	validate :user_webpage_limit
+	validate :user_webpage_limit, on: :create
 
 	scope :with_active_subscribers, -> {
 		joins(website: [:user, user: [:subscriptions]])
@@ -61,7 +61,7 @@ class Webpage < ApplicationRecord
 		
 		def user_webpage_limit
 			if self.website.user.current_plan.present? && self.website.user.current_plan.webpage_limit.present?
-				errors.add(:base, "You have reached your website limit.") if self.website.webpages.count >= self.website.user.current_plan.webpage_limit
+				errors.add(:base, "You have reached your webpage limit.") if self.website.webpages.count >= self.website.user.current_plan.webpage_limit
 			end
 		end
 

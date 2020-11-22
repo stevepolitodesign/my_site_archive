@@ -1,8 +1,19 @@
-<%= form_with model: [@website, @webpage], local: true, class: "form-inline", id: dom_id(@webpage) do |f| %>
-    <%= render partial: "shared/form_errors", locals: { object: f.object } %>
-    <%= f.label :title, class: "mr-2" %>
-    <%= f.text_field :title, required: true, class: "form-control mr-2" %>
-    <%= f.label :url, class: "mr-2" %>
-    <%= f.url_field :url, required: true, value: @website.url, class: "form-control mr-2" %>
-    <%= f.submit class: "btn btn-primary" %>
+<% if @webpage.persisted? %>
+    <%= form_with model: [@website, @webpage], url: website_webpage_path(@website, @webpage), local: true, class: "form-inline", id: dom_id(@webpage) do |f| %>
+        <%= render partial: "shared/form_errors", locals: { object: f.object } %>
+        <%= f.label :title, class: "mr-2" %>
+        <%= f.text_field :title, required: true, class: "form-control mr-2" %>
+        <%= f.label :url, class: "mr-2" %>
+        <%= f.url_field :url, required: true, value: @website.url, class: "form-control mr-2", disabled: true %>
+        <%= f.submit class: "btn btn-primary" %>
+    <% end %>
+<% else %>
+    <%= form_with model: [@website, @webpage], local: true, class: "form-inline", id: dom_id(@webpage) do |f| %>
+        <%= render partial: "shared/form_errors", locals: { object: f.object } %>
+        <%= f.label :title, class: "mr-2" %>
+        <%= f.text_field :title, required: true, class: "form-control mr-2" %>
+        <%= f.label :url, class: "mr-2" %>
+        <%= f.url_field :url, required: true, value: @website.url, class: "form-control mr-2" %>
+        <%= f.submit class: "btn btn-primary" %>
+    <% end %>
 <% end %>

@@ -1,9 +1,11 @@
 class WebpagesController < ApplicationController
     before_action :set_webpage, only: [:show, :edit, :update, :destroy]
-    before_action :set_website, only: [:create]
+    before_action :set_website, only: [:create, :edit, :update]
 
     def show
         authorize @webpage
+        @html_documents = @webpage.html_documents
+        @screenshots    = @webpage.screenshots
     end
 
     def edit
@@ -26,6 +28,11 @@ class WebpagesController < ApplicationController
 
     def update
         authorize @webpage
+        if @webpage.update(webpage_params)
+            redirect_to website_webpage_path(@website, @webpage), notice: "Webpage updated."
+        else
+            render :edit
+        end
     end
 
     def destroy
