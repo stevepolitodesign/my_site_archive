@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Chargable
   include Pay::Billable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -13,12 +14,6 @@ class User < ApplicationRecord
 
   scope :with_active_subscriptions, -> { joins(:subscriptions).where({ pay_subscriptions: { status: "active" } }).distinct }
   scope :with_websites, -> { joins(:websites).distinct }
-
-  def card_on_file
-    if has_card?
-      "#{card_type} #{card_last4} expiring on #{card_exp_month}/#{card_exp_year}"
-    end
-  end
   
   def current_plan
     Plan.find_by(processor_id: self.subscription.processor_plan) unless self.subscription.nil?
@@ -33,10 +28,6 @@ class User < ApplicationRecord
     self.subscription.cancel_now! if self.subscribed?
     rescue Pay::Error
     super
-  end
-
-  def has_card?
-    card_type.present? && card_last4.present? && card_exp_month.present? && card_exp_year.present?
   end
 
 end
