@@ -8,7 +8,7 @@ class WebsitesController < ApplicationController
     def show
         authorize @website
         @webpage = @website.webpages.build
-        @webpages = @website.webpages
+        @webpages = @website.webpages.includes([latest_screenshot: [image_attachment: :blob]])
     end
 
     def new
