@@ -2,9 +2,11 @@
     My Websites
 <% end %>
 <% if @websites.present? %>
-<div class="row row-cols-1 row-cols-md-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
+<div class="card-deck justify-content-center">
     <%= render @websites %>
 </div>
 <% else %>
-    <%= link_to "Add Your First Website", new_website_path, class: "btn btn-primary btn-lg" %>
+    <div class=" justify-content-center">
+        <%= link_to "Add Your First Website", new_website_path, class: "btn btn-primary btn-lg" %>
+    </div>
 <% end %>

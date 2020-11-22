@@ -1,11 +1,31 @@
-<p><strong>Current Plan:</strong> <%= @current_plan.formatted_name %></p>
-<% unless current_user.subscription.ends_at.present? %>
-    <%= link_to "Cancel My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" } %>
-<% else %>
-    <p>Your subscription is set to end on <%= current_user.subscription.ends_at %></p>
-    <%= link_to "Resume My Subscription", resume_subscription_path, method: :put %>    
+<% content_for :page_title do %>
+    Billing
 <% end %>
-<hr/>
-<%= render "credit_cards/form" %>
+<div class="row row-cols-1 row-cols-lg-3 justify-content-center mb-4">
+    <div class="card">
+        <div class="card-header">
+            <strong>Current Plan:</strong> <%= @current_plan.formatted_name %>
+        </div>
+        <div class="card-body">
+            <% unless current_user.subscription.ends_at.present? %>
+                <%= link_to "Cancel My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+            <% else %>
+                <p>Your subscription is set to end on <%= current_user.subscription.ends_at %></p>
+                <%= link_to "Resume My Subscription", resume_subscription_path, method: :put %>    
+            <% end %>
+        </div>
+    </div>
+</div>
+<div class="row row-cols-1 row-cols-lg-3 justify-content-center mb-4">
+    <div class="card">
+        <div class="card-header">
+            <strong>Card On File:</strong> <%= current_user.card_on_file %>
+        </div>
+        <div class="card-body">
+            <%= render "credit_cards/form" %>
+        </div>
+    </div>
+</div>
+
 <hr/>
 <%= render partial: "charges/charge", collection: @charges %>
