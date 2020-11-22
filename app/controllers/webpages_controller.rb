@@ -11,7 +11,7 @@ class WebpagesController < ApplicationController
     end
 
     def create
-        authorize @webpage
+        authorize @website
         @webpage = @website.webpages.create(webpage_params)
         if @webpage.save
             redirect_to website_webpage_path(@website, @webpage), notice: "Webpage saved."
