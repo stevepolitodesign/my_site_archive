@@ -35,10 +35,17 @@ class WebsitesController < ApplicationController
 
     def update
         authorize @website
+        if @website.update(website_params)
+            redirect_to @website, notice: "Website updated."
+        else
+            render :edit
+        end
     end
 
     def destroy
         authorize @website
+        @website.destroy
+        redirect_to websites_path, notice: "Website deleted."
     end
 
     private

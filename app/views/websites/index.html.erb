@@ -1,12 +1,11 @@
 <% content_for :page_title do %>
     My Websites
 <% end %>
-<% if @websites.present? %>
-<div class="card-deck justify-content-center">
-    <%= render @websites %>
+<div class="text-center mb-5">
+    <%= link_to "Add a Website to Monitor", new_website_path, class: "btn btn-primary btn-lg" %>
 </div>
-<% else %>
-    <div class="text-center">
-        <%= link_to "Add Your First Website", new_website_path, class: "btn btn-primary btn-lg" %>
+<% if @websites.present? %>
+    <div class="card-deck justify-content-center">
+        <%= render @websites %>
     </div>
 <% end %>

@@ -12,7 +12,10 @@
                     </svg>
                 <% end %>
             </p>
-            <%= link_to "View", website, class: "btn btn-sm btn-primary" %>
+            <div class="btn-group">
+                <%= link_to "View", website, class: "btn btn-sm btn-primary" %>
+                <%= link_to "Edit", edit_website_path(website), class: "btn btn-sm btn-primary" %>
+            </div>
         </div>
     </div>
 </div>
