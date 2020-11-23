@@ -7,10 +7,6 @@ class ZoneFilesController < ApplicationController
         @zone_files = @website.zone_files
     end
 
-    def show
-        authorize @website, :show?
-    end
-
     private
 
         def set_website
