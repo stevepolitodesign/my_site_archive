@@ -37,6 +37,8 @@ class WebpagesController < ApplicationController
 
     def destroy
         authorize @webpage
+        @webpage.destroy
+        redirect_to websites_path, notice: "Webpage deleted."
     end
 
     private 
