@@ -1,5 +1,5 @@
 class HtmlDocument < ApplicationRecord
-  belongs_to :webpage
+  belongs_to :screenshot
 
   validates :source_code, presence: true
 end

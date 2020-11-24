@@ -2,8 +2,8 @@ require 'test_helper'
 
 class HtmlDocumentTest < ActiveSupport::TestCase
   def setup
-    @webpage = webpages(:one)
-    @html_document = @webpage.html_documents.build(source_code: "source code")
+    @screenshot = screenshots(:one)
+    @html_document = @screenshot.create_html_document(source_code: "source code")
   end
 
   test "should be valid" do

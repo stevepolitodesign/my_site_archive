@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_17_012315) do
+ActiveRecord::Schema.define(version: 2020_11_24_012519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,11 +47,11 @@ ActiveRecord::Schema.define(version: 2020_11_17_012315) do
   end
 
   create_table "html_documents", force: :cascade do |t|
-    t.bigint "webpage_id", null: false
     t.text "source_code", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["webpage_id"], name: "index_html_documents_on_webpage_id"
+    t.bigint "screenshot_id", null: false
+    t.index ["screenshot_id"], name: "index_html_documents_on_screenshot_id"
   end
 
   create_table "pay_charges", id: :serial, force: :cascade do |t|
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_012315) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "dns_records", "zone_files"
-  add_foreign_key "html_documents", "webpages"
+  add_foreign_key "html_documents", "screenshots"
   add_foreign_key "screenshots", "webpages"
   add_foreign_key "webpages", "websites"
   add_foreign_key "websites", "users"

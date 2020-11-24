@@ -2,9 +2,7 @@ require 'uri'
 
 class Webpage < ApplicationRecord
 	belongs_to :website
-	has_many :html_documents, dependent: :destroy
   	has_many :screenshots, dependent: :destroy
-	has_one :latest_html_document, -> { order('created_at') }, class_name: "HtmlDocument"
 	has_one :latest_screenshot, -> { order('created_at') }, class_name: "Screenshot"
 
   	validates :title, :url, presence: true
