@@ -37,6 +37,7 @@ class SubscriptionsController < ApplicationController
 
     def destroy
         current_user.subscription.cancel
+        # TODO: Use strftime
         redirect_to root_path, notice: "Your subscription has been paused. You will lose access in #{time_ago_in_words current_user.subscription.ends_at}"
     rescue Pay::Error
         redirect_to subscription_path, alert: "There was an error pausing your subscription."
