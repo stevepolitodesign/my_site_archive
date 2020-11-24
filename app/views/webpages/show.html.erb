@@ -4,11 +4,5 @@
 <%= link_to @webpage.url, @webpage.url, target: "_blank" %>
 <% if @webpage.latest_screenshot.present? %>
     <%= image_tag @webpage.latest_screenshot.image%>
-<% end %>
-<% if @webpage.latest_html_document.present? %>
-    <pre>
-        <code>
-            <%= @webpage.latest_html_document.source_code %>
-        </code>
-    </pre>
+    <%= @webpage.latest_screenshot.html_document.source_code %>
 <% end %>

@@ -7,7 +7,11 @@ class CreateScreenshotJob < ApplicationJob
     result = ScreenshotCapturer.new(@webpage.url).call
     if result.success?
       screenshot = result.payload
-      ScreenshotCreator.new(webpage_id, screenshot).call
+      result = ScreenshotCreator.new(webpage_id, screenshot).call
+      if result.success?
+        @screenshot = result.payload
+        CreateHtmlDocumentJob.perform_later(@screenshot.id)
+      end
       TmpFileRemover.new(screenshot).call
     else
       return

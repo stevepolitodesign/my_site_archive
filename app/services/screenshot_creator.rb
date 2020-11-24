@@ -8,8 +8,8 @@ class ScreenshotCreator
 
     def call
         attach_screenshot
-        @screenshot = @screenshot.save
-        OpenStruct.new({ success?: true, payload: @screenshot })
+        @screenshot.save
+        OpenStruct.new({ success?: true, payload: @screenshot.reload })
     rescue => error
         OpenStruct.new({ success?: false, error: error })
     end

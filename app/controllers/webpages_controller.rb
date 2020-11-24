@@ -4,8 +4,7 @@ class WebpagesController < ApplicationController
 
     def show
         authorize @webpage
-        @html_documents = @webpage.html_documents
-        @screenshots    = @webpage.screenshots
+        @screenshots = @webpage.screenshots
     end
 
     def edit
@@ -18,7 +17,7 @@ class WebpagesController < ApplicationController
         if @webpage.save
             redirect_to website_webpage_path(@website, @webpage), notice: "Webpage saved."
             # TODO: Condider running @webpage.capture_new_html_document
-            CreateHtmlDocumentJob.perform_later(@webpage.id)
+            # CreateHtmlDocumentJob.perform_later(@screenshot.id)
             # TODO: Condider running @webpage.capture_new_screenshot
             CreateScreenshotJob.perform_later(@webpage.id)
         else
