@@ -15,24 +15,8 @@ class Webpage < ApplicationRecord
 		.where({ pay_subscriptions: { status: "active" } }).distinct
     }
 
-	def capture_new_html_document
-		CreateHtmlDocumentJob.perform_later(self.id)
-	end
-
 	def capture_new_screenshot
 		CreateScreenshotJob.perform_later(self.id)
-	end
-
-	def should_capture_new_html_document?
-        return true if self.latest_html_document.nil?
-        if duration.present?
-            case duration
-            when "week"
-                return difference_between_html_document_dates > 7
-            end
-        else
-            return false
-        end
 	end
 	
 	def should_capture_new_screenshot?
