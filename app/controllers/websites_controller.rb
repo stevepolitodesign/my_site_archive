@@ -26,7 +26,6 @@ class WebsitesController < ApplicationController
         if @website.save
             redirect_to @website, notice: "Website created."
             @website.capture_screenshot
-            # TODO: Consider running @website.capture_new_zone_file
             @website.capture_new_zone_file
         else
             render "new"

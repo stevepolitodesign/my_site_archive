@@ -21,4 +21,12 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   include Devise::Test::IntegrationHelpers
+
+  def assert_user_not_authorized
+    assert_text "You are not authorized to perform this action."
+  end
+
+  def assert_user_authenticated
+    assert_text "You need to sign in or sign up before continuing."
+  end
 end
