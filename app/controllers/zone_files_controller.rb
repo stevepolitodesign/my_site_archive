@@ -4,7 +4,7 @@ class ZoneFilesController < ApplicationController
 
     def index
         authorize @website, :show?
-        @zone_files = @website.zone_files
+        @pagy, @zone_files = pagy(@website.zone_files)
     end
 
     private

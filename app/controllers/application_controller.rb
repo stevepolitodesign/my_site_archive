@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
+    include Pagy::Backend
     include Pundit
+
     before_action :authenticate_user!, unless: :exempt_devise_controllers
     before_action :authenticate_subscription, unless: :exempt_subscription_controllers
     after_action :verify_authorized, unless: :exempt_pundit_controllers
