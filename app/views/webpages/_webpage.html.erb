@@ -1,7 +1,15 @@
 <% if webpage.persisted? %>
     <div class="col-md-6 col-lg-4 mb-4">
         <div class="card">
-            <%= image_tag webpage.latest_screenshot.image.variant(resize_to_limit: [480, 480]), class: "card-img-top" if webpage.latest_screenshot.present? %>
+            <% if webpage.latest_screenshot.present? %>
+                <%= image_tag webpage.latest_screenshot.image.variant(resize_to_limit: [480, 480]), class: "card-img-top" %>
+            <% else %>
+                <div class="embed-responsive embed-responsive-1by1 bg-dark d-flex align-items-center justify-content-center">
+                    <div class="spinner-border text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            <% end %>
             <div class="card-body">
                 <h5 class="card-title font-weight-normal text-truncate"><%= webpage.title %></h5>
                 <p class="card-text">

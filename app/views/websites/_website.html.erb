@@ -1,6 +1,14 @@
 <div class="col-md-6 col-lg-4 mb-4">
     <div class="card">
-        <%= image_tag website.image.variant(resize_to_limit: [480, 480]), class: "card-img-top" %>
+        <% if website.image.attached? %>
+            <%= image_tag website.image.variant(resize_to_limit: [480, 480]), class: "card-img-top" %>
+        <% else %>
+            <div class="embed-responsive embed-responsive-1by1 bg-dark d-flex align-items-center justify-content-center">
+                <div class="spinner-border text-light" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        <% end %>
         <div class="card-body">
             <h5 class="card-title font-weight-normal text-truncate"><%= website.title %></h5>
             <p class="card-text">
