@@ -4,7 +4,7 @@ class WebpagesController < ApplicationController
 
     def show
         authorize @webpage
-        @screenshots = @webpage.screenshots
+        @pagy, @screenshots = pagy(@webpage.screenshots.with_attached_image.includes([:html_document]))
     end
 
     def edit
