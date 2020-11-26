@@ -27,7 +27,7 @@ class WebsitesController < ApplicationController
             redirect_to @website, notice: "Website created."
             @website.capture_screenshot
             # TODO: Consider running @website.capture_new_zone_file
-            CreateZoneFileJob.perform_later(@website.id)
+            @website.capture_new_zone_file
         else
             render "new"
         end

@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 17 Nov 2020 01:02:05 GMT
+      - Thu, 26 Nov 2020 16:44:39 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -51,7 +51,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_YJ2FgPfipouiqr
+      - req_L8AqitNT1ByXPK
       Stripe-Version:
       - '2020-08-27'
       Strict-Transport-Security:
@@ -68,5 +68,5 @@ http_interactions:
             "type": "invalid_request_error"
           }
         }
-  recorded_at: Tue, 17 Nov 2020 01:02:05 GMT
+  recorded_at: Thu, 26 Nov 2020 16:44:39 GMT
 recorded_with: VCR 6.0.0
