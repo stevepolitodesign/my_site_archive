@@ -1,6 +1,14 @@
 <div class="col-md-6 col-lg-4 mb-4">
     <div class="card">
-        <%= image_tag screenshot.image.variant(resize_to_limit: [480, 480]), class: "card-img-top" if screenshot.image.attached? %>
+        <% if screenshot.image.attached? %>
+            <%= image_tag screenshot.image.variant(resize_to_limit: [480, 480]), class: "card-img-top" %>
+        <% else %>
+            <div class="embed-responsive embed-responsive-1by1 bg-dark d-flex align-items-center justify-content-center">
+                <div class="spinner-border text-light" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        <% end %>        
         <div class="card-body">
             <h5 class="card-title font-weight-normal text-truncate">Captured <%= screenshot.created_at.strftime("%m/%d/%y") %></h5>
             <p class="card-text">
@@ -13,31 +21,35 @@
                 <% end %>
             </p>
             <div class="btn-group">
-                <%= link_to "View Larger", url_for(screenshot.image), class: "btn btn-sm btn-primary" %>
-                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#<%= dom_id(screenshot) %>">View Source Code</button>
+                <%= link_to "View Larger", url_for(screenshot.image), class: "btn btn-sm btn-primary" if screenshot.image.attached? %>
+                <% if screenshot.html_document.present? %>
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#<%= dom_id(screenshot) %>">View Source Code</button>
+                <% end %>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="<%= dom_id(screenshot) %>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="<%= dom_id(screenshot) %>Label" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="<%= dom_id(screenshot) %>Label">Source Code</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <pre>
-                        <code>
-                            <%= screenshot.html_document.source_code %>
-                        </code>
-                    </pre>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <% if screenshot.html_document.present? %>
+        <div class="modal fade" id="<%= dom_id(screenshot) %>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="<%= dom_id(screenshot) %>Label" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="<%= dom_id(screenshot) %>Label">Source Code</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <pre>
+                            <code>
+                                <%= screenshot.html_document.source_code %>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>    
+    <% end %>
 </div>
