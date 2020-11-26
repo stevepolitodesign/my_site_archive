@@ -42,7 +42,19 @@ class WebsiteFlowsTest < ApplicationSystemTestCase
   end
 
   test "deleting a website" do
-    skip
+    sign_in @user
+    visit edit_website_path(@website)
+
+    assert_difference("Website.count", -1) do
+      accept_confirm do
+        click_link "Delete Website"
+      end
+      sleep 5
+    end
+
+    assert_text "Website deleted."
+
+    take_screenshot
   end
 
   test "preventing a user from editing another's website" do
