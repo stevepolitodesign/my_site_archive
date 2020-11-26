@@ -1,9 +1,11 @@
 <% content_for :page_title do %>
     <% @webpage.title %>
 <% end %>
-<div class="card mb-4">
-    <div class="card-header"><h2 class="mb-0">Edit Webpage<h2></div>
-    <div class="card-body">
-        <%= render "form" %>
+<div class="row row-cols-lg-3 justify-content-center mb-4">
+    <div class="card">
+        <div class="card-header"><h2 class="mb-0">Edit Webpage<h2></div>
+        <div class="card-body">
+            <%= render "form" %>
+        </div>
     </div>
 </div>

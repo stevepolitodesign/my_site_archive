@@ -40,12 +40,14 @@
     </div>
 <% end %>
 <% if policy(@website.webpages.build).new? %>
-    <div class="card mb-4">
-        <div class="card-header"><h2 class="h3 mb-0">Add a webpage to monitor</h2></div>
-        <div class="card-body">
-            <%= render partial: "webpages/form" %>
+    <div class="row row-cols-lg-3 justify-content-center mb-4">
+        <div class="card">
+            <div class="card-header"><h2 class="h3 mb-0">Add a webpage to monitor</h2></div>
+            <div class="card-body">
+                <%= render partial: "webpages/form" %>
+            </div>
         </div>
-    </div>
+    </div>    
 <% end %>
 <div class="card-deck justify-content-center">
     <%= render @webpages %>

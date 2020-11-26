@@ -41,6 +41,10 @@ class WebsiteFlowsTest < ApplicationSystemTestCase
     take_screenshot
   end
 
+  test "deleting a website" do
+    skip
+  end
+
   test "preventing a user from editing another's website" do
     sign_in @another_user
 

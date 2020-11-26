@@ -1,4 +1,10 @@
-<%# TODO: Style %>
-<% object.errors.full_messages.each do |full_message| %>
-    <%= full_message %>
+<% if object.errors.any? %>
+    <div class="alert alert-danger">
+        <p><%= pluralize(object.errors.count, "error") %> prevented this <%= object.class.name%> from being saved.</p>
+        <ul>
+            <% object.errors.full_messages.each do |full_message| %>
+                <li><%= full_message %></li>
+            <% end %>
+        </ul>
+    </div>
 <% end %>

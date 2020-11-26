@@ -50,10 +50,6 @@ class Webpage < ApplicationRecord
 		def duration
             self.website.user.current_plan_job_schedule_frequency
 		end
-		
-		def difference_between_html_document_dates
-            (1.send(duration).from_now.to_date - self.latest_html_document.created_at.to_date).to_i
-		end
 
 		def difference_between_screenshot_dates
             (1.send(duration).from_now.to_date - self.latest_screenshot.created_at.to_date).to_i
