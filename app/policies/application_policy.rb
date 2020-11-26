@@ -53,6 +53,14 @@ class ApplicationPolicy
       user == record.user
     end
 
+    def user_has_not_reached_webpage_limit?
+      user.current_plan.webpage_limit > record.website.webpages.count
+    end
+
+    def user_has_not_reached_website_limit?
+      user.current_plan.website_limit > user.websites.count
+    end
+
     def user_subscribed?
       user.subscribed?
     end

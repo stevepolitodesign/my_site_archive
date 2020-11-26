@@ -2,7 +2,7 @@
     My Websites
 <% end %>
 <div class="text-center mb-5">
-    <%= link_to "Add a Website to Monitor", new_website_path, class: "btn btn-primary btn-lg" %>
+    <%= link_to "Add a Website to Monitor", new_website_path, class: "btn btn-primary btn-lg" if policy(Website).new? %>
 </div>
 <% if @websites.present? %>
     <div class="card-deck justify-content-center">

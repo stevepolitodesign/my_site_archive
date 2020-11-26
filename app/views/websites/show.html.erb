@@ -39,12 +39,14 @@
         <span class="ml-3">Retrieving DNS Records. Check back later.</span>
     </div>
 <% end %>
-<div class="card mb-4">
-    <div class="card-header"><h2 class="h3 mb-0">Add a webpage to monitor</h2></div>
-    <div class="card-body">
-        <%= render partial: "webpages/form" %>
+<% if policy(@website.webpages.build).new? %>
+    <div class="card mb-4">
+        <div class="card-header"><h2 class="h3 mb-0">Add a webpage to monitor</h2></div>
+        <div class="card-body">
+            <%= render partial: "webpages/form" %>
+        </div>
     </div>
-</div>
+<% end %>
 <div class="card-deck justify-content-center">
     <%= render @webpages %>
 </div>

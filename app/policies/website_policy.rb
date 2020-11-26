@@ -4,7 +4,7 @@ class WebsitePolicy < ApplicationPolicy
   end
   
   def new?
-    user_subscribed?
+    user_subscribed? && user_has_not_reached_website_limit?
   end
 
   def edit?
