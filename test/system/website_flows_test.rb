@@ -23,6 +23,14 @@ class WebsiteFlowsTest < ApplicationSystemTestCase
     take_screenshot
   end
 
+  test "editing a website" do
+    skip
+  end
+
+  test "rendering form errors" do
+    skip
+  end  
+
   test "preventing a user from editing another's website" do
     skip
   end
@@ -30,4 +38,5 @@ class WebsiteFlowsTest < ApplicationSystemTestCase
   test "preventing a user from viewing another's website" do
     skip
   end
+
 end
