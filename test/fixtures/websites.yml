@@ -16,3 +16,10 @@ sample_user_website_<%= i %>:
   url: http://example.com/
   user: sample_user
 <% end %>
+
+<% 1.upto(10) do |i| %>
+sample_user_with_pending_data_website_<%= i %>:
+  title: <%= Faker::Lorem.paragraph %>
+  url: http://example.com/
+  user: sample_user_with_pending_data
+<% end %>

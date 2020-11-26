@@ -44,4 +44,16 @@ sample_user:
   card_last4: 4242
   card_exp_month: 1
   card_exp_year: <%= (1.year.from_now).strftime("%Y") %>
-  accepted_terms: true  
+  accepted_terms: true
+
+sample_user_with_pending_data:
+  email: $LABEL@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: <%= Time.zone.now %>
+  processor: stripe
+  processor_id: cus_123
+  card_type: Visa
+  card_last4: 4242
+  card_exp_month: 1
+  card_exp_year: <%= (1.year.from_now).strftime("%Y") %>
+  accepted_terms: true
