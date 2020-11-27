@@ -9,6 +9,7 @@ class DnsRecordRetriever
 
     def call
         resources = Resolv::DNS.new.getresources(@address, @resolv_typeclass)
+    # TODO: Only rescue from Resolv::DNS
     rescue => error
         OpenStruct.new({success?: false, error: error})
     else
