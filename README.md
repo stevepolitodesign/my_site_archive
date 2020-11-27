@@ -57,3 +57,7 @@ stripe:
 rails t
 rails test:system
 ```
+
+## To Do
+
+`rails notes`
