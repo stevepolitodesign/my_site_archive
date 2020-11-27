@@ -12,7 +12,7 @@ class ScreenshotCapturer
         browser.screenshot(path: @screenshot, full: true)
         browser.quit
         OpenStruct.new({ success?: true, payload: @screenshot })
-    rescue => Ferrum::Error
+    rescue Ferrum::Error
         OpenStruct.new({ success?: false, error: error })
     end
 

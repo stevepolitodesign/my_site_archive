@@ -10,7 +10,7 @@ class ImageAttacher
         if @record.save
             OpenStruct.new({success?:true, payload: @record})
         else
-            OpenStruct.new({success?:false, errors: @record.errors.full_messages.to_sentence})
+            OpenStruct.new({success?:false, errors: @record.errors})
         end
     end
 
