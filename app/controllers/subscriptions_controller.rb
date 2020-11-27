@@ -2,7 +2,6 @@ class SubscriptionsController < ApplicationController
     include ActionView::Helpers::DateHelper
     include Subscribable
 
-    before_action :authenticate_user!
     before_action :set_subscription, only: [:show, :edit, :update, :destroy]
     before_action :set_available_plans, only: [:edit]
     before_action :set_current_plan, only: [:show, :edit, :update]
@@ -38,9 +37,9 @@ class SubscriptionsController < ApplicationController
 
     def destroy
         current_user.subscription.cancel
-        redirect_to root_path, notice: "Your subscription has been canceled. You will lose access in #{time_ago_in_words current_user.subscription.ends_at}"
+        redirect_to root_path, notice: "Your subscription has been paused. You will lose access on #{current_user.subscription.ends_at.strftime('%m/%d/%y')}"
     rescue Pay::Error
-        redirect_to subscription_path, alert: "There was an error canceling your subscription."
+        redirect_to subscription_path, alert: "There was an error pausing your subscription."
     end
 
 end

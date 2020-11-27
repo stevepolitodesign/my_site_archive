@@ -9,11 +9,11 @@ class ScreenshotCapturer
     def call
         browser = Ferrum::Browser.new
         browser.goto(@url)
-        browser.screenshot(path: @screenshot)
+        browser.screenshot(path: @screenshot, full: true)
         browser.quit
         OpenStruct.new({ success?: true, payload: @screenshot })
-    rescue => error
-        OpenStruct.new({ success?: false, error: error })
+    rescue Ferrum::Error
+        OpenStruct.new({ success?: false, error: Ferrum::Error })
     end
 
     private
@@ -25,8 +25,7 @@ class ScreenshotCapturer
             Dir.mkdir(directory) unless File.directory?(directory)
             return directory
         end
-        
-        # TODO: Make screenshot full page, and wider.
+
         def path_to_screenshot(directory)
             "#{directory}/#{url.parameterize}-#{Time.zone.now.to_s.parameterize}.png"
         end

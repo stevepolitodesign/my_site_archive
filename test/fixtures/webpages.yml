@@ -9,3 +9,21 @@ two:
   website: two
   title: Getting Started
   url: https://guides.rubyonrails.org/getting_started.html
+
+<% 1.upto(10) do |i| %>
+<% 1.upto(10) do |j| %>
+sample_user_website_<%= i %>_webpage_<%= j %>:
+  website: sample_user_website_<%= i %>
+  title: <%= Faker::Lorem.paragraph %>
+  url: http://example.com/
+<% end %>
+<% end %>
+
+<% 1.upto(10) do |i| %>
+<% 1.upto(10) do |j| %>
+sample_user_with_pending_data_website_<%= i %>_webpage_<%= j %>:
+  website: sample_user_with_pending_data_website_<%= i %>
+  title: <%= Faker::Lorem.paragraph %>
+  url: http://example.com/
+<% end %>
+<% end %>

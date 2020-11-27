@@ -23,7 +23,7 @@ gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -57,9 +57,11 @@ gem "aws-sdk-s3", require: false
 gem "bullet", "~> 6.1"
 gem "data_migrate", "~> 6.5"
 gem "devise", "~> 4.7"
+gem "faker", "~> 2.14"
 gem "ferrum", "~> 0.9"
 gem "honeybadger", "~> 4.7"
 gem "pay", "~> 2.2"
+gem "pagy", "~> 3.10"
 gem "pundit", "~> 2.1"
 gem "sendgrid-ruby", "~> 6.3"
 gem "sidekiq", "~> 6.1"

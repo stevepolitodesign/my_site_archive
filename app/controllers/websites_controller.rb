@@ -1,10 +1,14 @@
 class WebsitesController < ApplicationController
-    before_action :authenticate_user!
     before_action :set_website, only: [:show, :edit, :update, :destroy]
+
+    def index
+        @websites = current_user.websites.with_attached_image
+    end
 
     def show
         authorize @website
         @webpage = @website.webpages.build
+        @webpages = @website.webpages.includes([latest_screenshot: [image_attachment: :blob]])
     end
 
     def new
@@ -21,8 +25,8 @@ class WebsitesController < ApplicationController
         authorize @website
         if @website.save
             redirect_to @website, notice: "Website created."
-            # TODO: Consider running @website.capture_new_zone_file
-            CreateZoneFileJob.perform_later(@website.id)
+            @website.capture_screenshot
+            @website.capture_new_zone_file
         else
             render "new"
         end
@@ -30,10 +34,17 @@ class WebsitesController < ApplicationController
 
     def update
         authorize @website
+        if @website.update(website_params)
+            redirect_to @website, notice: "Website updated."
+        else
+            render :edit
+        end
     end
 
     def destroy
         authorize @website
+        @website.destroy
+        redirect_to websites_path, notice: "Website deleted."
     end
 
     private

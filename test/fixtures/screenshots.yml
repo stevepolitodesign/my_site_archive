@@ -5,3 +5,21 @@ one:
 
 two:
   webpage: two
+
+<% 1.upto(10) do |i| %>
+<% 1.upto(10) do |j| %>
+<% 1.upto(25) do |x| %>
+sample_user_website_<%= i %>_webpage_<%= j %>_screenshot_<%= x %>:
+  webpage: sample_user_website_<%= i %>_webpage_<%= j %>
+<% end %>
+<% end %>
+<% end %>
+
+<% 1.upto(10) do |i| %>
+<% 1.upto(10) do |j| %>
+<% 1.upto(25) do |x| %>
+sample_user_with_pending_data_website_<%= i %>_webpage_<%= j %>_screenshot_<%= x %>:
+  webpage: sample_user_with_pending_data_website_<%= i %>_webpage_<%= j %>
+<% end %>
+<% end %>
+<% end %>

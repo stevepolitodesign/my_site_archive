@@ -26,8 +26,8 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
 
   test "deleting a subscription" do
     create_subscription
-    delete_subscription
-    assert_text "Your subscription has been canceled."
+    pause_subscription
+    assert_text "Your subscription has been paused."
     assert @unsubscribed_user.subscription.cancelled?
   end
 
@@ -35,7 +35,7 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
     create_subscription
     visit edit_user_registration_path
     accept_confirm do
-      click_button "Cancel my account"
+      click_button "Cancel my account and subscription"
     end
     sleep 10
     assert_not @unsubscribed_user.subscribed?
@@ -53,7 +53,7 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
     fill_out_subscription_form(
       card_number: "5555 5555 5555 4444",
     )
-    click_button "Save"
+    click_button "Update My Card"
     sleep 10
     assert_text "Credit card updated."
     assert_equal "Mastercard", @unsubscribed_user.reload.card_type
@@ -61,7 +61,7 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
 
   test "resuming a subscription" do
     create_subscription
-    delete_subscription
+    pause_subscription
     visit subscription_path
     click_link "Resume My Subscription"
     sleep 10
@@ -86,12 +86,12 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
   test "subscribing to a private plan" do
     sign_in @unsubscribed_user
     visit new_subscription_path + "?plan_uuid=#{@private_plan.uuid}"
-    take_screenshot
     fill_out_subscription_form
-    click_button "Save"
+    click_button "Sign Up"
     sleep 10
     assert_text "You are now subscribed."
     assert @unsubscribed_user.subscribed?    
+    take_screenshot
   end
 
   private
@@ -100,14 +100,14 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
       sign_in @unsubscribed_user
       visit new_subscription_path
       fill_out_subscription_form
-      click_button "Save"
+      click_button "Sign Up"
       sleep 10
     end
 
-    def delete_subscription
+    def pause_subscription
       visit subscription_path
       accept_confirm do
-        click_link "Cancel My Subscription"
+        click_link "Pause My Subscription"
       end
       sleep 10      
     end

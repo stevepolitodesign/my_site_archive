@@ -10,7 +10,7 @@ class DnsRecordCreator
         if @dns_record.save
             OpenStruct.new({success?: true, payload: @dns_record})
         else
-            OpenStruct.new({success?: false, error: @dns_record.errors.full_messages.to_sentence})
+            OpenStruct.new({success?: false, error: @dns_record.errors })
         end
     end
 

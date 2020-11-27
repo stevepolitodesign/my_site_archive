@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MySiteArchive</title>
+    <title>My Site Archive</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <%= tag.meta name: "viewport", content: "width=device-width, initial-scale=1, shrink-to-fit=no" %>
     <%= tag.meta name: "stripe-key", content: Rails.application.credentials.dig(:stripe, :public_key) %>
+    
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'https://js.stripe.com/v3/' %>
   </head>
 
-  <body>
+  <body class="bg-light">
     <%= render "shared/flash" %>
-    <%= yield %>
+    <header class="container">
+      <%= render partial: "shared/breadcrumb" %>
+      <%= render partial: "shared/nav" %>
+      <%= render partial: "shared/page_title" %>
+      <%= render partial: "shared/base_url" %>
+    </header>
+    <main class="container py-5">
+      <%= yield %>
+    </main>
   </body>
 </html>

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class HtmlDocumentsControllerTest < ActionDispatch::IntegrationTest
+class ScreenshotsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

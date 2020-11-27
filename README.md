@@ -1,56 +1,63 @@
-## Models
+## Local Development
 
-### Website
+### Step 1
 
-- `belongs_to :user`
-- `has_many :webpages`
-- `has_many :dns_records`
-- `title:string`
-- `url:string`
-    - Need to run a callback to ensure just the domain with subdomain is saved. Eg. app.example.com or www.example.com
+```
+bundle install
+rails db:create
+rails development_setup:perform
+```
 
-### Webpage
+### Step 2
 
-- `belongs_to :website`
-- `has_many: :screenshots`
-- `has_many: :html_documents`
-- `title:string`
-- `path:string`
-    - Need to run a callback that ensures the final result saved to the database is  `website.url + path`, and that the path is does not contain the `website.url`
+`rails credentials:edit --environment=test`
 
-### Screenshot
+```
+stripe:
+  private_key: sk_test_123
+  public_key: pk_test_123
+  signing_secret: 123abc
+```
 
-- `belongs_to :webpage`
-- `has_one_attached :image`
-- `width:integer`
-- `height:integer`
+`rails credentials:edit --environment=development`
 
-### HTML Document
+```
+stripe:
+  private_key: sk_test_123
+  public_key: pk_test_123
+  signing_secret: 123abc
+```
 
-- `belongs_to :webpage`
-- `source_code:text`
+`rails credentials:edit`
 
-### Zone File
+```
+digitalocean:
+  access_key_id: 123abc
+  secret_access_key: 123abc
+  region: nyc3
+  bucket: 123abc
 
-- `belongs_to :website`
-- `has_many :records`
+sendgrid:
+  username: apikey
+  password: 123abc
 
-### DNS Record
+stripe:
+  private_key: sk_live_123
+  public_key: pk_live_123
+  signing_secret: 123abc
+```
 
-- `belongs_to :zone_file`
-- `content:text`
-- `priority:integer`
-- `type:integer`
-    - CNAME
-        - name
-    - A
-        - address
-    - AAAA
-        - address
-    - MX
-        - exchange
-        - preference
-    - NS
-        - name
-    - TXT 
-        - strings
+### Step 3
+
+`foreman start`
+
+## Tests
+
+```
+rails t
+rails test:system
+```
+
+## To Do
+
+`rails notes`

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class HtmlDocumentPolicyTest < ActiveSupport::TestCase
+class ScreenshotPolicyTest < ActiveSupport::TestCase
   def test_scope
   end
 

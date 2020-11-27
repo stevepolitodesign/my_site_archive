@@ -46,14 +46,6 @@ class WebpageTest < ActiveSupport::TestCase
     end
   end
 
-  test "should destroy associated html_documents" do
-    @webpage.save
-    @webpage.html_documents.create(source_code: "source code")
-    assert_difference("HtmlDocument.count", -1) do
-      @webpage.destroy
-    end
-  end
-
   test "should limit the amount of webpages a user has based on their plan" do
     @user = users(:subscribed_user_with_no_websites)
     @website = @user.websites.create(title: "title", url: "https://www.example.com")

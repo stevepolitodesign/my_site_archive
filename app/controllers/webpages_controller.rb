@@ -1,11 +1,10 @@
 class WebpagesController < ApplicationController
-    # TODO: Authenticate subscription
-    before_action :authenticate_user!
     before_action :set_webpage, only: [:show, :edit, :update, :destroy]
-    before_action :set_website, only: [:create]
+    before_action :set_website, only: [:create, :edit, :update]
 
     def show
         authorize @webpage
+        @pagy, @screenshots = pagy(@webpage.screenshots.with_attached_image.includes([:html_document]))
     end
 
     def edit
@@ -13,13 +12,11 @@ class WebpagesController < ApplicationController
     end
 
     def create
+        authorize @website
         @webpage = @website.webpages.create(webpage_params)
         if @webpage.save
             redirect_to website_webpage_path(@website, @webpage), notice: "Webpage saved."
-            # TODO: Condider running @webpage.capture_new_html_document
-            CreateHtmlDocumentJob.perform_later(@webpage.id)
-            # TODO: Condider running @webpage.capture_new_screenshot
-            CreateScreenshotJob.perform_later(@webpage.id)
+            @webpage.capture_new_screenshot
         else
             redirect_to @website, alert: @webpage.errors.full_messages.to_sentence
         end
@@ -27,10 +24,17 @@ class WebpagesController < ApplicationController
 
     def update
         authorize @webpage
+        if @webpage.update(webpage_params)
+            redirect_to website_webpage_path(@website, @webpage), notice: "Webpage updated."
+        else
+            render :edit
+        end
     end
 
     def destroy
         authorize @webpage
+        @webpage.destroy
+        redirect_to websites_path, notice: "Webpage deleted."
     end
 
     private 

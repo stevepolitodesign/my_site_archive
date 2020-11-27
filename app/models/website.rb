@@ -5,11 +5,13 @@ class Website < ApplicationRecord
     has_many :webpages, dependent: :destroy
     has_many :zone_files, dependent: :destroy
     has_one :latest_zone_file, -> { order('created_at') }, class_name: "ZoneFile"
+    # TODO: Make sure the image is deleted when the record is deleted.
+    has_one_attached :image
 
     validates :title, :url, presence: true
     validates :url, url: true
     validate :associated_user_should_have_an_active_subscription
-    validate :user_website_limit
+    validate :user_website_limit, on: :create
     
     scope :with_active_subscribers, -> {
         joins(user: :subscriptions).where({ pay_subscriptions: { status: "active" } }).distinct
@@ -25,6 +27,14 @@ class Website < ApplicationRecord
 
     def capture_new_zone_file
         CreateZoneFileJob.perform_later(self.id)
+    end
+
+    def capture_screenshot
+        result = ScreenshotCapturer.new(self.url).call
+        if result.success?
+            ImageAttacher.new(self, result.payload, "image").call
+            TmpFileRemover.new(result.payload).call
+        end
     end
 
     def should_capture_new_zone_file?

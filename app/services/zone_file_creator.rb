@@ -8,7 +8,7 @@ class ZoneFileCreator
         if @zone_file.save
             OpenStruct.new({success?: true, payload: @zone_file})
         else
-            OpenStruct.new({success?: false, error: @zone_file.errors.full_messages.to_sentence})
+            OpenStruct.new({success?: false, error: @zone_file.errors})
         end
     end
 end

@@ -15,3 +15,21 @@ subscribed_user_with_no_websites_subscription:
   processor_id: sub_123
   processor_plan: price_1HkrqzIZ6Y8BQ2bm4CJfzmno
   status: active
+
+sample_user_subscription:
+  owner_type: User
+  owner_id: <%= ActiveRecord::FixtureSet.identify(:sample_user) %>
+  name: default
+  processor: stripe
+  processor_id: sub_123
+  processor_plan: price_1HkrqzIZ6Y8BQ2bm4CJfzmno
+  status: active  
+
+sample_user_with_pending_data_subscription:
+  owner_type: User
+  owner_id: <%= ActiveRecord::FixtureSet.identify(:sample_user_with_pending_data) %>
+  name: default
+  processor: stripe
+  processor_id: sub_123
+  processor_plan: price_1HkrqzIZ6Y8BQ2bm4CJfzmno
+  status: active    

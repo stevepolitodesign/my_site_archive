@@ -1,1 +1,5 @@
-<%= charge.inspect %>
+<tr>
+    <td><%= number_to_currency charge.amount / 100 %></td>
+    <td><%= charge.charged_to %></td>
+    <td><%= charge.created_at.strftime("%m/%d/%y") %></td>
+</tr>

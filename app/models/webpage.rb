@@ -2,39 +2,21 @@ require 'uri'
 
 class Webpage < ApplicationRecord
 	belongs_to :website
-	has_many :html_documents, dependent: :destroy
   	has_many :screenshots, dependent: :destroy
-	has_one :latest_html_document, -> { order('created_at') }, class_name: "HtmlDocument"
 	has_one :latest_screenshot, -> { order('created_at') }, class_name: "Screenshot"
 
   	validates :title, :url, presence: true
   	validates :url, url: true
 	validate :url_should_match_website_url
-	validate :user_webpage_limit
+	validate :user_webpage_limit, on: :create
 
 	scope :with_active_subscribers, -> {
 		joins(website: [:user, user: [:subscriptions]])
 		.where({ pay_subscriptions: { status: "active" } }).distinct
     }
 
-	def capture_new_html_document
-		CreateHtmlDocumentJob.perform_later(self.id)
-	end
-
 	def capture_new_screenshot
 		CreateScreenshotJob.perform_later(self.id)
-	end
-
-	def should_capture_new_html_document?
-        return true if self.latest_html_document.nil?
-        if duration.present?
-            case duration
-            when "week"
-                return difference_between_html_document_dates > 7
-            end
-        else
-            return false
-        end
 	end
 	
 	def should_capture_new_screenshot?
@@ -61,16 +43,12 @@ class Webpage < ApplicationRecord
 		
 		def user_webpage_limit
 			if self.website.user.current_plan.present? && self.website.user.current_plan.webpage_limit.present?
-				errors.add(:base, "You have reached your website limit.") if self.website.webpages.count >= self.website.user.current_plan.webpage_limit
+				errors.add(:base, "You have reached your webpage limit.") if self.website.webpages.count >= self.website.user.current_plan.webpage_limit
 			end
 		end
 
 		def duration
             self.website.user.current_plan_job_schedule_frequency
-		end
-		
-		def difference_between_html_document_dates
-            (1.send(duration).from_now.to_date - self.latest_html_document.created_at.to_date).to_i
 		end
 
 		def difference_between_screenshot_dates

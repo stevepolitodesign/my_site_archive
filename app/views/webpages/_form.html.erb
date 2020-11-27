@@ -1,8 +1,31 @@
-<%= form_with model: [@website, @webpage], local: true do |f| %>
-    <%= render partial: "shared/form_errors", locals: { object: f.object } %>
-    <%= f.label :title %>
-    <%= f.text_field :title, required: true %>
-    <%= f.label :url %>
-    <%= f.url_field :url, required: true, value: @website.url %>
-    <%= f.submit %>
+<% if @webpage.persisted? %>
+    <%= form_with model: [@website, @webpage], url: website_webpage_path(@website, @webpage), local: true, id: dom_id(@webpage) do |f| %>
+        <%= render partial: "shared/form_errors", locals: { object: f.object } %>
+            <div class="form-group">
+                <%= f.label :title %>
+                <%= f.text_field :title, required: true, class: "form-control" %>
+            </div>
+            <div class="form-group">
+                <%= f.label :url %>
+                <%= f.url_field :url, required: true, value: @website.url, class: "form-control" %>
+            </div>
+            <div class="btn-group">
+                <%= f.submit class: "btn btn-primary" %>
+                <%= link_to "Delete Webpage", website_webpage_path(@website, @webpage), method: :delete, class: "btn btn-danger", data: { confirm: "This will delete all associated screenshots and source code." } %>
+            </div>
+        </div>
+    <% end %>
+<% else %>
+    <%= form_with model: [@website, @webpage], local: true, id: dom_id(@webpage) do |f| %>
+        <%= render partial: "shared/form_errors", locals: { object: f.object } %>
+        <div class="form-group">
+            <%= f.label :title %>
+            <%= f.text_field :title, required: true, class: "form-control" %>
+        </div>
+        <div class="form-group">
+            <%= f.label :url %>
+            <%= f.url_field :url, required: true, value: @website.url, class: "form-control" %>
+        </div>
+        <%= f.submit class: "btn btn-primary" %>
+    <% end %>
 <% end %>

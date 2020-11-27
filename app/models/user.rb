@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Chargable
   include Pay::Billable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -13,20 +14,20 @@ class User < ApplicationRecord
 
   scope :with_active_subscriptions, -> { joins(:subscriptions).where({ pay_subscriptions: { status: "active" } }).distinct }
   scope :with_websites, -> { joins(:websites).distinct }
+  
+  def current_plan
+    Plan.find_by(processor_id: self.subscription.processor_plan) unless self.subscription.nil?
+  end
+  
+  def current_plan_job_schedule_frequency
+    return if current_plan.nil?
+    self.current_plan.job_schedule_frequency
+  end
 
   def destroy
     self.subscription.cancel_now! if self.subscribed?
     rescue Pay::Error
     super
-  end
-
-  def current_plan
-    Plan.find_by(processor_id: self.subscription.processor_plan) unless self.subscription.nil?
-  end
-
-  def current_plan_job_schedule_frequency
-    return if current_plan.nil?
-    self.current_plan.job_schedule_frequency
   end
 
 end

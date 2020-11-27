@@ -1,12 +1,11 @@
-<h1><%= @webpage.title %></h1>
-<%= link_to @webpage.url, @webpage.url, target: "_blank" %>
-<% if @webpage.latest_screenshot.present? %>
-    <%= image_tag @webpage.latest_screenshot.image%>
+<% content_for :page_title do %>
+    <% @webpage.title %>
 <% end %>
-<% if @webpage.latest_html_document.present? %>
-    <pre>
-        <code>
-            <%= @webpage.latest_html_document.source_code %>
-        </code>
-    </pre>
+<% if @screenshots.present? %>
+    <div class="card-deck justify-content-center">
+        <%= render @screenshots %>
+    </div>
+    <div class="d-flex justify-content-center">
+        <%== pagy_bootstrap_nav(@pagy) %>
+    </div>    
 <% end %>

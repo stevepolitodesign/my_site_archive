@@ -2,9 +2,9 @@ class WebsitePolicy < ApplicationPolicy
   def show?
     user_subscribed? && is_record_owner?
   end
-
+  
   def new?
-    user_subscribed?
+    user_subscribed? && user_has_not_reached_website_limit?
   end
 
   def edit?

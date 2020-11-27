@@ -1,26 +1,54 @@
-<h1><%= @website.title %></h1>
-<%= link_to @website.url, @website.url, target: "_blank" %>
-<%= render partial: "webpages/form" %>
-<% if @website.latest_zone_file.present? %>
-    <h2>DNS Records</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Record Type</th>
-                <th>Content</th>
-                <th>Priority</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @website.latest_zone_file.dns_records.each do |dns_record| %>
-                <tr>
-                    <td><%= dns_record.record_type %></td>
-                    <td><%= dns_record.content %></td>
-                    <td><%= dns_record.priority %></td>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
-<% else %>
-    <p>Retrieving DNS Records. Check back later.</p>
+<% content_for :page_title do %>
+    <% @website.title %>
 <% end %>
+<% if @website.latest_zone_file.present? %>
+    <div class="card mb-4">
+        <div class="card-header d-flex align-items-center">
+            <h2 class="h3">Current DNS Records</h2>
+            <%= link_to @website.url, target: "_blank", class: "d-flex align-items-center ml-3" do  %>
+                <span class="mr-2"><%= @website.url %></span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                </svg>
+            <% end %>            
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">Record Type</th>
+                            <th scope="col">Content</th>
+                            <th scope="col">Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%= render partial: "dns_records/dns_record", collection: @website.latest_zone_file.dns_records, as: "dns_record" %>
+                    </tbody>
+                </table>
+            </div>
+            <%= link_to "Previous Rescords", website_zone_files_path(@website), class: "btn btn-primary" %>
+        </div>
+    </div>
+<% else %>
+    <div class="d-flex justify-content-center align-items-center mb-4">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <span class="ml-3">Retrieving DNS Records. Check back later.</span>
+    </div>
+<% end %>
+<% if policy(@website.webpages.build).new? %>
+    <div class="row row-cols-lg-3 justify-content-center mb-4">
+        <div class="card">
+            <div class="card-header"><h2 class="h3 mb-0">Add a webpage to monitor</h2></div>
+            <div class="card-body">
+                <%= render partial: "webpages/form" %>
+            </div>
+        </div>
+    </div>    
+<% end %>
+<div class="card-deck justify-content-center">
+    <%= render @webpages %>
+</div>

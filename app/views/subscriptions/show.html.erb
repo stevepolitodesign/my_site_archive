@@ -1,11 +1,51 @@
-<p><strong>Current Plan:</strong> <%= @current_plan.formatted_name %></p>
-<% unless current_user.subscription.ends_at.present? %>
-    <%= link_to "Cancel My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" } %>
-<% else %>
-    <p>Your subscription is set to end on <%= current_user.subscription.ends_at %></p>
-    <%= link_to "Resume My Subscription", resume_subscription_path, method: :put %>    
+<% content_for :page_title do %>
+    Billing
 <% end %>
-<hr/>
-<%= render "credit_cards/form" %>
-<hr/>
-<%= render partial: "charges/charge", collection: @charges %>
+<div class="row">
+    <div class="col-md-4 mb-4 mb-md-0">
+        <div class="card mb-4">
+            <div class="card-header">
+                <strong>Current Plan:</strong> <%= @current_plan.formatted_name %>
+            </div>
+            <div class="card-body">
+                <% unless current_user.subscription.ends_at.present? %>
+                    <%= link_to "Pause My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                <% else %>
+                    <p>Your subscription is set to end on <%= current_user.subscription.ends_at.strftime("%m/%d/%y") %></p>
+                    <%= link_to "Resume My Subscription", resume_subscription_path, method: :put, class: "btn btn-success" %>    
+                <% end %>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <strong>Card On File:</strong> <%= current_user.card_on_file %>
+            </div>
+            <div class="card-body">
+                <%= render "credit_cards/form" %>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <% if @charges.present? %>
+            <div class="card">
+            <div class="card-header"><h2 class="h3 mb-0">Charges</h2></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ammount</th>
+                                    <th scope="col">Card</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%= render partial: "charges/charge", collection: @charges %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
