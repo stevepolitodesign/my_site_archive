@@ -24,7 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%= render partial: "dns_records/dns_record", collection: @website.latest_zone_file.dns_records, as: "dns_record" %>
+                        <%= render partial: "dns_records/dns_record", collection: @website.latest_zone_file.dns_records.ordered.unique, as: "dns_record" %>
                     </tbody>
                 </table>
             </div>

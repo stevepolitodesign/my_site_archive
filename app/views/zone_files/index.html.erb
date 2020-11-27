@@ -1,7 +1,7 @@
 <% content_for :page_title do %>
     Previous DNS Records
 <% end %>
-<% @website.zone_files.includes([:dns_records]).each do |zone_file| %>
+<% @website.zone_files.each do |zone_file| %>
     <div class="card mb-4">
         <div class="card-header d-flex align-items-center">
             <h2 class="h3">DNS Records on <%= zone_file.created_at.strftime("%m/%d/%y") %></h2>
@@ -24,7 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%= render partial: "dns_records/dns_record", collection: zone_file.dns_records, as: "dns_record" %>
+                        <%= render partial: "dns_records/dns_record", collection: zone_file.dns_records.ordered.unique, as: "dns_record" %>
                     </tbody>
                 </table>
             </div>
