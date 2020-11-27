@@ -25,8 +25,7 @@ class ScreenshotCapturer
             Dir.mkdir(directory) unless File.directory?(directory)
             return directory
         end
-        
-        # TODO: Make screenshot full page, and wider.
+
         def path_to_screenshot(directory)
             "#{directory}/#{url.parameterize}-#{Time.zone.now.to_s.parameterize}.png"
         end
