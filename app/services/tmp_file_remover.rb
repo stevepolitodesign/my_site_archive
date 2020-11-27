@@ -6,8 +6,7 @@ class TmpFileRemover
     def call
         deleted_file = File.delete(@file)
         OpenStruct.new({ success?: true, payload: deleted_file })
-    # TODO: Only rescue from File
-    rescue => error
+    rescue Errno::ENOENT
         OpenStruct.new({ success?: false, error: error })
     end
 end
