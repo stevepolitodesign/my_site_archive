@@ -37,11 +37,11 @@ class CreateDnsRecordsJob < ApplicationJob
 
     def url_with_subdomain_without_protocol(url)
       uri = URI.parse(url)
-      domain = PublicSuffix.parse(uri.host)
+      domain = PublicSuffix.parse(uri.host).subdomain
     end
 
     def url_without_protocol(url)
-      url = url_with_subdomain_without_protocol(url)
-      url.domain
+      uri = URI.parse(url)
+      domain = PublicSuffix.parse(uri.host).domain
     end
 end
