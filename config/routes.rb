@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  # TODO: Redirec to subscriptio#new on new user creation
   # TODO: Update Stripe URLs 
   devise_for :users, controllers: {
     registrations: 'users/registrations'
