@@ -8,4 +8,11 @@
     <div class="d-flex justify-content-center">
         <%== pagy_bootstrap_nav(@pagy) %>
     </div>    
+<% else %>
+    <div class="d-flex justify-content-center align-items-center mb-4">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <span class="ml-3">Generating screenshot. Check back later.</span>
+    </div>
 <% end %>
