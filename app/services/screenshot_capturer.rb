@@ -9,7 +9,7 @@ class ScreenshotCapturer
     def call
         browser = Ferrum::Browser.new(timeout: 15)
         browser.goto(@url)
-        browser.screenshot(path: @screenshot, full: true)
+        browser.screenshot(path: @screenshot, full: true, quality: 60)
         browser.quit
         OpenStruct.new({ success?: true, payload: @screenshot })
     rescue Ferrum::Error => error
