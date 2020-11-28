@@ -19,7 +19,7 @@ class CreateScreenshotJob < ApplicationJob
       if result.success?
         screenshot  = result.payload 
         result      = create_screenshot(screenshot)
-        TmpFileRemover.new(screenshot).call
+        TmpFileRemover.new(screenshot).call if result.success?
         result
       else
         return 

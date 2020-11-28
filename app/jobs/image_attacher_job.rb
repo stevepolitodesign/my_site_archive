@@ -10,8 +10,8 @@ class ImageAttacherJob < ApplicationJob
   private
 
     def attach_image(file)
-      ImageAttacher.new(@website, file, "image").call
-      TmpFileRemover.new(file).call
+      result = ImageAttacher.new(@website, file, "image").call
+      TmpFileRemover.new(file).call if result.success?
     end
 
     def capture_screenshot
