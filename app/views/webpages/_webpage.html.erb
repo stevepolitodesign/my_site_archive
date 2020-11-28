@@ -2,7 +2,7 @@
     <div class="col-md-6 col-lg-4 mb-4">
         <div class="card">
             <% if webpage.latest_screenshot.present? && webpage.latest_screenshot.image.attached? %>
-                <%= image_tag webpage.latest_screenshot.image.variant(resize_to_fill: [480, 480, { gravity: 'North' }]).processed, class: "card-img-top" %>
+                <%= image_tag webpage.latest_screenshot.image.variant(resize_to_fill: [480, 480, { gravity: 'North' }]), class: "card-img-top" %>
             <% else %>
                 <div class="embed-responsive embed-responsive-1by1 bg-dark d-flex align-items-center justify-content-center">
                     <div class="spinner-border text-light" role="status">
