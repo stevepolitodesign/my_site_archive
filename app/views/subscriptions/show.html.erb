@@ -16,7 +16,7 @@
                 <% end %>
             </div>
         </div>
-        <div class="card">
+        <div class="card shadow-sm border-0">
             <div class="card-header">
                 <strong>Card On File:</strong> <%= current_user.card_on_file %>
             </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="col-md-8">
         <% if @charges.present? %>
-            <div class="card">
+            <div class="card shadow-sm border-0">
             <div class="card-header"><h2 class="h3 mb-0">Charges</h2></div>
                 <div class="card-body">
                     <div class="table-responsive">

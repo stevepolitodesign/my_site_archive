@@ -1,5 +1,5 @@
 <div class="col-md-6 col-lg-4 mb-4">
-    <div class="card">
+    <div class="card shadow-sm border-0">
         <% if screenshot.image.attached? %>
             <%= image_tag screenshot.image.variant(resize_to_fill: [480, 480, { gravity: 'North' }]), class: "card-img-top" %>
         <% else %>
