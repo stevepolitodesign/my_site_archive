@@ -19,8 +19,7 @@
             <%= f.url_field :url, required: true, placeholder: "https://www.example.com", class: "form-control" %>
         <% end %>
     </div>
-    <div class="btn-group">
-        <%= f.submit class: "btn btn-primary" %>
-        <%= link_to "Delete Website", website_path(@website), method: :delete, data: { confirm: "This will delete all associated webpages, screenshots and source code." }, class: "btn btn-danger" if @website.persisted? %>
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Delete Website", website_path(@website), method: :delete, data: { confirm: "This will delete all associated webpages, screenshots and source code." }, class: "btn btn-link text-danger" if @website.persisted? %>
     </div>
 <% end %>

@@ -14,9 +14,9 @@ class Plan < ApplicationRecord
 
     def formatted_name
         if self.price_in_cents.present?
-            "#{self.name} (#{number_to_currency(self.price_in_cents / 100)})"
+            "#{self.name} (#{number_to_currency(self.price_in_cents / 100)} billed #{self.interval})"
         else 
-            "#{self.name} (#{number_to_currency(0)})"
+            "#{self.name} (#{number_to_currency(0)} billed #{self.interval})"
         end
     end
 

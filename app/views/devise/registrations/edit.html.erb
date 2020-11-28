@@ -4,6 +4,7 @@
 <div class="row row-cols-lg-3 justify-content-center mb-4">
   <div class="card shadow-sm border-0">
     <div class="card-body">
+      <h5 class="card-title">Edit my account</h5>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -44,8 +45,8 @@
 </div>
 <div class="row row-cols-lg-3 justify-content-center">
   <div class="card border-danger" >
-    <div class="card-header border-danger bg-transparent text-danger"><h4>Cancel my account</h4></div>
     <div class="card-body text-danger">
+        <h5 class="card-title">Cancel my account</h5>
         <p>This will delete all your data, and cannot be undone.</p>
         <%= button_to "Cancel my account and subscription", registration_path(resource_name), data: { confirm: "This will delete all your data, and cannot be undone." }, method: :delete, class: "btn btn-danger" %>
     </div>

@@ -1,4 +1,4 @@
-<div class="col-md-6 col-lg-4 mb-4">
+<div class="col-md-6 col-lg-4 mb-5">
     <div class="card shadow-sm border-0">
         <% if screenshot.image.attached? %>
             <%= image_tag screenshot.image.variant(resize_to_fill: [480, 480, { gravity: 'North' }]), class: "card-img-top" %>
@@ -20,12 +20,10 @@
                     </svg>
                 <% end %>
             </p>
-            <div class="btn-group">
-                <%= link_to "View Larger", url_for(screenshot.image), class: "btn btn-sm btn-primary" if screenshot.image.attached? %>
-                <% if screenshot.html_document.present? %>
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#<%= dom_id(screenshot) %>">View Source Code</button>
-                <% end %>
-            </div>
+            <%= link_to "View Larger", url_for(screenshot.image), class: "btn btn-sm btn-dark", target: "_blank" if screenshot.image.attached? %>
+            <% if screenshot.html_document.present? %>
+                <button type="button" class="btn btn-sm btn-link-dark" data-toggle="modal" data-target="#<%= dom_id(screenshot) %>">View Source Code</button>
+            <% end %>
         </div>
     </div>
     <% if screenshot.html_document.present? %>
@@ -38,15 +36,15 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <pre>
-                            <code>
+                    <div class="modal-body p-0">
+                        <pre class="bg-dark text-white mb-0">
+                            <code class="">
                                 <%= screenshot.html_document.source_code %>
                             </code>
                         </pre>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

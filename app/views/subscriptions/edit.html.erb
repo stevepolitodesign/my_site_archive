@@ -1,12 +1,21 @@
-<p><strong>Current Plan:</strong> <%= @current_plan.formatted_name %></p>
-<p><strong>Available Plans:</strong></p>
-<ul>
-    <% @available_plans.each do |available_plan| %>
-        <li>
-            <%= form_with url: subscription_path, local: true, method: :put do |f| %>
-                <%= f.hidden_field :plan, value: available_plan.processor_id %>
-                <%= f.submit available_plan.formatted_name %>
+<% content_for :page_title do %>
+    Change Plans
+<% end %>
+<div class="row row-cols-lg-3 justify-content-center">
+  <div class="card shadow-sm border-0 text-center">
+    <div class="card-body">
+        <p class="h5 card-title pb-3 border-bottom"><strong>Current Plan:</strong> <%= @current_plan.formatted_name %></p>
+        <p><strong>Available Plans:</strong></p>
+        <ul class="list-unstyled">
+            <% @available_plans.each do |available_plan| %>
+                <li>
+                    <%= form_with url: subscription_path, local: true, method: :put do |f| %>
+                        <%= f.hidden_field :plan, value: available_plan.processor_id %>
+                        <%= f.submit "Upgrade to #{available_plan.formatted_name}", class: "btn btn-primary btn-block" %>
+                    <% end %>
+                </li>
             <% end %>
-        </li>
-    <% end %>
-</ul>
+        </ul>
+    </div>
+  </div>
+</div>

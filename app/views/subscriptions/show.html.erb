@@ -2,14 +2,13 @@
     Billing
 <% end %>
 <div class="row">
-    <div class="col-md-4 mb-4 mb-md-0">
-        <div class="card mb-4">
-            <div class="card-header">
-                <strong>Current Plan:</strong> <%= @current_plan.formatted_name %>
-            </div>
+    <div class="col-md-4 mb-5 mb-md-0">
+        <div class="card shadow-sm border-0 mb-4">
             <div class="card-body">
+                <p class="card-title"><strong>Current Plan:</strong> <%= @current_plan.formatted_name %></p>
                 <% unless current_user.subscription.ends_at.present? %>
-                    <%= link_to "Pause My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                    <%= link_to "Pause My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-block btn-sm btn-danger" %>
+                    <%= link_to "Change My Subscription", edit_subscription_path, class: "btn btn-block btn-sm btn-primary" %>
                 <% else %>
                     <p>Your subscription is set to end on <%= current_user.subscription.ends_at.strftime("%m/%d/%y") %></p>
                     <%= link_to "Resume My Subscription", resume_subscription_path, method: :put, class: "btn btn-success" %>    
@@ -17,10 +16,8 @@
             </div>
         </div>
         <div class="card shadow-sm border-0">
-            <div class="card-header">
-                <strong>Card On File:</strong> <%= current_user.card_on_file %>
-            </div>
-            <div class="card-body">
+            <div class="card-body pb-3 border-bottom">
+                <p class="card-title"><strong>Card On File:</strong> <%= current_user.card_on_file %></p>
                 <%= render "credit_cards/form" %>
             </div>
         </div>
@@ -28,8 +25,8 @@
     <div class="col-md-8">
         <% if @charges.present? %>
             <div class="card shadow-sm border-0">
-            <div class="card-header"><h2 class="h3 mb-0">Charges</h2></div>
                 <div class="card-body">
+                    <h5 class="card-title pb-3 border-bottom text-center">Charges</h5>
                     <div class="table-responsive">
                         <table class="table table-borderless">
                             <thead>

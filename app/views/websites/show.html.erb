@@ -2,18 +2,18 @@
     <% @website.title %>
 <% end %>
 <% if @website.latest_zone_file.present? %>
-    <div class="card mb-4">
-        <div class="card-header d-flex align-items-center">
-            <h2 class="h3">Current DNS Records</h2>
-            <%= link_to @website.url, target: "_blank", class: "d-flex align-items-center ml-3" do  %>
-                <span class="mr-2"><%= @website.url %></span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
-                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                </svg>
-            <% end %>            
-        </div>
+    <div class="card border-0 shadow-sm mb-5">
         <div class="card-body">
+            <h5 class="card-title d-flex justify-content-center align-items-center pb-3 border-bottom">
+                Current DNS Records
+                <%= link_to @website.url, target: "_blank", class: "d-flex align-items-center ml-3 font-weight-light" do  %>
+                    <span class="mr-2"><%= @website.url %></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                    </svg>
+                <% end %>
+            </h5>
             <div class="table-responsive">
                 <table class="table table-borderless">
                     <thead>
@@ -28,7 +28,7 @@
                     </tbody>
                 </table>
             </div>
-            <%= link_to "Previous Rescords", website_zone_files_path(@website), class: "btn btn-primary" %>
+            <%= link_to "View Previous Records", website_zone_files_path(@website), class: "btn btn-primary" %>
         </div>
     </div>
 <% else %>
@@ -40,14 +40,12 @@
     </div>
 <% end %>
 <% if policy(@website.webpages.build).new? %>
-    <div class="row row-cols-lg-3 justify-content-center mb-4">
-        <div class="card shadow-sm border-0">
-            <div class="card-header"><h2 class="h3 mb-0">Add a webpage to monitor</h2></div>
-            <div class="card-body">
-                <%= render partial: "webpages/form" %>
-            </div>
-        </div>
-    </div>    
+<div class="card shadow-sm border-0 mb-5">
+    <div class="card-body">
+        <h5 class="card-title pb-3 border-bottom text-center">Add a webpage to monitor</h5>
+        <%= render partial: "webpages/form" %>
+    </div>
+</div>
 <% end %>
 <div class="card-deck justify-content-center">
     <%= render @webpages %>
