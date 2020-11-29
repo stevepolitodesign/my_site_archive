@@ -1,0 +1,27 @@
+<div class="row mb-3">
+    <div class="col">
+        <h2 class="h1 text-center">Plans</h2>
+    </div>
+</div>
+<div class="row row-cols-1 row-cols-md-3 justify-content-center">
+    <% Plan.available.each do |plan| %>
+        <div class="col mb-4">
+            <div class="card border-0 shadow-sm h-100 text-center">
+                <div class="card-body d-flex align-items-center flex-column">
+                    <h5 class="card-tite"><%= plan.formatted_name %></h5>
+                    <ul class="list-group list-group-flush mb-4">
+                        <% if plan.interval == "yearly"%>
+                            <li class="list-group-item px-0"><strong>Get 2 months free.</strong></li>
+                        <% end %>
+                        <li class="list-group-item px-0">Monitor up to 10 websites.</li>
+                        <li class="list-group-item px-0">Monitor up to 10 webpages per website.</li>
+                        <li class="list-group-item px-0">Weekly screenshot generation per wepage.</li>
+                        <li class="list-group-item px-0">Weekly source code generation per wepage.</li>
+                        <li class="list-group-item px-0">Weekly DNS record generation per website.</li>
+                    </ul>
+                    <%= link_to "Sign Up", new_user_registration_path, class: "mt-auto btn btn-sm btn-primary btn-block" %>
+                </div>
+            </div>
+        </div>    
+    <% end %>
+</div>
