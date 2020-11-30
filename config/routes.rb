@@ -20,4 +20,5 @@ Rails.application.routes.draw do
     resources :zone_files, only: [:index, :show]
   end
   get "pricing", to: "static_pages#pricing", as: "pricing"
+  get "faqs", to: "static_pages#faqs", as: "faqs"
 end
