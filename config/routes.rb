@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   end
   get "pricing", to: "static_pages#pricing", as: "pricing"
   get "faqs", to: "static_pages#faqs", as: "faqs"
+  get "terms-of-use", to: "static_pages#terms_of_use", as: "terms"
 end
