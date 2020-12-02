@@ -7,9 +7,9 @@ class ScreenshotCapturer
     end
     
     def call
-        browser = Ferrum::Browser.new
+        browser = Ferrum::Browser.new(timeout: 15)
         browser.goto(@url)
-        browser.screenshot(path: @screenshot, full: true)
+        browser.screenshot(path: @screenshot, full: true, quality: 60, format: "jpeg")
         browser.quit
         OpenStruct.new({ success?: true, payload: @screenshot })
     rescue Ferrum::Error => error
@@ -27,7 +27,7 @@ class ScreenshotCapturer
         end
 
         def path_to_screenshot(directory)
-            "#{directory}/#{url.parameterize}-#{Time.zone.now.to_s.parameterize}.png"
+            "#{directory}/#{url.parameterize}-#{Time.zone.now.to_s.parameterize}.jpeg"
         end
         
 end
