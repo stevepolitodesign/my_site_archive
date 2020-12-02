@@ -57,3 +57,10 @@ sample_user_with_pending_data:
   card_exp_month: 1
   card_exp_year: <%= (1.year.from_now).strftime("%Y") %>
   accepted_terms: true
+
+admin_user:
+  email: $LABEL@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: <%= Time.zone.now %>
+  accepted_terms: true  
+  admin: true
