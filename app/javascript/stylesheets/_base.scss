@@ -97,5 +97,6 @@ $theme-colors: (
   "black":      $black,
 ) !default;
 
-$body-color:        $gray-800;
-$enable-gradients:  true;
+$body-color:                    $gray-800;
+$enable-gradients:              true;
+$enable-responsive-font-sizes:  true;
