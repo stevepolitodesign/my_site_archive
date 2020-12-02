@@ -7,6 +7,7 @@
 
     <%= tag.meta name: "viewport", content: "width=device-width, initial-scale=1, shrink-to-fit=no" %>
     <%= tag.meta name: "stripe-key", content: Rails.application.credentials.dig(:stripe, :public_key) %>
+    <%= favicon_link_tag %>
     
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
