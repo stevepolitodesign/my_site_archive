@@ -2,7 +2,7 @@
   Resend unlock instructions
 <% end %>
 <div class="row row-cols-lg-3 justify-content-center">
-  <div class="card">
+  <div class="card shadow-sm border-0">
     <div class="card-body">
       <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>

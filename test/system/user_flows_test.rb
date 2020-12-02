@@ -14,7 +14,7 @@ class UserFlowsTest < ApplicationSystemTestCase
       fill_in "Email", with: "example@example.com"
       fill_in "Password", with: "password"
       fill_in "Password confirmation", with: "password"
-      check "Terms"
+      check "I accept the terms of service and privacy policy"
       click_button "Sign up"
     end
 

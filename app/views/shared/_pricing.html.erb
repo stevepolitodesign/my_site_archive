@@ -1,8 +1,10 @@
-<% content_for :page_title do %>
-    Change Plans
-<% end %>
+<div class="row mb-3">
+    <div class="col">
+        <h2 class="h1 text-center">Plans</h2>
+    </div>
+</div>
 <div class="row row-cols-1 row-cols-md-3 justify-content-center">
-    <% @available_plans.each do |plan| %>
+    <% Plan.available.each do |plan| %>
         <div class="col mb-4">
             <div class="card border-0 shadow-sm h-100 text-center">
                 <div class="card-body d-flex align-items-center flex-column">
@@ -17,10 +19,7 @@
                         <li class="list-group-item px-0">Weekly source code generation per wepage.</li>
                         <li class="list-group-item px-0">Weekly DNS record generation per website.</li>
                     </ul>
-                    <%= form_with url: subscription_path, local: true, method: :put do |f| %>
-                        <%= f.hidden_field :plan, value: plan.processor_id %>
-                        <%= f.submit "Upgrade to #{plan.formatted_name}", class: "btn btn-sm btn-primary" %>
-                    <% end %>
+                    <%= link_to "Sign Up", new_user_registration_path, class: "mt-auto btn btn-sm btn-primary btn-block" %>
                 </div>
             </div>
         </div>    

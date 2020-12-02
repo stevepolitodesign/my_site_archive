@@ -1,6 +1,6 @@
 <% content_for :page_title do "Sign up" end %>
 <div class="row row-cols-lg-3 justify-content-center">
-  <div class="card">
+  <div class="card shadow-sm border-0">
     <div class="card-body">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
@@ -25,7 +25,9 @@
 
         <div class="form-group form-check">
           <%= f.check_box :accepted_terms, required: true, class: "form-check-input" %>
-          <%= f.label :accepted_terms, "Terms", class: "form-check-label" %>
+          <%= f.label :accepted_terms, class: "form-check-label" do %>
+           I accept the <%= link_to "terms of service", terms_path, target: "_blank" %> and <%= link_to "privacy policy", privacy_path, target: "_blank" %>
+          <% end %>
         </div>  
 
         <div class="form-group">

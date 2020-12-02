@@ -19,4 +19,8 @@ Rails.application.routes.draw do
     end
     resources :zone_files, only: [:index, :show]
   end
+  get "pricing", to: "static_pages#pricing", as: "pricing"
+  get "faqs", to: "static_pages#faqs", as: "faqs"
+  get "terms-of-use", to: "static_pages#terms_of_use", as: "terms"
+  get "privacy-policy", to: "static_pages#privacy_policy", as: "privacy"
 end
