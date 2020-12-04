@@ -4,7 +4,7 @@ class WebpagesController < ApplicationController
 
     def show
         authorize @webpage
-        @pagy, @screenshots = pagy(@webpage.screenshots.with_attached_image.includes([:html_document]))
+        @pagy, @screenshots = pagy(@webpage.screenshots.order(created_at: :desc).with_attached_image.includes([:html_document]))
     end
 
     def edit
