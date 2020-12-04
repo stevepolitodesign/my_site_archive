@@ -5,7 +5,6 @@ class Website < ApplicationRecord
     has_many :webpages, dependent: :destroy
     has_many :zone_files, dependent: :destroy
     has_one :latest_zone_file, -> { order(created_at: :desc) }, class_name: "ZoneFile"
-    # TODO: Make sure the image is deleted when the record is deleted.
     has_one_attached :image
 
     validates :title, :url, presence: true
