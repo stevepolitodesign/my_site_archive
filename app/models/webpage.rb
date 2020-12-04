@@ -3,7 +3,7 @@ require 'uri'
 class Webpage < ApplicationRecord
 	belongs_to :website
   	has_many :screenshots, dependent: :destroy
-	has_one :latest_screenshot, -> { order('created_at') }, class_name: "Screenshot"
+	has_one :latest_screenshot, -> { order(created_at: :desc) }, class_name: "Screenshot"
 
   	validates :title, :url, presence: true
   	validates :url, url: true
@@ -28,7 +28,7 @@ class Webpage < ApplicationRecord
             end
         else
             return false
-        end
+		end
     end	
 
   	private
