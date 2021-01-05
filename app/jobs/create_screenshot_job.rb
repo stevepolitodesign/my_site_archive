@@ -16,7 +16,7 @@ class CreateScreenshotJob < ApplicationJob
 
     def capture_and_create_screenshot
       result = capture_screenshot
-      if result.success?
+      if result.present? && result.success?
         screenshot  = result.payload 
         result      = create_screenshot(screenshot)
         TmpFileRemover.new(screenshot).call if result.success?
@@ -36,7 +36,7 @@ class CreateScreenshotJob < ApplicationJob
     
     def capture_and_create_screenshot_and_html_document
       result = capture_and_create_screenshot
-      if result.success?
+      if result.present? && result.success?
         create_html_document(result.payload.id)
       else
         return
