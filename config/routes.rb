@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resource :credit_card, only: [:update]
   resource :subscription
   resource :resume_subscription, only: [:update]
+  resources :posts
   resources :websites do
     resources :webpages, only: [:show, :edit, :create, :update, :destroy] do
       resources :screenshots, only: [:index, :show]
