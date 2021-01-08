@@ -19,17 +19,21 @@ class ApplicationController < ActionController::Base
         end
 
         def exempt_devise_controllers
-            devise_controller? || static_pages_controller?
+            devise_controller? || static_pages_controller? || posts_controller?
         end
 
         def exempt_subscription_controllers
-            devise_controller? || resume_subscriptions_controller? || static_pages_controller? || subscriptions_controller?
+            devise_controller? || resume_subscriptions_controller? || static_pages_controller? || subscriptions_controller? || posts_controller?
         end
 
         def exempt_pundit_controllers
             credit_cards_controller? || devise_controller? || resume_subscriptions_controller? || static_pages_controller? || subscriptions_controller? || websites_controller?
         end
- 
+         
+        def posts_controller?
+            controller_name == "posts"
+        end
+
         def resume_subscriptions_controller?
             controller_name == "resume_subscriptions"
         end         
