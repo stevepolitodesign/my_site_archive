@@ -2,3 +2,13 @@
 #   record: name_of_fixture (ClassOfFixture)
 #   name: content
 #   body: <p>In a <i>million</i> stars!</p>
+
+post_one:
+  record: one (Post)
+  name: content
+  body: <p>In a <i>million</i> stars!</p>
+
+post_two:
+  record: two (Post)
+  name: content
+  body: <p>In a <i>million</i> stars!</p>
