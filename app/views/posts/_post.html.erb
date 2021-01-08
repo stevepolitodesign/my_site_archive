@@ -1,0 +1,6 @@
+<article class="mb-4">
+    <h2><%= link_to post.title, post, class: "text-dark" %></h2>
+    <hr/>
+    <p><%= truncate(post.content.to_plain_text, length: 160) %></p>
+    <%= link_to "Read More", post %>
+</article>
