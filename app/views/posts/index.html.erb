@@ -1,4 +1,9 @@
 <% content_for :page_title do %>
     Posts
 <% end %>
+<% if policy(Post).new? %>
+    <div class="text-center mb-5">
+        <%= link_to "New Post", new_post_path, class: "btn btn-primary btn-lg" %>
+    </div>
+<% end %>
 <%= render @posts %>
