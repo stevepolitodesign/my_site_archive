@@ -8,6 +8,9 @@ class PostsController < ApplicationController
 
     def show
         authorize @post
+        set_meta_tags   title: @post.title,
+                        description: @post.meta_description,
+                        site: nil
     end
 
     def new
