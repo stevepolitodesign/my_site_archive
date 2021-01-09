@@ -1,0 +1,19 @@
+<%= form_with model: @post, local: true do |f| %>
+    <%= render partial: "shared/form_errors", locals: { object: f.object } %>
+    <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :status %>
+        <%= f.select(:status, Post.statuses.keys.map {|status| [status.titleize,status]}, {}, class: "form-control" ) %>
+    </div>
+    <div class="form-group">
+        <%= f.label :content %>
+        <%= f.rich_text_area :content, class: "form-control h-auto" %>
+    </div>
+    <div class="btn-group" role="group">
+        <%= f.submit class: "btn btn-primary" %>
+        <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }, class:  "btn btn-link text-danger" if @post.persisted? %>
+    </div>    
+<% end %>
