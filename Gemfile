@@ -70,3 +70,5 @@ gem "stripe_event", "~> 2.3"
 gem "strong_migrations", "~> 0.7.1"
 gem "validate_url", "~> 1.0"
 gem "friendly_id", "~> 5.4"
+
+gem "meta-tags", "~> 2.14"
