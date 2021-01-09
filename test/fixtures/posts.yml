@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: Published Post
+  status: published
+  meta_description: <%= Faker::Lorem.paragraph %>
+  slug: published-post
+
+two:
+  title: Draft Post
+  status: draft
+  meta_description: <%= Faker::Lorem.paragraph %>
+  slug: draft-post
