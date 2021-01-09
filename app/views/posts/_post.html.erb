@@ -2,5 +2,8 @@
     <h2><%= link_to post.title, post, class: "text-dark" %></h2>
     <hr/>
     <p><%= truncate(post.content.to_plain_text, length: 160) %></p>
-    <%= link_to "Read More", post %>
+    <div class="flex">
+        <%= link_to "Read More", post %>
+        <%= link_to "Edit", edit_post_path(post), class: "ml-2" if policy(post).edit? %>
+    </div>
 </article>

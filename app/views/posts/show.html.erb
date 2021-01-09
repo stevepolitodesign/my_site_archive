@@ -1,0 +1,10 @@
+<% content_for :page_title do %>
+    <%= @post.title %>
+<% end %>
+<% if policy(@post).edit? %>
+    <%= link_to "Edit", edit_post_path(@post) %>
+    <hr/>
+<% end %>
+<article>
+    <%= @post.content %>
+</article>
