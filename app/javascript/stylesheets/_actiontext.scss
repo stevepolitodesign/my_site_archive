@@ -1,0 +1,6 @@
+.trix-content > * {
+    @extend .mb-4;
+}
+.trix-content h1 {
+    @extend .h1;
+}
