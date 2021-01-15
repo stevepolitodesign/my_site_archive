@@ -16,13 +16,15 @@ class CreateScreenshotJob < ApplicationJob
 
     def capture_and_create_screenshot
       result = capture_screenshot
-      if result.present? && result.success?
+      if result.nil?
+        raise "Unable to capture screenshot." 
+      elsif result.success?
         screenshot  = result.payload 
         result      = create_screenshot(screenshot)
         TmpFileRemover.new(screenshot).call if result.success?
         result
       else
-        return 
+        raise "Unable to capture screenshot: #{result.error}" 
       end
     end
     
@@ -36,10 +38,13 @@ class CreateScreenshotJob < ApplicationJob
     
     def capture_and_create_screenshot_and_html_document
       result = capture_and_create_screenshot
-      if result.present? && result.success?
+
+      if result.nil?
+        raise "Unable to capture and create screenshot. "
+      elsif result.success?
         create_html_document(result.payload.id)
       else
-        return
+        raise "Unable to capture and create screenshot: #{result.error}"
       end
     end
 
