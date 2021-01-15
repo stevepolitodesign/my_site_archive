@@ -7,7 +7,7 @@ class ScreenshotCapturer
     end
     
     def call
-        browser = Ferrum::Browser.new(timeout: 15)
+        browser = Ferrum::Browser.new(timeout: 60)
         browser.goto(@url)
         browser.screenshot(path: @screenshot, full: true, quality: 60, format: "jpeg")
         browser.quit
