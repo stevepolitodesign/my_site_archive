@@ -7,7 +7,7 @@ class Post < ApplicationRecord
     validates :status, :title, presence: true
 
     has_rich_text :content
-    friendly_id :title, use: :slugged
+    friendly_id :title, use: :history
 
     def should_generate_new_friendly_id?
         title_changed?
