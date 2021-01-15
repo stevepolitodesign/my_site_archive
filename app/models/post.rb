@@ -8,4 +8,8 @@ class Post < ApplicationRecord
 
     has_rich_text :content
     friendly_id :title, use: :slugged
+
+    def should_generate_new_friendly_id?
+        title_changed?
+    end
 end
