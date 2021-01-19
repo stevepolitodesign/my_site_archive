@@ -7,6 +7,10 @@
     <div class="form-group">
         <%= f.label :meta_description %>
         <%= f.text_area :meta_description, class: "form-control h-auto" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :slug %>
+        <%= f.text_field :slug, required: true, class: "form-control h-auto" %>
     </div>    
     <div class="form-group">
         <%= f.label :status %>

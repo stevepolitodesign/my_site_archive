@@ -34,7 +34,7 @@ class PostsController < ApplicationController
 
     def update
         authorize @post
-        if @post.update(post_params)
+        if @post.update_attributes(post_params)
             redirect_to @post, notice: "Post updated."
         else
             render "edit"
@@ -50,7 +50,7 @@ class PostsController < ApplicationController
     private
 
         def post_params
-            params.require(:post).permit(:title, :meta_description, :status, :content)
+            params.require(:post).permit(:title, :meta_description, :slug, :status, :content)
         end
 
         def set_post
