@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+    attr_accessor :temporary_slug
     extend FriendlyId
     
     scope :published, -> { where(status: :published) }
@@ -7,9 +8,9 @@ class Post < ApplicationRecord
     validates :status, :title, presence: true
 
     has_rich_text :content
-    friendly_id :title, use: :history
+    friendly_id :temporary_slug, use: :history
 
     def should_generate_new_friendly_id?
-        title_changed?
+        slug.blank? && title_changed?
     end
 end
