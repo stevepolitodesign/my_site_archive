@@ -18,20 +18,33 @@ class Webpage < ApplicationRecord
 	def capture_new_screenshot
 		CreateScreenshotJob.perform_later(self.id)
 	end
+
+	# OPTIMIZE: Consider saving this value in a seperate database column.
+	def next_scheduled_screenshot_capture
+		return Time.zone.now if self.latest_screenshot.nil?
+		if duration.present?
+			case duration
+			when "week"
+				self.latest_screenshot.created_at + 7.days
+			else
+				Time.zone.now
+			end
+		else
+			Time.zone.now
+		end
+	end
 	
 	def should_capture_new_screenshot?
         return true if self.latest_screenshot.nil?
-        if duration.present?
-            case duration
-            when "week"
-                return difference_between_screenshot_dates > 7
-            end
-        else
-            return false
-		end
-    end	
+		next_scheduled_screenshot_capture <= Time.zone.now
+	end
+	
 
-  	private
+	  private
+
+		def duration
+			self.website.user.current_plan_job_schedule_frequency
+		end
 
 		def url_should_match_website_url
 			begin
@@ -47,11 +60,4 @@ class Webpage < ApplicationRecord
 			end
 		end
 
-		def duration
-            self.website.user.current_plan_job_schedule_frequency
-		end
-
-		def difference_between_screenshot_dates
-            (1.send(duration).from_now.to_date - self.latest_screenshot.created_at.to_date).to_i
-		end
 end
