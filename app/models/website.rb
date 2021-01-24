@@ -32,26 +32,38 @@ class Website < ApplicationRecord
         ImageAttacherJob.perform_later(self.id)
     end
 
+	# OPTIMIZE: Consider saving this value in a seperate database column.
+	def next_scheduled_zone_file_capture
+		return Time.zone.now if self.latest_zone_file.nil?
+		if duration.present?
+			case duration
+			when "week"
+				self.latest_zone_file.created_at + 7.days
+			else
+				Time.zone.now
+			end
+		else
+			Time.zone.now
+		end
+	end
+
     def should_capture_new_zone_file?
         return true if self.latest_zone_file.nil?
-        if duration.present?
-            case duration
-            when "week"
-                return difference_between_dates > 7
-            end
-        else
-            return false
-        end
+        next_scheduled_zone_file_capture <= Time.zone.now
     end
 
     private
 
-        def remove_path_from_url
-            self.url = URI.join(self.url, "/").to_s
-        end
-
         def associated_user_should_have_an_active_subscription
             errors.add(:base, "You need an active subscription to perform this action.") unless self.user.subscribed?
+        end
+
+        def duration
+            self.user.current_plan_job_schedule_frequency
+        end
+
+        def remove_path_from_url
+            self.url = URI.join(self.url, "/").to_s
         end
 
         def user_website_limit
@@ -60,11 +72,4 @@ class Website < ApplicationRecord
             end
         end
 
-        def duration
-            self.user.current_plan_job_schedule_frequency
-        end
-
-        def difference_between_dates
-            (1.send(duration).from_now.to_date - self.latest_zone_file.created_at.to_date).to_i
-        end
 end
