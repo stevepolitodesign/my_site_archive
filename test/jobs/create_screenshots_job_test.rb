@@ -19,6 +19,11 @@ class CreateScreenshotsJobTest < ActiveJob::TestCase
       assert_equal 1, Screenshot.count
       assert_equal 1, HtmlDocument.count
       
+      travel_to 1.day.from_now
+      CreateScreenshotsJob.perform_now
+      assert_equal 1, Screenshot.count
+      assert_equal 1, HtmlDocument.count
+
       travel_to 1.week.from_now
       CreateScreenshotsJob.perform_now
       assert_equal 2, Screenshot.count

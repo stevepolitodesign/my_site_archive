@@ -17,6 +17,10 @@ class CreateZoneFilesJobTest < ActiveJob::TestCase
       CreateZoneFilesJob.perform_now
       assert_equal 1, ZoneFile.count
       
+      travel_to 1.day.from_now
+      CreateZoneFilesJob.perform_now
+      assert_equal 1, ZoneFile.count
+
       travel_to 1.week.from_now
       CreateZoneFilesJob.perform_now
       assert_equal 2, ZoneFile.count
