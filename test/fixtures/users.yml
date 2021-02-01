@@ -64,3 +64,10 @@ admin_user:
   confirmed_at: <%= Time.zone.now %>
   accepted_terms: true  
   admin: true
+
+sample_user_on_generic_trial:
+  email: $LABEL@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: <%= Time.zone.now %>
+  accepted_terms: true
+  trial_ends_at: <%= 30.days.from_now %>

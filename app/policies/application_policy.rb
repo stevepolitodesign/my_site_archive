@@ -61,6 +61,10 @@ class ApplicationPolicy
       user.current_plan.website_limit > user.websites.count
     end
 
+    def user_on_generic_trial?
+      user.on_generic_trial?
+    end
+
     def user_subscribed?
       user.subscribed?
     end
