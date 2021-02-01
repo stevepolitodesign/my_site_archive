@@ -54,11 +54,19 @@ class ApplicationPolicy
     end
 
     def user_has_not_reached_webpage_limit?
-      user.current_plan.webpage_limit > record.website.webpages.count
+      if user_on_generic_trial?
+        10 > record.website.webpages.count
+      else
+        user.current_plan.webpage_limit > record.website.webpages.count
+      end
     end
 
     def user_has_not_reached_website_limit?
-      user.current_plan.website_limit > user.websites.count
+      if user_on_generic_trial?
+        10 > user.websites.count
+      else
+        user.current_plan.website_limit > user.websites.count
+      end
     end
 
     def user_on_generic_trial?
