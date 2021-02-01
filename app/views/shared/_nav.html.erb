@@ -13,7 +13,7 @@
             <%= link_to "Sign In", new_user_session_path, class: "nav-link text-white" %>
         </li>
     <% else %>
-        <% if current_user.subscribed? %>
+        <% if current_user.on_generic_trial? || current_user.subscribed? %>
             <li class="nav-item">
                 <%= link_to "My Sites", websites_path, class: "nav-link text-white" %>
             </li>    
