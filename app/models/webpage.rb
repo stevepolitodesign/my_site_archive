@@ -57,6 +57,8 @@ class Webpage < ApplicationRecord
 		def user_webpage_limit
 			if self.website.user.current_plan.present? && self.website.user.current_plan.webpage_limit.present?
 				errors.add(:base, "You have reached your webpage limit.") if self.website.webpages.count >= self.website.user.current_plan.webpage_limit
+			elsif self.website.user.on_generic_trial?
+				errors.add(:base, "You have reached your webpage limit.") if self.website.webpages.count >= 10
 			end
 		end
 

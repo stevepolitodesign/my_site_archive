@@ -69,6 +69,8 @@ class Website < ApplicationRecord
         def user_website_limit
             if self.user.current_plan.present? && self.user.current_plan.website_limit.present?
                 errors.add(:base, "You have reached your website limit.") if self.user.websites.count >= self.user.current_plan.website_limit
+            elsif self.user.on_generic_trial?
+                errors.add(:base, "You have reached your website limit.") if self.user.websites.count >= 10
             end
         end
 
