@@ -46,7 +46,7 @@ class Website < ApplicationRecord
 				Time.zone.now
 			end
 		else
-			Time.zone.now
+			self.latest_zone_file.created_at + 7.days
 		end
 	end
 

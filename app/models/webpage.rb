@@ -33,7 +33,7 @@ class Webpage < ApplicationRecord
 				Time.zone.now
 			end
 		else
-			Time.zone.now
+			self.latest_screenshot.created_at + 7.days
 		end
 	end
 	
