@@ -14,6 +14,9 @@ class Webpage < ApplicationRecord
 		joins(website: [:user, user: [:subscriptions]])
 		.where({ pay_subscriptions: { status: "active" } }).distinct
     }
+    scope :with_on_going_free_trials, -> {
+        joins(website: :user).where("users.trial_ends_at >= ?", Time.zone.now)
+	}
 
 	def capture_new_screenshot
 		CreateScreenshotJob.perform_later(self.id)
