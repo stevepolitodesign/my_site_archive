@@ -9,11 +9,14 @@ class Website < ApplicationRecord
 
     validates :title, :url, presence: true
     validates :url, url: true
-    validate :associated_user_should_have_an_active_subscription
+    validate :associated_user_should_have_an_active_subscription_or_free_trial
     validate :user_website_limit, on: :create
     
     scope :with_active_subscribers, -> {
         joins(user: :subscriptions).where({ pay_subscriptions: { status: "active" } }).distinct
+    }
+    scope :with_on_going_free_trials, -> {
+        joins(:user).where("users.trial_ends_at >= ?", Time.zone.now)
     }
 
     before_save :remove_path_from_url
@@ -54,8 +57,8 @@ class Website < ApplicationRecord
 
     private
 
-        def associated_user_should_have_an_active_subscription
-            errors.add(:base, "You need an active subscription to perform this action.") unless self.user.subscribed?
+        def associated_user_should_have_an_active_subscription_or_free_trial
+            errors.add(:base, "You need an active subscription to perform this action.") unless (self.user.on_generic_trial? || self.user.subscribed?)
         end
 
         def duration
