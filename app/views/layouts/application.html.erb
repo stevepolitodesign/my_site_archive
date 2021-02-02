@@ -20,6 +20,7 @@
     <%= render "shared/flash" %>
     <header class="bg-gradient-primary overflow-auto">
       <div class="container">
+        <%= render partial: "shared/free_trial_expiration" if current_user && current_user.on_generic_trial? %>
         <%= render partial: "shared/nav" %>
         <%= render partial: "shared/page_title" %>
         <%= render partial: "shared/sub_head" %>
