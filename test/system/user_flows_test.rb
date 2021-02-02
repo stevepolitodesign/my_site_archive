@@ -19,6 +19,7 @@ class UserFlowsTest < ApplicationSystemTestCase
     end
 
     assert_text "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+    assert User.last.on_generic_trial?
 
     take_screenshot
   end

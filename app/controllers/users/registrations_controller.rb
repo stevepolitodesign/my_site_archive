@@ -10,9 +10,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    resource.update(trial_ends_at: 30.days.from_now)
+  end
 
   # GET /resource/edit
   # def edit
