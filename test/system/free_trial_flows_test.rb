@@ -12,5 +12,9 @@ class FreeTrialFlowsTest < ApplicationSystemTestCase
 
   test "access to websites while not on free trial" do
     skip
-  end  
+  end
+
+  test "rendering free trial expiration" do
+    skip
+  end
 end
