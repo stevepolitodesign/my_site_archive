@@ -3,16 +3,28 @@ require "application_system_test_case"
 class SubscriptionFlowsTest < ApplicationSystemTestCase
   # TODO: Test failing payments and/or expired cards
   def setup
-    @unsubscribed_user = users(:unsubscribed_user)
-    @subscribed_user = users(:subscribed_user_with_websites)
-    @yearly_plan = plans(:yearly_plan)
-    @private_plan = plans(:private_plan)
+    @user_on_generic_trial          = users(:sample_user_on_generic_trial)
+    @unsubscribed_user              = users(:unsubscribed_user)
+    @subscribed_user                = users(:subscribed_user_with_websites)
+    @yearly_plan                    = plans(:yearly_plan)
+    @private_plan                   = plans(:private_plan)
   end
 
   test "creating a subscription" do
     create_subscription
     assert_text "You are now subscribed."
     assert @unsubscribed_user.subscribed?
+  end
+
+  test "creating a subscription during a free trial" do
+    sign_in @user_on_generic_trial
+    visit new_subscription_path
+    fill_out_subscription_form
+    click_button "Sign Up"
+    sleep 10
+    assert_text "You are now subscribed."
+    assert @user_on_generic_trial.subscribed?
+    assert_not @user_on_generic_trial.reload.on_generic_trial?
   end
 
   test "updating a subscription" do
