@@ -33,7 +33,7 @@ class UserFlowsTest < ApplicationSystemTestCase
       accept_confirm do
         click_button "Cancel my account and subscription"
       end
-      sleep 1
+      sleep 10
     end
 
     assert_text "Bye! Your account has been successfully cancelled"
