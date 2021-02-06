@@ -27,6 +27,7 @@ class User < ApplicationRecord
 
   def destroy
     self.subscription.cancel_now! if self.subscribed?
+    super
     rescue Pay::Error
     super
   end
