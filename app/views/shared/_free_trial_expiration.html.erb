@@ -1,0 +1,3 @@
+<div class="alert alert-primary mt-3 text-center" role="alert">
+  Your free trial will end in <%= time_ago_in_words(current_user.trial_ends_at) %> from now. Make sure you <%= link_to "subscribe", subscription_path %> to continue to archive your websites.
+</div>

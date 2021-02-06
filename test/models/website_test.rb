@@ -50,10 +50,18 @@ class WebsiteTest < ActiveSupport::TestCase
     end
   end
   
-  test "associated user should have an active subscription" do
+  test "associated user should have an active subscription or be on a free trial" do
     @unsubscribed_user = users(:unsubscribed_user)
     @website = @unsubscribed_user.websites.build(title: "title", url: "https://www.example.com")
     assert_not @website.valid?
+
+    @user_on_generic_trial = users(:sample_user_on_generic_trial)
+    @website = @user_on_generic_trial.websites.build(title: "title", url: "https://www.example.com")
+    assert @website.valid?
+
+    @user_on_expired_generic_trial = users(:sample_user_on_expired_generic_trial)
+    @website = @user_on_expired_generic_trial.websites.build(title: "title", url: "https://www.example.com")
+    assert_not @website.valid?    
   end
 
   test "should limit the amount of websites a user has based on their plan" do

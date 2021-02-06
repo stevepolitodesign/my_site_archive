@@ -17,7 +17,7 @@ class SubscriptionsController < ApplicationController
     end
 
     def create
-        current_user.update(processor: "stripe", card_token: params[:card_token])
+        current_user.update(processor: "stripe", card_token: params[:card_token], trial_ends_at: nil)
         current_user.subscribe(plan: params[:plan], coupon: params[:coupon])
         redirect_to new_website_path, notice: "You are now subscribed."
     rescue Pay::Error

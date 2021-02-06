@@ -13,6 +13,7 @@ class User < ApplicationRecord
   validates :accepted_terms, exclusion: { in: [nil,false] }
 
   scope :with_active_subscriptions, -> { joins(:subscriptions).where({ pay_subscriptions: { status: "active" } }).distinct }
+  scope :with_expiring_free_trials_in_days, -> (number_of_days_left) { where("trial_ends_at >= :start_date AND trial_ends_at <= :end_date", start_date: Time.zone.now, end_date: number_of_days_left.days.from_now  ) }
   scope :with_websites, -> { joins(:websites).distinct }
   
   def current_plan

@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     private
 
         def authenticate_subscription
-            redirect_to new_subscription_path, alert: "Please subscribe to access this feature." unless current_user.subscribed?
+            redirect_to new_subscription_path, alert: "Please subscribe to access this feature." unless current_user.on_generic_trial? || current_user.subscribed?
         end
 
         def credit_cards_controller?

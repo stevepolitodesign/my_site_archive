@@ -14,6 +14,9 @@ class Webpage < ApplicationRecord
 		joins(website: [:user, user: [:subscriptions]])
 		.where({ pay_subscriptions: { status: "active" } }).distinct
     }
+    scope :with_on_going_free_trials, -> {
+        joins(website: :user).where("users.trial_ends_at >= ?", Time.zone.now)
+	}
 
 	def capture_new_screenshot
 		CreateScreenshotJob.perform_later(self.id)
@@ -30,7 +33,7 @@ class Webpage < ApplicationRecord
 				Time.zone.now
 			end
 		else
-			Time.zone.now
+			self.latest_screenshot.created_at + 7.days
 		end
 	end
 	
@@ -57,6 +60,8 @@ class Webpage < ApplicationRecord
 		def user_webpage_limit
 			if self.website.user.current_plan.present? && self.website.user.current_plan.webpage_limit.present?
 				errors.add(:base, "You have reached your webpage limit.") if self.website.webpages.count >= self.website.user.current_plan.webpage_limit
+			elsif self.website.user.on_generic_trial?
+				errors.add(:base, "You have reached your webpage limit.") if self.website.webpages.count >= 10
 			end
 		end
 
