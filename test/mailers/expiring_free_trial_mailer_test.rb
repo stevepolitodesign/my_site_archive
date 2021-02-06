@@ -1,12 +1,14 @@
 require 'test_helper'
 
 class ExpiringFreeTrialMailerTest < ActionMailer::TestCase
+  include ActionView::Helpers::DateHelper
+
   test "reminder" do
-    mail = ExpiringFreeTrialMailer.reminder
-    assert_equal "Reminder", mail.subject
-    assert_equal ["to@example.org"], mail.to
-    assert_equal ["from@example.com"], mail.from
-    assert_match "Hi", mail.body.encoded
+    user = users(:sample_user_on_generic_trial) 
+    mail = ExpiringFreeTrialMailer.reminder(user: user)
+    assert_match time_ago_in_words(user.trial_ends_at), mail.subject
+    assert_equal [user.email], mail.to
+    assert_equal ["stevepolito@hey.com"], mail.from
   end
 
 end

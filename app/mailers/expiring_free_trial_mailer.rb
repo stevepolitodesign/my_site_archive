@@ -1,5 +1,5 @@
 class ExpiringFreeTrialMailer < ApplicationMailer
-  include ActionView::Helpers::DateHelper 
+  include ActionView::Helpers::DateHelper
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
