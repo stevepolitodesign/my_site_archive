@@ -46,11 +46,13 @@ class SubscriptionFlowsTest < ApplicationSystemTestCase
   test "canceling an account" do
     create_subscription
     visit edit_user_registration_path
-    accept_confirm do
-      click_button "Cancel my account and subscription"
+    assert_difference("User.count", -1) do
+      accept_confirm do
+        click_button "Cancel my account and subscription"
+      end
+      sleep 10
+      assert_not @unsubscribed_user.subscribed?
     end
-    sleep 10
-    assert_not @unsubscribed_user.subscribed?
   end
 
   test "preventing duplicate subscriptions" do

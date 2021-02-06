@@ -29,8 +29,11 @@ class UserFlowsTest < ApplicationSystemTestCase
 
     visit edit_user_registration_path
 
-    accept_confirm do
-      click_button "Cancel my account and subscription"
+    assert_difference("User.count", -1) do
+      accept_confirm do
+        click_button "Cancel my account and subscription"
+      end
+      sleep 1
     end
 
     assert_text "Bye! Your account has been successfully cancelled"
