@@ -17,12 +17,12 @@ class ExpiringFreeTrialReminderJobTest < ActiveJob::TestCase
 
   test "should deliver reminder email" do
     assert_no_emails do
-      ExpiringFreeTrialReminderJob.perform_now(number_of_days_left: 2)
+      ExpiringFreeTrialReminderJob.perform_now
     end
 
     travel_to(@user.trial_ends_at - 2.days)
     assert_emails 1 do
-      ExpiringFreeTrialReminderJob.perform_now(number_of_days_left: 2)
+      ExpiringFreeTrialReminderJob.perform_now
     end
   end
 end
