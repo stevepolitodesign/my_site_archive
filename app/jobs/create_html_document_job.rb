@@ -3,6 +3,7 @@ require 'open-uri'
 
 class CreateHtmlDocumentJob < ApplicationJob
   queue_as :default
+  discard_on OpenURI::HTTPError
 
   def perform(screenshot_id)
     @screenshot = Screenshot.find_by(id: screenshot_id)
