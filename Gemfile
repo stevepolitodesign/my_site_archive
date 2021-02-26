@@ -61,7 +61,7 @@ gem "faker", "~> 2.14"
 gem "ferrum", "~> 0.9"
 gem "honeybadger", "~> 4.7"
 gem "meta-tags", "~> 2.14"
-gem "pay", "~> 2.2"
+gem 'pay', '~> 2.6', '>= 2.6.4'
 gem "pagy", "~> 3.10"
 gem "pundit", "~> 2.1"
 gem "sendgrid-ruby", "~> 6.3"
