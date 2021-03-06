@@ -1,3 +1,4 @@
+:concurrency: 1
 :queues:
   - default
   - active_storage_purge
