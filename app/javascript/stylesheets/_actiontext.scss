@@ -4,3 +4,19 @@
 .trix-content h1 {
     @extend .h1;
 }
+.trix-content figure.attachment,
+.trix-content .attachment--preview .attachment__caption {
+    text-align: left;
+}
+.trix-content figure.attachment {
+    @extend .figure;
+
+    img {
+        @extend .figure-img;
+        @extend .img-fluid;
+    }
+}
+
+.trix-content .attachment--preview .attachment__caption {
+    @extend .figure-caption;
+}
