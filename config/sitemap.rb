@@ -39,7 +39,7 @@ SitemapGenerator::Sitemap.create do
   #   end
   
   add posts_path, :priority => 0.7, :changefreq => 'monthly'
-  Post.published do |post|
+  Post.published.each do |post|
     add post_path(post), :lastmod => post.updated_at
   end
 
