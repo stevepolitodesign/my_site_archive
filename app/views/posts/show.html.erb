@@ -8,3 +8,4 @@
 <article>
     <%= @post.content %>
 </article>
+<%= render "shared/cta" unless current_user %>
