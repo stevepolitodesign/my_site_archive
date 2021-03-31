@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
 
         def resume_subscriptions_controller?
             controller_name == "resume_subscriptions"
-        end         
+        end
         
         def static_pages_controller?
             controller_name == "static_pages"

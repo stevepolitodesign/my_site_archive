@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+    include Schemable
+
     before_action :set_post, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!, except: [:show, :index]
 
@@ -11,6 +13,7 @@ class PostsController < ApplicationController
         set_meta_tags   title: @post.title,
                         description: @post.meta_description,
                         site: nil
+        set_schema_dot_org
     end
 
     def new
