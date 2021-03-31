@@ -1,6 +1,11 @@
 <% content_for :page_title do %>
     <%= @post.title %>
 <% end %>
+<% content_for :sub_head do %>
+    <div class="d-flex flex-column align-items-center mt-n3 mb-5">
+        <%= render "byline" %>
+    </div>
+<% end %>
 <% if policy(@post).edit? %>
     <%= link_to "Edit", edit_post_path(@post) %>
     <hr/>
