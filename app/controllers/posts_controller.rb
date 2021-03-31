@@ -13,7 +13,12 @@ class PostsController < ApplicationController
         set_meta_tags   title: @post.title,
                         description: @post.meta_description,
                         site: nil
-        set_schema_dot_org
+        set_schema_dot_org(schema: {
+            :@type => "BlogPosting",
+            :dateModified => @post.updated_at,
+            :datePublished => @post.created_at,
+            :headline => @post.title,
+        })
     end
 
     def new
