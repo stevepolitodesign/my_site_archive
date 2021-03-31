@@ -214,6 +214,9 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    schema_dot_org (1.7.0)
+      sorbet-runtime (>= 0.5.5890)
+      validated_object (~> 2.1)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -225,6 +228,7 @@ GEM
       redis (>= 4.2.0)
     sitemap_generator (6.1.2)
       builder (~> 3.0)
+    sorbet-runtime (0.5.6360)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -254,6 +258,9 @@ GEM
     validate_url (1.0.13)
       activemodel (>= 3.0.0)
       public_suffix
+    validated_object (2.1.0)
+      activemodel (>= 3.2.21)
+      sorbet-runtime (>= 0.5.5890)
     vcr (6.0.0)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -308,6 +315,7 @@ DEPENDENCIES
   rails (~> 6.0.3, >= 6.0.3.4)
   redis (~> 4.0)
   sass-rails (>= 6)
+  schema_dot_org (~> 1.7)
   selenium-webdriver
   sendgrid-ruby (~> 6.3)
   sidekiq (~> 6.1)
