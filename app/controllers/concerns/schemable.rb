@@ -15,6 +15,6 @@ module Schemable
           defaults = {
               :@context => "https://schema.org/"
           }
-          @schema = defaults.merge!(schema).to_json.html_safe
+          @schema = defaults.merge!(schema).to_json
         end
 end
