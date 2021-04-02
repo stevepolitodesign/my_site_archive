@@ -1,0 +1,10 @@
+<h1><%= @post.title %></h1>
+<%= render "byline" %>
+<% if policy(@post).edit? %>
+    <%= link_to "Edit", edit_post_path(@post) %>
+    <hr/>
+<% end %>
+<article>
+    <%= @post.content %>
+</article>
+<%= render partial: "shared/cta", formats: :html unless current_user %>
