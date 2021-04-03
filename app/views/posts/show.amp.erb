@@ -5,6 +5,6 @@
   <hr/>
 <% end %>
 <article>
-  <%= @post.content.to_plain_text %>
+  <%= sanitize @post.content.body.to_html, tags: %w(div strong em a strike h1 blockquote pre ul ol li br), attributes: %w(href) %>
 </article>
 <%= render partial: "shared/cta", formats: :html unless current_user %>
