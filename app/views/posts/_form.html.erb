@@ -17,6 +17,10 @@
         <%= f.select(:status, Post.statuses.keys.map {|status| [status.titleize,status]}, {}, class: "form-control" ) %>
     </div>
     <div class="form-group">
+        <%= f.label :featured_image %>
+        <%= f.file_field :featured_image, class: "form-control" %>
+    </div>    
+    <div class="form-group">
         <%= f.label :content %>
         <%= f.rich_text_area :content, class: "form-control h-auto" %>
     </div>

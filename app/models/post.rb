@@ -7,6 +7,7 @@ class Post < ApplicationRecord
 
     validates :status, :title, presence: true
 
+    has_one_attached :featured_image
     has_rich_text :content
     friendly_id :temporary_slug, use: :history
 
