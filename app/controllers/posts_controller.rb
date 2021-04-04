@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     before_action :authenticate_user!, except: [:show, :index]
 
     def index
-        @posts = policy_scope Post.all.includes([:rich_text_content]).order(created_at: :desc)
+        @posts = policy_scope Post.all.includes([:rich_text_content, :featured_image_attachment]).order(created_at: :desc)
     end
 
     def show
