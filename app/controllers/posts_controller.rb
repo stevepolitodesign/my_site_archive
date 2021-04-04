@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+    include ActionView::Helpers::AssetUrlHelper
     include Schemable
 
     before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -15,9 +16,29 @@ class PostsController < ApplicationController
                         site: nil
         set_schema_dot_org(schema: {
             :@type => "BlogPosting",
-            :dateModified => @post.updated_at,
-            :datePublished => @post.created_at,
+            :mainEntityOfPage => {
+                :@type => "WebPage",
+                :@id => post_url(@post)
+            },
             :headline => @post.title,
+            :image => [
+                url_for(@post.featured_image),
+            ],
+            :datePublished => @post.created_at,
+            :dateModified => @post.updated_at,
+            :author => {
+                :@type => "Person",
+                :name => "Steve Polito",
+
+            },
+            :publisher => {
+                :@type => "Organization",
+                :name => "My Site Archive",
+                :logo => {
+                    :@type => "ImageObject",
+                    :url => asset_url("assets/amp_logo.png")
+                }
+            }
         })
     end
 
