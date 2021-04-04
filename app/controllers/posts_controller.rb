@@ -7,6 +7,7 @@ class PostsController < ApplicationController
 
     def index
         @posts = policy_scope Post.all.includes([:rich_text_content, :featured_image_attachment]).order(created_at: :desc)
+        fresh_when @posts
         respond_to do |format|
             format.html
             format.rss { render layout: false }
@@ -14,6 +15,7 @@ class PostsController < ApplicationController
     end
 
     def show
+        fresh_when @post
         authorize @post
         set_meta_tags   title: @post.title,
                         description: @post.meta_description,
