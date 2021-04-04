@@ -40,3 +40,4 @@ yarn-debug.log*
 /config/credentials/development.key
 dump.rdb
 latest.dump
+.DS_Store
