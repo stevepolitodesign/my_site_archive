@@ -7,6 +7,10 @@ class PostsController < ApplicationController
 
     def index
         @posts = policy_scope Post.all.includes([:rich_text_content, :featured_image_attachment]).order(created_at: :desc)
+        respond_to do |format|
+            format.html
+            format.rss { render layout: false }
+        end
     end
 
     def show
