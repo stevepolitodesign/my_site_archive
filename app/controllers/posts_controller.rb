@@ -22,7 +22,7 @@ class PostsController < ApplicationController
             },
             :headline => @post.title,
             :image => [
-                url_for(@post.featured_image),
+                url_for(@post.featured_image) if @post.featured_image.attached?,
             ],
             :datePublished => @post.created_at,
             :dateModified => @post.updated_at,
