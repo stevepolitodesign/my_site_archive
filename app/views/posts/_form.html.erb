@@ -22,7 +22,7 @@
     </div>    
     <div class="form-group">
         <%= f.label :content %>
-        <%= f.rich_text_area :content, class: "form-control h-auto" %>
+        <%= f.rich_text_area :content, class: "trix-content form-control h-auto" %>
     </div>
     <%= f.submit class: "btn btn-primary" %>
     <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }, class:  "btn btn-link text-danger" if @post.persisted? %>    

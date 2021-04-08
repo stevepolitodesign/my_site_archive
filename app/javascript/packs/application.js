@@ -26,3 +26,4 @@ document.addEventListener("turbolinks:load", function() {
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 import "./subscriptions";
+import "./richtext";
