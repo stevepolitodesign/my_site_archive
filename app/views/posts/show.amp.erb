@@ -1,0 +1,21 @@
+<% content_for :page_title do %>
+    <%= @post.title %>
+<% end %>
+<% content_for :sub_head do %>
+    <div class="d-flex flex-column align-items-center mt-n3 mb-5">
+        <%= render "byline" %>
+    </div>
+<% end %>
+<% if @post.featured_image.attached?%>
+  <div>
+    <amp-img src="<%= url_for @post.featured_image.variant(resize_to_fill: [1200, 400, { gravity: 'North' }]) %>" width="1200" height="400"></amp-image>
+  </div>
+<% end %>
+<% if policy(@post).edit? %>
+  <%= link_to "Edit", edit_post_path(@post) %>
+  <hr/>
+<% end %>
+<article>
+  <%= sanitize @post.content.body.to_html, tags: %w(div strong em a strike h1 blockquote pre ul ol li br), attributes: %w(href) %>
+</article>
+<%= render partial: "shared/cta", formats: :html unless current_user %>
