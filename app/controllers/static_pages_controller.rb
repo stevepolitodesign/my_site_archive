@@ -1,4 +1,19 @@
 class StaticPagesController < ApplicationController
+    include Schemable
+
+    before_action do |controller|
+        set_schema_dot_org(
+            schema: {
+                :name => "My Site Archive",
+                :offers =>{
+                    :@type => "Offer",
+                    :price => "2.00",
+                    :priceCurrency => "USD"
+                }
+            }
+        )
+    end 
+
     def home
         set_meta_tags  description: "My Site Archive captures screenshots, downloads source code, and monitors DNS records helping you keep track of changes on your websites without needing to restore from a backup. Think of it like the Wayback Machine on steroids. Sign up today for a 30 day free trial. No credit card required."
     end
