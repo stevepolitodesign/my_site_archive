@@ -8,7 +8,6 @@ class ExpiringFreeTrialMailerTest < ActionMailer::TestCase
     mail = ExpiringFreeTrialMailer.reminder(user: user)
     assert_match time_ago_in_words(user.trial_ends_at), mail.subject
     assert_equal [user.email], mail.to
-    assert_equal ["stevepolito@hey.com"], mail.from
   end
 
 end

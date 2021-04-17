@@ -10,8 +10,7 @@ class ExpiringFreeTrialMailer < ApplicationMailer
     @user       = user
     @expiration = @user.trial_ends_at
     @subject    = "Your free trail to My Site Archive expires in #{time_ago_in_words(@expiration)}."
-    @from       = "stevepolito@hey.com"
 
-    mail to: @user.email, from: @from, subject: @subject
+    mail to: @user.email, subject: @subject
   end
 end
