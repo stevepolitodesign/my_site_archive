@@ -66,4 +66,6 @@ Rails.application.configure do
     Bullet.enable = true
     Bullet.alert = true
   end
+
+  config.hosts << /[a-z0-9]+\.ngrok\.io/
 end
