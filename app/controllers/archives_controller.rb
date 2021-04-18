@@ -5,6 +5,7 @@ class ArchivesController < ApplicationController
     @archive = Archive.new
   end
 
+  # TODO: Need to rate limit this action.
   def create
     @archive          = Archive.new(archive_params)
     @archive.user_id  = @user.id
