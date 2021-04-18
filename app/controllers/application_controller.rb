@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
         end
 
         def exempt_pundit_controllers
-            credit_cards_controller? || devise_controller? || resume_subscriptions_controller? || static_pages_controller? || subscriptions_controller? || websites_controller?
+            credit_cards_controller? || devise_controller? || resume_subscriptions_controller? || static_pages_controller? || subscriptions_controller? || websites_controller? || archives_controller?
         end
          
         def posts_controller?
