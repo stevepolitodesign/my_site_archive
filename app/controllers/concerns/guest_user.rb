@@ -10,11 +10,8 @@ module GuestUser
       user
     end 
 
-    def destroy_guest_user_record_and_session
-      if User.find_by(id: session[:guest_user_id]).present?
-        User.find_by(id: session[:guest_user_id]).destroy
-        session[:guest_user_id] = nil
-      end
+    def destroy_guest_user_session
+      session[:guest_user_id] = nil
     end
 
     def set_guest_user
