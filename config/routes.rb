@@ -29,4 +29,5 @@ Rails.application.routes.draw do
   get "features", to: "static_pages#features", as: "features"
   get "terms-of-use", to: "static_pages#terms_of_use", as: "terms"
   get "privacy-policy", to: "static_pages#privacy_policy", as: "privacy"
+  get "free-website-archive-tool", to: "archives#new"
 end
