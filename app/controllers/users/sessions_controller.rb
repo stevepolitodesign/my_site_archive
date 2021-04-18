@@ -10,15 +10,15 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
-
-  # DELETE /resource/sign_out
-  def destroy
+  def create
     super
     destroy_guest_user_session
   end
+
+  # DELETE /resource/sign_out
+  # def destroy
+  #   super
+  # end
 
   # protected
 
