@@ -1,5 +1,6 @@
-<%= form_with model: @archive, local: true do |form| %>
-  <%= form.label :url %>
-  <%= form.url_field :url %>
-  <%= form.submit %>
+<%= form_with model: @archive, local: true do |f| %>
+  <%= render partial: "shared/form_errors", locals: { object: f.object } %>
+  <%= f.label :url %>
+  <%= f.url_field :url, required: true %>
+  <%= f.submit %>
 <% end %>

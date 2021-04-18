@@ -6,8 +6,13 @@ class ArchivesController < ApplicationController
   end
 
   def create
-    raise
-    @archive = Archive.new(archive_params)
+    @archive          = Archive.new(archive_params)
+    @archive.user_id  = @user.id
+    if @archive.valid?
+      @archive.generate_report
+    else
+      render :new
+    end
   end
 
   private
