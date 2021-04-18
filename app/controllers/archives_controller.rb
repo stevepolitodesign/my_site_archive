@@ -1,9 +1,10 @@
 class ArchivesController < ApplicationController
   def new
-    @archive = Archive.new(archive_params)
+    @archive = Archive.new
   end
 
   def create
+    @archive = Archive.new(archive_params)
   end
 
   private
