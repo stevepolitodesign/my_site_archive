@@ -2,5 +2,6 @@
   <%= render partial: "shared/form_errors", locals: { object: f.object } %>
   <%= f.label :url %>
   <%= f.url_field :url, required: true %>
+  <%# TODO: Add CAPTCHA %>
   <%= f.submit %>
 <% end %>
