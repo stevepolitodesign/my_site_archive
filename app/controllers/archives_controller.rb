@@ -10,7 +10,7 @@ class ArchivesController < ApplicationController
   # TODO: Need to rate limit this action.
   def create
     @archive          = Archive.new(archive_params)
-    @archive.user_id  = @user.id
+    @archive.user_id  = @guest_user.id
     if @archive.valid?
       @archive.generate_report
     else

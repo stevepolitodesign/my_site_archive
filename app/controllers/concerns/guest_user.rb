@@ -15,7 +15,7 @@ module GuestUser
     end
 
     def set_guest_user
-      User.find_by(id: session[:guest_user_id]).present? ? User.find_by(id: session[:guest_user_id]) : create_guest_user
+      @guest_user = User.find_by(id: session[:guest_user_id]).present? ? User.find_by(id: session[:guest_user_id]) : create_guest_user
     end
 
 end
