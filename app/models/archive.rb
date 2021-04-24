@@ -1,6 +1,6 @@
 class Archive
-  include ActiveRecord::Associations
   include ActiveModel::Model
+  include Domainable
 
   attr_accessor :url, :user_id
 
@@ -10,6 +10,16 @@ class Archive
   validates :url, url: true
 
   def generate_report
-    # TODO: Trigger jobs to build archive.
+    ActiveRecord::Base.transaction do
+      domain = remove_path_from_url
+      @website = Website.new(url: domain, title: domain, user_id: user_id)
+      @website.save!(validate: false)
+      @website.capture_new_zone_file
+      @webpage = @website.webpages.create(url: url, title: url)
+      @webpage.capture_new_screenshot
+      @website
+    end
   end
+
+
 end

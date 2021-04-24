@@ -12,7 +12,8 @@ class ArchivesController < ApplicationController
     @archive          = Archive.new(archive_params)
     @archive.user_id  = @guest_user.id
     if @archive.valid?
-      @archive.generate_report
+      @website = @archive.generate_report
+      redirect_to website_path(@website)
     else
       render :new
     end

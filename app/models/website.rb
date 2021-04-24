@@ -1,6 +1,5 @@
-require 'uri'
-
 class Website < ApplicationRecord
+    include Domainable
     belongs_to :user
     has_many :webpages, dependent: :destroy
     has_many :zone_files, dependent: :destroy
@@ -63,10 +62,6 @@ class Website < ApplicationRecord
 
         def duration
             self.user.current_plan_job_schedule_frequency
-        end
-
-        def remove_path_from_url
-            self.url = URI.join(self.url, "/").to_s
         end
 
         def user_website_limit
