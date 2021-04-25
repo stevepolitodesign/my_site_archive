@@ -5,7 +5,7 @@ class Archives::WebsitesController < ApplicationController
     @zone_file      = @website.latest_zone_file
     @webpage        = @website.first_webpage
     @screenshot     = @webpage.latest_screenshot if @webpage.present?
-    @html_document  = @screenshot.html_document if @screenshot
+    @html_document  = @screenshot.html_document if @screenshot.present?
   end
 
   private
