@@ -1,18 +1,18 @@
-class Archive
-  include ActiveModel::Model
+class Archive < ApplicationRecord
   include Domainable
 
-  attr_accessor :url, :user_id
+  belongs_to :user
+  belongs_to :website
 
   # TODO: Consider adding a validation to prevent anonymous users from running too many reports
-  validates :user_id, :url, presence: true
-  validates :user_id, numericality: { only_integer: true, greater_than: 0 }
+  validates :user, :url, presence: true
   validates :url, url: true
 
   def generate_report
+    # TODO: Extract this into a Job.
     ActiveRecord::Base.transaction do
-      domain = remove_path_from_url
-      @website = Website.new(url: domain, title: domain, user_id: user_id)
+      domain = remove_path_from_url      
+      @website = self.websites.new(url: domain, title: domain, user_id: user_id)
       @website.save!(validate: false)
       @website.capture_new_zone_file
       @webpage = @website.webpages.create(url: url, title: url)
@@ -20,6 +20,4 @@ class Archive
       @website
     end
   end
-
-
 end

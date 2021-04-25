@@ -1,7 +1,27 @@
 require 'test_helper'
 
 class ArchiveTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+  end
+
+  test "should be valid"
+    flunk
+  end
+
+  test "should have a user"
+    flunk
+  end
+
+  test "should have a website"
+    flunk
+  end
+
+  test "should have a valid url"
+    flunk
+  end
+
+  test "user cannot have more than 5 archives" 
+    flunk
+  end
+
 end

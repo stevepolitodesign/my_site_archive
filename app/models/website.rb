@@ -1,5 +1,6 @@
 class Website < ApplicationRecord
     include Domainable
+    belongs_to :archive, optional: true
     belongs_to :user
     has_many :webpages, dependent: :destroy
     has_many :zone_files, dependent: :destroy

@@ -34,4 +34,8 @@ class UserTest < ActiveSupport::TestCase
       @user.destroy
     end
   end
+
+  test "should destroy associated archives" do
+    flunk
+  end  
 end
