@@ -11,11 +11,9 @@ class ArchivesController < ApplicationController
   def create
     # TODO: Need to build Website first
     @archive = @guest_user.archives.build(archive_params)
-    @website = @archive.website.create()
-    raise
     if @archive.save
       @website = @archive.generate_report
-      redirect_to website_path(@website)
+      redirect_to archive_website_path(@archive, @website)
     else
       render :new
     end

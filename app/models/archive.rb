@@ -12,7 +12,7 @@ class Archive < ApplicationRecord
     # TODO: Extract this into a Job.
     ActiveRecord::Base.transaction do
       domain = remove_path_from_url      
-      @website = self.website.new(url: domain, title: domain, user_id: user_id)
+      @website = self.build_website(url: domain, title: domain, user_id: user_id)
       @website.save!(validate: false)
       @website.capture_new_zone_file
       @webpage = @website.webpages.create(url: url, title: url)

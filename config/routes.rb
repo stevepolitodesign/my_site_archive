@@ -32,6 +32,6 @@ Rails.application.routes.draw do
   get "privacy-policy", to: "static_pages#privacy_policy", as: "privacy"
   get "free-website-archive-tool", to: "archives#new"
   resources :archives, only: :create do
-    resources :websites, only: :show do
+    resources :websites, only: :show
   end
 end
