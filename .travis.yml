@@ -14,6 +14,7 @@ before_script:
   - bundle exec rake db:schema:load
 script:
   - bundle exec rake test
+  - bundle exec rake test test/system/free_trial_flows_test.rb
   - bundle exec rake test test/system/user_flows_test.rb
   - bundle exec rake test test/system/webpage_flows_test.rb 
   - bundle exec rake test test/system/website_flows_test.rb   
