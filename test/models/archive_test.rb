@@ -12,15 +12,15 @@ class ArchiveTest < ActiveSupport::TestCase
     flunk
   end
 
-  test "should have a website"
-    flunk
-  end
-
   test "should have a valid url"
     flunk
   end
 
   test "user cannot have more than 5 archives" 
+    flunk
+  end
+
+  test "should destroy assoociated website"
     flunk
   end
 

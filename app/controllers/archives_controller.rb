@@ -9,14 +9,19 @@ class ArchivesController < ApplicationController
 
   # TODO: Need to rate limit this action.
   def create
-    @archive          = Archive.new(archive_params)
-    @archive.user_id  = @guest_user.id
-    if @archive.valid?
+    # TODO: Need to build Website first
+    @archive = @guest_user.archives.build(archive_params)
+    @website = @archive.website.create()
+    raise
+    if @archive.save
       @website = @archive.generate_report
       redirect_to website_path(@website)
     else
       render :new
     end
+  end
+
+  def show
   end
 
   private

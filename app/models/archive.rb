@@ -2,7 +2,7 @@ class Archive < ApplicationRecord
   include Domainable
 
   belongs_to :user
-  belongs_to :website
+  has_one :website, dependent: :destroy
 
   # TODO: Consider adding a validation to prevent anonymous users from running too many reports
   validates :user, :url, presence: true
@@ -12,7 +12,7 @@ class Archive < ApplicationRecord
     # TODO: Extract this into a Job.
     ActiveRecord::Base.transaction do
       domain = remove_path_from_url      
-      @website = self.websites.new(url: domain, title: domain, user_id: user_id)
+      @website = self.website.new(url: domain, title: domain, user_id: user_id)
       @website.save!(validate: false)
       @website.capture_new_zone_file
       @webpage = @website.webpages.create(url: url, title: url)
