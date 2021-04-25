@@ -1,0 +1,43 @@
+<% content_for :page_title do %>
+  <% @title %>
+<% end %>
+<% if @screenshot.present? %>
+  <div class="card-deck justify-content-center">
+    <%= render partial: "screenshots/screenshot", locals: { screenshot: @screenshot } %>
+  </div>
+<% else %>
+  <div class="d-flex justify-content-center align-items-center mb-4">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <span class="ml-3">Generating screenshot. Check back later.</span>
+  </div>
+<% end %>
+<% if @zone_file.present? %>
+  <div class="card border-0 shadow-sm mb-5">
+    <div class="card-body">
+        <h5 class="card-title d-flex justify-content-center align-items-center pb-3 border-bottom">Current DNS Records</h5>
+        <div class="table-responsive">
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th scope="col">Record Type</th>
+                <th scope="col">Content</th>
+                <th scope="col">Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render partial: "dns_records/dns_record", collection: @zone_file.dns_records.ordered.unique, as: "dns_record" %>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+<% else %>
+  <div class="d-flex justify-content-center align-items-center mb-4">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <span class="ml-3">Retrieving DNS Records. Check back later.</span>
+  </div>
+<% end %>

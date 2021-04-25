@@ -2,6 +2,7 @@ class ArchivesController < ApplicationController
   include GuestUser
 
   before_action :set_guest_user, only: :create
+  before_action :set_archive, only: [:show]
 
   def new
     @archive = Archive.new
@@ -9,23 +10,33 @@ class ArchivesController < ApplicationController
 
   # TODO: Need to rate limit this action.
   def create
-    # TODO: Need to build Website first
     @archive = @guest_user.archives.build(archive_params)
     if @archive.save
-      @website = @archive.generate_report
-      redirect_to archive_website_path(@archive, @website)
+      @website = @archive.create_website_for_report
+      @archive.generate_report(@website, archive_params[:url])
+      redirect_to @archive
     else
       render :new
     end
   end
 
   def show
+    @title          = @archive.url
+    @website        = @archive.website
+    @zone_file      = @website.latest_zone_file if @website.present?
+    @webpage        = @website.first_webpage if @zone_file.present?
+    @screenshot     = @webpage.latest_screenshot if @webpage.present?
+    @html_document  = @screenshot.html_document if @screenshot.present?    
   end
 
   private
 
     def archive_params
       params.require(:archive).permit(:url)
+    end
+
+    def set_archive
+      @archive = Archive.find(params[:id])
     end
 
 end
