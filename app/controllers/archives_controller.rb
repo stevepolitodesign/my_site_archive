@@ -11,7 +11,7 @@ class ArchivesController < ApplicationController
   # TODO: Need to rate limit this action.
   def create
     @archive = @guest_user.archives.build(archive_params)
-    if @archive.save
+    if verify_recaptcha(model: @archive) && @archive.save
       @website = @archive.create_website_for_report
       @archive.generate_report(@website, archive_params[:url])
       redirect_to @archive
