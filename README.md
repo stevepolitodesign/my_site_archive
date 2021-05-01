@@ -13,6 +13,10 @@ rails development_setup:perform
 `rails credentials:edit --environment=test`
 
 ```
+recaptcha:
+  site_key: abc123
+  secret_key: abc123
+
 stripe:
   private_key: sk_test_123
   public_key: pk_test_123
@@ -22,6 +26,10 @@ stripe:
 `rails credentials:edit --environment=development`
 
 ```
+recaptcha:
+  site_key: abc123
+  secret_key: abc123
+
 stripe:
   private_key: sk_test_123
   public_key: pk_test_123
@@ -36,6 +44,10 @@ digitalocean:
   secret_access_key: 123abc
   region: nyc3
   bucket: 123abc
+
+recaptcha:
+  site_key: abc123
+  secret_key: abc123
 
 sendgrid:
   username: apikey
