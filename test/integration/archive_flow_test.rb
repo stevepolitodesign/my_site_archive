@@ -11,8 +11,10 @@ class ArchiveFlowTest < ActionDispatch::IntegrationTest
           url: "http://example.com/foo.html"
         }
       }
+      perform_enqueued_jobs
     end
     assert_redirected_to Archive.last
-    assert_text "http://example.com/foo.html"
+    follow_redirect!
+    assert_match "http://example.com/foo.html", @response.body
   end
 end
