@@ -3,5 +3,6 @@
   <%= f.label :url %>
   <%= f.url_field :url, required: true %>
   <%# TODO: Add CAPTCHA %>
+  <%= render "shared/hcaptcha" %>
   <%= f.submit %>
 <% end %>
