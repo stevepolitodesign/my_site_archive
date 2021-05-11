@@ -6,14 +6,14 @@ class CreateScreenshotJob < Browserless::BaseJob
 
   def perform(webpage_id)
     return if @webpage.nil?
-    capture_and_create_screenshot_and_html_document(@webpage)
+    capture_and_create_screenshot_and_html_document(@webpage.url)
   end
 
   private
       
-    def capture_and_create_screenshot_and_html_document(webpage)
+    def capture_and_create_screenshot_and_html_document(url)
       browser = Capybara.current_session
-      browser.visit webpage.url
+      browser.visit url
       puts browser.html
       browser.driver.quit
     end
