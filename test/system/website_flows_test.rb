@@ -1,3 +1,4 @@
+# TODO: Add VCR
 require "application_system_test_case"
 
 class WebsiteFlowsTest < ApplicationSystemTestCase
@@ -12,6 +13,7 @@ class WebsiteFlowsTest < ApplicationSystemTestCase
     VCR.eject_cassette
   end
 
+  # TODO: I think I need to create integration test since these both use Capybara and raise Net::ReadTimeout: Net::ReadTimeout
   test "creating a website" do
     sign_in @user
     visit new_website_path
