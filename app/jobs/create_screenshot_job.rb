@@ -10,7 +10,8 @@ class CreateScreenshotJob < Browserless::BaseJob
   end
 
   private
-      
+    
+    # OPTIMIZE: This can probaby be extracted into Browserless::BaseJob, and merged with capture_screenshot_and_attach_image
     def capture_and_create_screenshot_and_html_document(url)
       directory   = create_temporary_screenshot_directory
       file_name   = path_to_screenshot(directory, url)
@@ -21,7 +22,9 @@ class CreateScreenshotJob < Browserless::BaseJob
       @screenshot = @webpage.screenshots.build
       @screenshot.image.attach(io: File.open(screenshot), filename: file_name.split("/").last)
       @screenshot.create_html_document(source_code: markup) if @screenshot.save
+      TmpFileRemover.new(file_name).call
       browser.driver.quit
+      @screenshot
     end
 
     def set_webpage
