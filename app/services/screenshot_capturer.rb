@@ -1,3 +1,4 @@
+# TODO: I might be able to delete this
 require 'capybara'
 require 'selenium-webdriver'
 

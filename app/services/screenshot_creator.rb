@@ -1,3 +1,4 @@
+# TODO: I might be able to delete this
 class ScreenshotCreator
     def initialize(webpage_id, file)
         @webpage_id = webpage_id

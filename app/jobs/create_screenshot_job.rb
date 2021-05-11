@@ -5,6 +5,7 @@ class CreateScreenshotJob < ApplicationJob
 
   def perform(webpage_id)
     return if @webpage.nil?
+    # OPTIMIZE: Refactor this to use Browserless
     capture_and_create_screenshot_and_html_document
   end
 

@@ -4,6 +4,7 @@ class ImageAttacherJob < ApplicationJob
   def perform(website_id)
     @website = Website.find_by(id: website_id)
     return if @website.nil?
+    # OPTIMIZE: Refactor this to use Browserless
     capture_screenshot_and_attach_image
   end
 

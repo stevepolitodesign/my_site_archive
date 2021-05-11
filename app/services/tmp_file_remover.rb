@@ -1,3 +1,4 @@
+# TODO: I might be able to delete this
 class TmpFileRemover
     def initialize(file)
         @file = file
