@@ -12,9 +12,15 @@ class CreateScreenshotJob < Browserless::BaseJob
   private
       
     def capture_and_create_screenshot_and_html_document(url)
-      browser = Capybara.current_session
+      directory   = create_temporary_screenshot_directory
+      file_name   = path_to_screenshot(directory, url)
+      browser     = Capybara.current_session
       browser.visit url
-      puts browser.html
+      markup      = browser.html
+      screenshot  = browser.save_screenshot(file_name, full: true)
+      @screenshot = @webpage.screenshots.build
+      @screenshot.image.attach(io: File.open(screenshot), filename: file_name.split("/").last)
+      @screenshot.create_html_document(source_code: markup) if @screenshot.save
       browser.driver.quit
     end
 

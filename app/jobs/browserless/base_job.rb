@@ -39,4 +39,14 @@ class Browserless::BaseJob < ApplicationJob
       
       Capybara.default_driver = :remote_chrome
     end
+
+    def create_temporary_screenshot_directory
+      directory = File.join(Rails.root, 'tmp', 'screenshots')
+      Dir.mkdir(directory) unless File.directory?(directory)
+      return directory
+    end
+
+    def path_to_screenshot(directory, url)
+      "#{directory}/#{url.parameterize}-#{Time.zone.now.to_s.parameterize}.png"
+    end
 end
