@@ -1,52 +1,21 @@
-class CreateScreenshotJob < ApplicationJob
+class CreateScreenshotJob < Browserless::BaseJob
   queue_as :default
 
+  before_perform :configure_capybara
   before_perform :set_webpage
 
   def perform(webpage_id)
     return if @webpage.nil?
-    # OPTIMIZE: Refactor this to use Browserless
-    capture_and_create_screenshot_and_html_document
+    capture_and_create_screenshot_and_html_document(@webpage)
   end
 
   private
-  
-    def capture_screenshot
-      ScreenshotCapturer.new(@webpage.url).call
-    end
-
-    def capture_and_create_screenshot
-      result = capture_screenshot
-      if result.nil?
-        raise "Unable to capture screenshot." 
-      elsif result.success?
-        screenshot  = result.payload 
-        result      = create_screenshot(screenshot)
-        TmpFileRemover.new(screenshot).call if result.success?
-        result
-      else
-        raise "Unable to capture screenshot: #{result.error}" 
-      end
-    end
-    
-    def create_html_document(screenshot_id)
-      CreateHtmlDocumentJob.perform_later(screenshot_id)
-    end
-    
-    def create_screenshot(screenshot)
-      ScreenshotCreator.new(arguments.first, screenshot).call
-    end
-    
-    def capture_and_create_screenshot_and_html_document
-      result = capture_and_create_screenshot
-
-      if result.nil?
-        raise "Unable to capture and create screenshot. "
-      elsif result.success?
-        create_html_document(result.payload.id)
-      else
-        raise "Unable to capture and create screenshot: #{result.error}"
-      end
+      
+    def capture_and_create_screenshot_and_html_document(webpage)
+      browser = Capybara.current_session
+      browser.visit webpage.url
+      puts browser.html
+      browser.driver.quit
     end
 
     def set_webpage
