@@ -43,6 +43,8 @@ group :development do
 end
 
 group :test do
+  gem 'capybara', '>= 2.15'
+  gem 'selenium-webdriver'
   gem "vcr", "~> 6.0"
   gem 'webdrivers'
   gem "webmock", "~> 3.10"
@@ -53,7 +55,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "aws-sdk-s3", require: false
 gem "bullet", "~> 6.1"
-gem 'capybara', '>= 2.15'
 gem "data_migrate", "~> 6.5"
 gem "devise", "~> 4.7"
 gem "faker", "~> 2.14"
@@ -63,7 +64,6 @@ gem "meta-tags", "~> 2.14"
 gem 'pay', '~> 2.6', '>= 2.6.4'
 gem "pagy", "~> 3.10"
 gem "pundit", "~> 2.1"
-gem 'selenium-webdriver'
 gem "sendgrid-ruby", "~> 6.3"
 gem "sidekiq", "~> 6.1"
 gem "sitemap_generator", "~> 6.1"
