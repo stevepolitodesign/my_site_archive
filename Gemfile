@@ -43,7 +43,6 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem "vcr", "~> 6.0"
   gem 'webdrivers'
@@ -55,6 +54,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "aws-sdk-s3", require: false
 gem "bullet", "~> 6.1"
+gem 'capybara', '>= 2.15'
 gem "data_migrate", "~> 6.5"
 gem "devise", "~> 4.7"
 gem "faker", "~> 2.14"
