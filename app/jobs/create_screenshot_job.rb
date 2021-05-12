@@ -1,4 +1,5 @@
 require 'net/http'
+require 'uri'
 class CreateScreenshotJob < ApplicationJob
   queue_as :default
 
@@ -22,7 +23,7 @@ class CreateScreenshotJob < ApplicationJob
           "url" => "#{url}",
           "options" => {
             "fullPage" => "true",
-            "type" => "png"
+            "type" => "png",
           }
         }.to_json,
         {
@@ -30,8 +31,8 @@ class CreateScreenshotJob < ApplicationJob
           "Cache-Control" => "no-cache"
         }
       )
-      puts res.body
       byebug
+      puts res.body
       # TODO:
       # @browserless = Browserless.new(markup: markup, screenshot: screenshot)
       @screenshot = @webpage.screenshots.build
