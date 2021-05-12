@@ -43,7 +43,6 @@ group :development do
 end
 
 group :test do
-  gem 'selenium-webdriver'
   gem "vcr", "~> 6.0"
   gem 'webdrivers'
   gem "webmock", "~> 3.10"
@@ -64,6 +63,7 @@ gem "meta-tags", "~> 2.14"
 gem 'pay', '~> 2.6', '>= 2.6.4'
 gem "pagy", "~> 3.10"
 gem "pundit", "~> 2.1"
+gem 'selenium-webdriver'
 gem "sendgrid-ruby", "~> 6.3"
 gem "sidekiq", "~> 6.1"
 gem "sitemap_generator", "~> 6.1"
