@@ -1,3 +1,4 @@
+require 'net/http'
 class CreateScreenshotJob < ApplicationJob
   queue_as :default
 
@@ -14,7 +15,23 @@ class CreateScreenshotJob < ApplicationJob
     def capture_and_create_screenshot_and_html_document(url)
       # TODO: Use Browslerless API 
       # https://docs.browserless.io/docs/content.html
-
+      uri = URI("https://chrome.browserless.io/screenshot?token=#{Rails.application.credentials.dig(:browserless, :private_key) }")
+      res = Net::HTTP.post(
+        uri,
+        {
+          "url" => "#{url}",
+          "options" => {
+            "fullPage" => "true",
+            "type" => "png"
+          }
+        }.to_json,
+        {
+          "Content-Type" => "application/json",
+          "Cache-Control" => "no-cache"
+        }
+      )
+      puts res.body
+      byebug
       # TODO:
       # @browserless = Browserless.new(markup: markup, screenshot: screenshot)
       @screenshot = @webpage.screenshots.build
