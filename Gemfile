@@ -58,6 +58,7 @@ gem "bullet", "~> 6.1"
 gem "data_migrate", "~> 6.5"
 gem "devise", "~> 4.7"
 gem "faker", "~> 2.14"
+# TODO: Remove
 gem "ferrum", "~> 0.9"
 gem "honeybadger", "~> 4.7"
 gem "meta-tags", "~> 2.14"
