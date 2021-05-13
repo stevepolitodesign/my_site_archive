@@ -1,6 +1,3 @@
-require 'stringio'
-require 'net/http'
-require 'uri'
 class CreateScreenshotJob < ApplicationJob
   queue_as :default
 
@@ -12,41 +9,13 @@ class CreateScreenshotJob < ApplicationJob
   end
 
   private
-    
-    # OPTIMIZE: This can probaby be extracted into Browserless::BaseJob, and merged with capture_screenshot_and_attach_image.
+
     def capture_and_create_screenshot_and_html_document(url)
-      # TODO: Make this a separate job
-      uri = URI("https://chrome.browserless.io/screenshot?token=#{Rails.application.credentials.dig(:browserless, :private_key) }")
-      res = Net::HTTP.post(
-        uri,
-        {
-          "url" => "#{url}",
-          "options" => {
-            "fullPage" => "true",
-            "type" => "png",
-          }
-        }.to_json,
-        {
-          "Content-Type" => "application/json",
-          "Cache-Control" => "no-cache"
-        }
-      )
-      image         = StringIO.new(res.body)
+      image   =  Browserless::Api::ScreenshotJob.perform_now(url)
+      markup  =  Browserless::Api::ContentJob.perform_now(url)
       @screenshot = @webpage.screenshots.build
       @screenshot.image.attach(io: image, filename: @webpage.generate_file_name)
-      # TODO: Make this a separate job
-      uri = URI("https://chrome.browserless.io/content?token=#{Rails.application.credentials.dig(:browserless, :private_key) }")
-      res = Net::HTTP.post(
-        uri,
-        {
-          "url" => "#{url}",
-        }.to_json,
-        {
-          "Content-Type" => "application/json",
-          "Cache-Control" => "no-cache"
-        }
-      )
-      @screenshot.create_html_document(source_code: res.body) if @screenshot.save
+      @screenshot.create_html_document(source_code: markup) if @screenshot.save
       @screenshot
     end
 

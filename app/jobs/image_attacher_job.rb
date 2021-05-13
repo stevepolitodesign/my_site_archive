@@ -11,23 +11,7 @@ class ImageAttacherJob < ApplicationJob
   private
 
     def capture_screenshot_and_attach_image(url)
-      # TODO: Make this a separate job
-      uri = URI("https://chrome.browserless.io/screenshot?token=#{Rails.application.credentials.dig(:browserless, :private_key) }")
-      res = Net::HTTP.post(
-        uri,
-        {
-          "url" => "#{url}",
-          "options" => {
-            "fullPage" => "true",
-            "type" => "png",
-          }
-        }.to_json,
-        {
-          "Content-Type" => "application/json",
-          "Cache-Control" => "no-cache"
-        }
-      )
-      image = StringIO.new(res.body)
+      image =  Browserless::Api::ScreenshotJob.perform_now(url)
       @website.image.attach(io: image, filename: @website.generate_file_name)
       @website.save
     end
