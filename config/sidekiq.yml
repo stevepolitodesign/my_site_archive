@@ -1,5 +1,3 @@
-# TODO: I can probably increase this value.
-:concurrency: 1
 :queues:
   - default
   - active_storage_purge
