@@ -1,3 +1,4 @@
+# OPTIMIZE: Consider making this a Job
 require "resolv"
 
 class DnsRecordRetriever

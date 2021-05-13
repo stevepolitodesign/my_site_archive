@@ -1,3 +1,4 @@
+# TODO: I can probably delete this.
 class ImageAttacher
     def initialize(record, file, attachable)
         @record     = record

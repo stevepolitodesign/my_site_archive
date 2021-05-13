@@ -1,3 +1,4 @@
+# OPTIMIZE: Consider making this a Job
 class ZoneFileCreator
     def initialize(website)
         @website = website
