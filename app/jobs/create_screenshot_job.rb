@@ -33,8 +33,7 @@ class CreateScreenshotJob < ApplicationJob
       )
       image         = StringIO.new(res.body)
       @screenshot = @webpage.screenshots.build
-      # TODO: Update file name
-      @screenshot.image.attach(io: image, filename: "some-image.png")
+      @screenshot.image.attach(io: image, filename: @screenshot.generate_file_name)
       # TODO: Make this a separate job
       uri = URI("https://chrome.browserless.io/content?token=#{Rails.application.credentials.dig(:browserless, :private_key) }")
       res = Net::HTTP.post(

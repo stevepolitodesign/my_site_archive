@@ -10,11 +10,25 @@ class ImageAttacherJob < ApplicationJob
 
   private
 
-    # OPTIMIZE: This can probaby be extracted into Browserless::BaseJob, and merged with capture_and_create_screenshot_and_html_document
     def capture_screenshot_and_attach_image(url)
-      # TODO: Use Browslerless API 
-      # https://docs.browserless.io/docs/content.html
-      @website.image.attach(io: File.open(screenshot), filename: file_name.split("/").last)
+      # TODO: Make this a separate job
+      uri = URI("https://chrome.browserless.io/screenshot?token=#{Rails.application.credentials.dig(:browserless, :private_key) }")
+      res = Net::HTTP.post(
+        uri,
+        {
+          "url" => "#{url}",
+          "options" => {
+            "fullPage" => "true",
+            "type" => "png",
+          }
+        }.to_json,
+        {
+          "Content-Type" => "application/json",
+          "Cache-Control" => "no-cache"
+        }
+      )
+      image = StringIO.new(res.body)
+      @website.image.attach(io: image, filename: @website.generate_file_name)
       @website.save
     end
 
