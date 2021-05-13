@@ -58,7 +58,6 @@ gem "bullet", "~> 6.1"
 gem "data_migrate", "~> 6.5"
 gem "devise", "~> 4.7"
 gem "faker", "~> 2.14"
-# TODO: Remove
 gem "honeybadger", "~> 4.7"
 gem "meta-tags", "~> 2.14"
 gem 'pay', '~> 2.6', '>= 2.6.4'
