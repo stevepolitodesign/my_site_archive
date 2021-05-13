@@ -1,3 +1,4 @@
+require 'stringio'
 require 'net/http'
 require 'uri'
 class CreateScreenshotJob < ApplicationJob
@@ -29,12 +30,13 @@ class CreateScreenshotJob < ApplicationJob
           "Cache-Control" => "no-cache"
         }
       )
-      # TODO: I need to convert the response to an actual PNG 
-      image = res.body
+      image         = StringIO.new(res.body)
       @screenshot = @webpage.screenshots.build
-      @screenshot.image.attach(io: File.open(image), filename: "some-image.png")
-      @screenshot.create_html_document(source_code: markup) if @screenshot.save
-      TmpFileRemover.new(file_name).call
+      # TODO: Update file name
+      @screenshot.image.attach(io: image, filename: "some-image.png")
+      # TODO: Add markup
+      # @screenshot.create_html_document(source_code: markup) if @screenshot.save
+      @screenshot.save
       @screenshot
     end
 
