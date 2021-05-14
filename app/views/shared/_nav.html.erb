@@ -1,31 +1,62 @@
-<ul class="nav justify-content-center mt-5 h3 font-weight-light border-bottom">
-    <% unless current_user %>
-        <li class="nav-item">
-            <%= link_to "Home", root_path, class: "nav-link text-white" %>
-        </li>    
-        <li class="nav-item">
-            <%= link_to "Pricing", pricing_path, class: "nav-link text-white" %>
-        </li>
-        <li class="nav-item">
-            <%= link_to "Resources", posts_path, class: "nav-link text-white" %>
-        </li>        
-        <li class="nav-item">
-            <%= link_to "Sign In", new_user_session_path, class: "nav-link text-white" %>
-        </li>
-    <% else %>
+
+
+<div class="bg-white">
+  <div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <%= link_to root_path, class: "d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none" do %>
+        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+        <span class="fs-3">My Site Archive</span>
+      <% end %>
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <% unless current_user %>
+          <li><%= link_to "Pricing", pricing_path, class: "nav-link px-2 link-dark" %></li>
+          <li><%= link_to "Features", features_path, class: "nav-link px-2 link-dark" %></li>
+          <li><%= link_to "FAQs", faqs_path, class: "nav-link px-2 link-dark" %></li>
+          <li><%= link_to "Resources", posts_path, class: "nav-link px-2 link-dark" %></li>
+        <% else %>
         <% if current_user.on_generic_trial? || current_user.subscribed? %>
-            <li class="nav-item">
-                <%= link_to "My Sites", websites_path, class: "nav-link text-white" %>
-            </li>    
+          <li><%= link_to "My Sites", websites_path, class: "nav-link px-2 link-dark" %></li>
         <% end %>
-        <li class="nav-item">
-            <%= link_to "My Account", edit_user_registration_path, class: "nav-link text-white" %>
-        </li>
-        <li class="nav-item">
-            <%= link_to "Billing", subscription_path, class: "nav-link text-white" %>
-        </li>        
-        <li class="nav-item">
-            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link text-white" %>
-        </li>    
-    <% end %>
+        <% end %>
+      </ul>
+      <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        <button type="button" class="btn btn-primary">Sign-up</button>
+      </div>
+    </header>
+  </div>
+</div>
+<ul class="nav justify-content-center mt-5 h3 font-weight-light border-bottom">
+  <% unless current_user %>
+  <li class="nav-item">
+    <%= link_to "Home", root_path, class: "nav-link text-white" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Pricing", pricing_path, class: "nav-link text-white" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Resources", posts_path, class: "nav-link text-white" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Sign In", new_user_session_path, class: "nav-link text-white" %>
+  </li>
+  <% else %>
+  <% if current_user.on_generic_trial? || current_user.subscribed? %>
+  <li class="nav-item">
+    <%= link_to "My Sites", websites_path, class: "nav-link text-white" %>
+  </li>
+  <% end %>
+  <li class="nav-item">
+    <%= link_to "My Account", edit_user_registration_path, class: "nav-link text-white" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Billing", subscription_path, class: "nav-link text-white" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link text-white" %>
+  </li>
+  <% end %>
 </ul>
+
