@@ -5,47 +5,18 @@ class CreateScreenshotJob < ApplicationJob
 
   def perform(webpage_id)
     return if @webpage.nil?
-    capture_and_create_screenshot_and_html_document
+    capture_and_create_screenshot_and_html_document(@webpage.url)
   end
 
   private
-  
-    def capture_screenshot
-      ScreenshotCapturer.new(@webpage.url).call
-    end
 
-    def capture_and_create_screenshot
-      result = capture_screenshot
-      if result.nil?
-        raise "Unable to capture screenshot." 
-      elsif result.success?
-        screenshot  = result.payload 
-        result      = create_screenshot(screenshot)
-        TmpFileRemover.new(screenshot).call if result.success?
-        result
-      else
-        raise "Unable to capture screenshot: #{result.error}" 
-      end
-    end
-    
-    def create_html_document(screenshot_id)
-      CreateHtmlDocumentJob.perform_later(screenshot_id)
-    end
-    
-    def create_screenshot(screenshot)
-      ScreenshotCreator.new(arguments.first, screenshot).call
-    end
-    
-    def capture_and_create_screenshot_and_html_document
-      result = capture_and_create_screenshot
-
-      if result.nil?
-        raise "Unable to capture and create screenshot. "
-      elsif result.success?
-        create_html_document(result.payload.id)
-      else
-        raise "Unable to capture and create screenshot: #{result.error}"
-      end
+    def capture_and_create_screenshot_and_html_document(url)
+      image   =  Browserless::Api::ScreenshotJob.perform_now(url)
+      markup  =  Browserless::Api::ContentJob.perform_now(url)
+      @screenshot = @webpage.screenshots.build
+      @screenshot.image.attach(io: image, filename: @webpage.generate_file_name)
+      @screenshot.create_html_document(source_code: markup) if @screenshot.save
+      @screenshot
     end
 
     def set_webpage

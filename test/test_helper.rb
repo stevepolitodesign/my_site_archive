@@ -9,6 +9,9 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.ignore_localhost = true
   config.allow_http_connections_when_no_cassette = true
+  config.filter_sensitive_data('<BROWSERLESS_PRIVATE_KEY>') do |filter|
+    Rails.application.credentials.dig(:browserless, :private_key)
+  end
 end
 
 

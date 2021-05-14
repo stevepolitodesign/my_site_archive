@@ -1,6 +1,8 @@
 require 'uri'
 
 class Webpage < ApplicationRecord
+	include FileNameable
+
 	belongs_to :website
   	has_many :screenshots, dependent: :destroy
 	has_one :latest_screenshot, -> { order(created_at: :desc) }, class_name: "Screenshot"
