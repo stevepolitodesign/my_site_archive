@@ -9,8 +9,10 @@ require("@rails/activestorage").start()
 require("channels")
 require("trix")
 require("@rails/actiontext")
-import { Tooltip, Toast, Popover } from 'bootstrap';
+
+import "./bootstrap";
 import "../stylesheets/application";
+
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
