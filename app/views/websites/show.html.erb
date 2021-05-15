@@ -5,6 +5,9 @@
     <%= render partial: "websites/url", locals: { url: @website.url }  %>
 <% end %>
 <% content_for :column_one do %>
+    <div class="row">
+        <%= render @webpages %>
+    </div>   
     <% if @website.latest_zone_file.present? %>
         <h5 class="text-secondary mb-4 border-bottom pb-3">Current DNS Records</h5>
         <div class="card border-0 shadow-sm mb-5">
@@ -33,10 +36,7 @@
             </div>
             <span class="ml-3">Retrieving DNS Records. Check back later.</span>
         </div>
-    <% end %>
-    <div class="card-deck justify-content-center">
-        <%= render @webpages %>
-    </div>    
+    <% end %> 
 <% end %>
 <% content_for :column_two do %>
     <% if policy(@website.webpages.build).new? %>
