@@ -2,7 +2,7 @@
     Edit Website
 <% end %>
 <%= link_to "Back", :back %>
-<%= image_tag @website.image %>
+<%= image_tag @website.image if @website.image.attached? %>
 <% content_for :column_two do %>
   <div class="card shadow-sm border-0">
         <div class="card-body">
