@@ -1,52 +1,58 @@
 <% content_for :page_title do %>
     <% @website.title %>
 <% end %>
-<% if @website.latest_zone_file.present? %>
-    <div class="card border-0 shadow-sm mb-5">
-        <div class="card-body">
-            <h5 class="card-title d-flex justify-content-center align-items-center pb-3 border-bottom">
-                Current DNS Records
-                <%= link_to @website.url, target: "_blank", class: "d-flex align-items-center ml-3 fw-light" do  %>
-                    <span class="mr-2"><%= @website.url %></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
-                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                    </svg>
-                <% end %>
-            </h5>
-            <div class="table-responsive">
-                <table class="table table-borderless">
-                    <thead>
-                        <tr>
-                            <th scope="col">Record Type</th>
-                            <th scope="col">Content</th>
-                            <th scope="col">Priority</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%= render partial: "dns_records/dns_record", collection: @website.latest_zone_file.dns_records.ordered.unique, as: "dns_record" %>
-                    </tbody>
-                </table>
+<% content_for :page_title_button do %>
+    <%= link_to @website.url, target: "_blank", class: "fs-6 fw-light d-flex align-items-center ml-3 text-secondary" do  %>
+        <span class="mr-2"><%= @website.url %></span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+        </svg>
+    <% end %>
+<% end %>
+<% content_for :column_one do %>
+    <% if @website.latest_zone_file.present? %>
+        <div class="card border-0 shadow-sm mb-5">
+            <div class="card-body">
+                <h5 class="card-title d-flex align-items-center pb-3 border-bottom">
+                    Current DNS Records
+                </h5>
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col">Record Type</th>
+                                <th scope="col">Content</th>
+                                <th scope="col">Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%= render partial: "dns_records/dns_record", collection: @website.latest_zone_file.dns_records.ordered.unique, as: "dns_record" %>
+                        </tbody>
+                    </table>
+                </div>
+                <%= link_to "View Previous Records", website_zone_files_path(@website), class: "btn btn-primary" %>
             </div>
-            <%= link_to "View Previous Records", website_zone_files_path(@website), class: "btn btn-primary" %>
+        </div>
+    <% else %>
+        <div class="d-flex justify-content-center align-items-center mb-4">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <span class="ml-3">Retrieving DNS Records. Check back later.</span>
+        </div>
+    <% end %>
+    <div class="card-deck justify-content-center">
+        <%= render @webpages %>
+    </div>    
+<% end %>
+<% content_for :column_two do %>
+    <% if policy(@website.webpages.build).new? %>
+    <div class="card shadow-sm border-0 mb-5">
+        <div class="card-body">
+            <h5 class="card-title pb-3 border-bottom text-center">Add a webpage to monitor</h5>
+            <%= render partial: "webpages/form" %>
         </div>
     </div>
-<% else %>
-    <div class="d-flex justify-content-center align-items-center mb-4">
-        <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <span class="ml-3">Retrieving DNS Records. Check back later.</span>
-    </div>
+    <% end %>
 <% end %>
-<% if policy(@website.webpages.build).new? %>
-<div class="card shadow-sm border-0 mb-5">
-    <div class="card-body">
-        <h5 class="card-title pb-3 border-bottom text-center">Add a webpage to monitor</h5>
-        <%= render partial: "webpages/form" %>
-    </div>
-</div>
-<% end %>
-<div class="card-deck justify-content-center">
-    <%= render @webpages %>
-</div>

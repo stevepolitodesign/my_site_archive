@@ -10,16 +10,13 @@
       </div>
     </section>
     <main class="py-5 bg-gray-100">
-      <div class="container">
-      <div class="row">
-        <div class="col-md-8">
-          <%= render partial: "shared/page_title" %>
-          <%= render partial: "shared/sub_head" %>
-        </div>
-        <div class="col-md-4">
+        <div class="container">
+          <div class="mb-3">
+            <%= render partial: "shared/page_title" %>
+            <%= render partial: "shared/sub_head" %>
+          </div>
           <%= yield %>
         </div>
-      </div>
     </main>
     <footer class="py-5">
       <div class="container">
