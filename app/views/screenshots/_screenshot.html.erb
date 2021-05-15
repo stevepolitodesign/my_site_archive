@@ -10,7 +10,7 @@
             </div>
         <% end %>        
         <div class="card-body">
-            <h5 class="card-title font-weight-normal text-truncate">Captured <%= screenshot.created_at.strftime("%m/%d/%y") %></h5>
+            <h5 class="card-title fw-normal text-truncate">Captured <%= screenshot.created_at.strftime("%m/%d/%y") %></h5>
             <p class="card-text">
                 <%= link_to screenshot.webpage.url, target: "_blank", class: "d-flex align-items-center" do  %>
                     <span class="mr-2"><%= screenshot.webpage.url %></span>

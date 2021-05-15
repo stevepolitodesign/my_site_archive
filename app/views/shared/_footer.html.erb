@@ -1,6 +1,6 @@
 <ul class="nav">
   <li class="nav-item">
-    <span class="nav-link font-weight-bolder text-white">About</span>
+    <span class="nav-link fw-bolder text-white">About</span>
     <ul class="nav flex-column">
       <li class="nav-item">
         <%= link_to "FAQs", faqs_path, class: "nav-link text-white"%>  
@@ -11,7 +11,7 @@
     </ul>
   </li>
   <li class="nav-item">
-    <span class="nav-link font-weight-bolder text-white">Legal</span>
+    <span class="nav-link fw-bolder text-white">Legal</span>
     <ul class="nav flex-column">
       <li class="nav-item">
         <%= link_to "Terms of Service", terms_path, class: "nav-link text-white"%>
@@ -22,7 +22,7 @@
     </ul>    
   </li>
   <li class="nav-item">
-    <span class="nav-link font-weight-bolder text-white">Resources</span>
+    <span class="nav-link fw-bolder text-white">Resources</span>
     <ul class="nav flex-column">
       <% policy_scope(Post.all.order(created_at: :desc)).each do |post| %>
         <% cache post do %>
