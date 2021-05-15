@@ -10,6 +10,8 @@
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'https://js.stripe.com/v3/' %>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700;900&display=swap" rel="stylesheet"> 
     <%= display_meta_tags site: 'My Site Archive' %>
     <%= render partial: "shared/canonical" if is_blog_post? %>
     <%= render partial: "shared/google_analytics" %>
