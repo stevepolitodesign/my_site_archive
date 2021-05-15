@@ -1,4 +1,6 @@
 class WebsitesController < ApplicationController
+    layout "two_column", only: [:new]
+
     before_action :set_website, only: [:show, :edit, :update, :destroy]
 
     def index

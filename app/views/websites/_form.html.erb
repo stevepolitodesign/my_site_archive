@@ -1,11 +1,11 @@
 <%= form_with model: @website, local: true do |f| %>
     <%= render partial: "shared/form_errors", locals: { object: f.object } %>
-    <div class="form-group">
-        <%= f.label :title %>
+    <div class="mb-3">
+        <%= f.label :title, class: "form-label" %>
         <%= f.text_field :title, required: true, class: "form-control" %>
     </div>
-    <div class="form-group">
-        <%= f.label :url, title: "The URL cannot be changed once created.", data: { bs_toggle: "tooltip", bs_placement: "right" } do %>
+    <div class="mb-3">
+        <%= f.label :url, class: "form-label", title: "The URL cannot be changed once created.", data: { bs_toggle: "tooltip", bs_placement: "right" } do %>
             URL
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle mb-1 ml-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
