@@ -2,7 +2,7 @@
     Previous DNS Records
 <% end %>
 <% content_for :page_title_button do %>
-    <%= render partial: "websites/url" %>
+    <%= render partial: "websites/url", locals: { url: @website.url }  %>
 <% end %>
 <% @zone_files.each do |zone_file| %>
     <div class="card border-0 shadow-sm mb-4">

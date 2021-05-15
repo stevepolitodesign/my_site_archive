@@ -1,6 +1,9 @@
 <% content_for :page_title do %>
     <% @webpage.title %>
 <% end %>
+<% content_for :page_title_button do %>
+    <%= render partial: "websites/url", locals: { url: @webpage.url }  %>
+<% end %>
 <% if @screenshots.present? %>
     <div class="card-deck justify-content-center">
         <%= render @screenshots %>

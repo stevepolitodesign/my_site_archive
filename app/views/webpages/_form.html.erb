@@ -1,12 +1,12 @@
 <% if @webpage.persisted? %>
     <%= form_with model: [@website, @webpage], url: website_webpage_path(@website, @webpage), local: true, id: dom_id(@webpage) do |f| %>
         <%= render partial: "shared/form_errors", locals: { object: f.object } %>
-            <div class="form-group">
-                <%= f.label :title %>
+            <div class="mb-3">
+                <%= f.label :title, class: "form-label" %>
                 <%= f.text_field :title, required: true, class: "form-control" %>
             </div>
-            <div class="form-group">
-                <%= f.label :url %>
+            <div class="mb-3">
+                <%= f.label :url, class: "form-label" %>
                 <%= f.url_field :url, required: true, value: @website.url, class: "form-control" %>
             </div>
             <%= f.submit class: "btn btn-primary" %>
@@ -14,12 +14,16 @@
         </div>
     <% end %>
 <% else %>
-    <%= form_with model: [@website, @webpage], local: true, class: "form-inline justify-content-center", id: dom_id(@webpage) do |f| %>
+    <%= form_with model: [@website, @webpage], local: true, id: dom_id(@webpage) do |f| %>
         <%= render partial: "shared/form_errors", locals: { object: f.object } %>
-        <%= f.label :title, class: "mr-2" %>
-        <%= f.text_field :title, required: true, class: "form-control mr-2" %>
-        <%= f.label :url, class: "mr-2" %>
-        <%= f.url_field :url, required: true, value: @website.url, class: "form-control mr-2" %>
+        <div class="mb-3">
+            <%= f.label :title, class: "form-label" %>
+            <%= f.text_field :title, required: true, class: "form-control" %>
+        </div>
+        <div class="mb-3">
+            <%= f.label :url, class: "form-label" %>
+            <%= f.url_field :url, required: true, value: @website.url, class: "form-control" %>
+        </div>
         <%= f.submit class: "btn btn-primary" %>
     <% end %>
 <% end %>

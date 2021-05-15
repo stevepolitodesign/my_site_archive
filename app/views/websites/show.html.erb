@@ -2,7 +2,7 @@
     <% @website.title %>
 <% end %>
 <% content_for :page_title_button do %>
-    <%= render "url" %>
+    <%= render partial: "websites/url", locals: { url: @website.url }  %>
 <% end %>
 <% content_for :column_one do %>
     <% if @website.latest_zone_file.present? %>
@@ -25,7 +25,7 @@
                         </tbody>
                     </table>
                 </div>
-                <%= link_to "View Previous Records", website_zone_files_path(@website), class: "btn btn-primary" %>
+                <%= link_to "View Previous Records", website_zone_files_path(@website), class: "text-secondary" %>
             </div>
         </div>
     <% else %>
@@ -44,7 +44,7 @@
     <% if policy(@website.webpages.build).new? %>
     <div class="card shadow-sm border-0 mb-5">
         <div class="card-body">
-            <h5 class="card-title pb-3 border-bottom text-center">Add a webpage to monitor</h5>
+            <h5 class="card-title pb-3 border-bottom">Add a webpage to monitor</h5>
             <%= render partial: "webpages/form" %>
         </div>
     </div>
