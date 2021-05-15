@@ -1,4 +1,5 @@
 <% if content_for?(:page_title) %>
+    <%= link_to "Back", :back, class: "text-secondary text-decoration-none" if request.referrer%>
     <div class="d-flex align-items-center">
         <h1 class="fw-bold"><%= yield :page_title %></h1>
         <% if content_for?(:page_title_button) %>
