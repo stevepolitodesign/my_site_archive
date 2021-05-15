@@ -6,7 +6,7 @@
 <% end %>
 <% content_for :column_one do %>
     <% if @website.latest_zone_file.present? %>
-        <h5 class="text-secondary mb-3 border-bottom pb-3">Current DNS Records</h5>
+        <h5 class="text-secondary mb-4 border-bottom pb-3">Current DNS Records</h5>
         <div class="card border-0 shadow-sm mb-5">
             <div class="card-body">
                 <div class="table-responsive">
@@ -40,7 +40,7 @@
 <% end %>
 <% content_for :column_two do %>
     <% if policy(@website.webpages.build).new? %>
-    <h5 class="text-secondary mb-3 border-bottom pb-3">Add a webpage to monitor</h5>
+    <h5 class="text-secondary mb-4 border-bottom pb-3">Add a webpage to monitor</h5>
     <div class="card shadow-sm border-0 mb-5">
         <div class="card-body">
             <%= render partial: "webpages/form" %>
