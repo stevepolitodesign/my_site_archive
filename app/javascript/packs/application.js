@@ -10,7 +10,7 @@ require("channels")
 require("trix")
 require("@rails/actiontext")
 
-import "./bootstrap";
+import 'bootstrap/js/dist/alert'
 import "../stylesheets/application";
 
 
