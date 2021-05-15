@@ -11,6 +11,15 @@ require("trix")
 require("@rails/actiontext")
 
 import 'bootstrap/js/dist/alert'
+import 'bootstrap/js/dist/popover'
+import Tooltip from 'bootstrap/js/dist/tooltip'
+document.addEventListener("turbolinks:load", function(){
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new Tooltip(tooltipTriggerEl)
+    })
+})
+
 import "../stylesheets/application";
 
 
