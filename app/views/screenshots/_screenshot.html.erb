@@ -1,25 +1,18 @@
 <div class="col-md-6 col-lg-4 mb-5">
+    <h5 class="text-secondary text-truncate mb-4 pb-3 border-bottom">Captured <%= screenshot.created_at.strftime("%m/%d/%y") %></h5>
     <div class="card shadow-sm border-0">
         <% if screenshot.image.attached? %>
             <%= image_tag screenshot.image.variant(resize_to_fill: [480, 480, { gravity: 'North' }]), class: "card-img-top" %>
         <% else %>
-            <div class="ratio ratio-1x1 bg-dark d-flex align-items-center justify-content-center">
-                <div class="spinner-border text-light" role="status">
-                    <span class="visually-hidden">Loading...</span>
+            <div class="ratio ratio-1x1 bg-dark rounded">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="spinner-border text-light" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
                 </div>
             </div>
         <% end %>        
         <div class="card-body">
-            <h5 class="card-title fw-normal text-truncate">Captured <%= screenshot.created_at.strftime("%m/%d/%y") %></h5>
-            <p class="card-text">
-                <%= link_to screenshot.webpage.url, target: "_blank", class: "d-flex align-items-center" do  %>
-                    <span class="mr-2"><%= screenshot.webpage.url %></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
-                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                    </svg>
-                <% end %>
-            </p>
             <%= link_to "View Larger", url_for(screenshot.image), class: "btn btn-sm btn-dark", target: "_blank" if screenshot.image.attached? %>
             <% if screenshot.html_document.present? %>
                 <button type="button" class="btn btn-sm btn-link-dark" data-toggle="modal" data-target="#<%= dom_id(screenshot) %>">View Source Code</button>
@@ -50,4 +43,11 @@
             </div>
         </div>
     <% end %>
+    <%= link_to screenshot.webpage.url, target: "_blank", class: "d-flex align-items-center text-secondary" do  %>
+        <span class="mr-2"><%= screenshot.webpage.url %></span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+        </svg>
+    <% end %>    
 </div>
