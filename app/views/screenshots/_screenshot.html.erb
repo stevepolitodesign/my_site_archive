@@ -20,28 +20,7 @@
         </div>
     </div>
     <% if screenshot.html_document.present? %>
-        <div class="modal fade" id="<%= dom_id(screenshot) %>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="<%= dom_id(screenshot) %>Label" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="<%= dom_id(screenshot) %>Label">Source Code</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body p-0">
-                        <pre class="bg-dark text-white mb-0">
-                            <code class="">
-                                <%= screenshot.html_document.source_code %>
-                            </code>
-                        </pre>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%= link_to "Source Code", website_html_document_path(@website, screenshot.html_document) %>
     <% end %>
     <%= link_to screenshot.webpage.url, target: "_blank", class: "d-flex align-items-center text-secondary" do  %>
         <span class="mr-2"><%= screenshot.webpage.url %></span>
