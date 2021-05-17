@@ -1,13 +1,5 @@
 <% content_for :page_title do %>
     My Site Archive
 <% end %>
-<% content_for :sub_head do %>
-    <h2 class="fw-light text-center pb-3 text-white">The Simplest Way To Archive Your Website</h2>
-    <div class="d-flex flex justify-content-center mb-5">
-        <%= link_to "Sign up today for a 30 day free trial. No credit card required.", new_user_registration_path, class: "btn btn-outline-light btn-lg" %>
-    </div>
-<% end %>
-<div class="mb-5">
-    <%= render "shared/demo" %>
-</div>
+<%= render "shared/hero" %>
 <%= render "shared/features" %>
