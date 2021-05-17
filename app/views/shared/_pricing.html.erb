@@ -2,26 +2,21 @@
     <% Plan.available.each do |plan| %>
         <div class="col-lg-6 mb-4">
             <h5 class="mb-4 pb-3 border-bottom text-secondary"><%= plan.formatted_name %></h5>
-            <div class="card border-0 shadow-sm">
+            <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body d-flex flex-column">
-                    <% if plan.interval == "yearly"%>
-                        <h5 class="card-title text-gray-700"><strong>Get 2 months free.</strong></h5>
-                    <% else %>
-                        <h5 class="card-title">&nbsp;</h5>
-                    <% end %>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item px-0 border-0 mb-0 pb-0 fs-6">Monitor up to 10 websites.</li>
-                        <li class="list-group-item px-0 border-0 mb-0 pb-0 fs-6">Monitor up to 10 webpages per website.</li>
-                        <li class="list-group-item px-0 border-0 mb-0 pb-0 fs-6">Weekly screenshot generation per webpage.</li>
-                        <li class="list-group-item px-0 border-0 mb-0 pb-0 fs-6">Weekly source code generation per webpage.</li>
-                        <li class="list-group-item px-0 border-0 mb-0 pb-0 fs-6">Weekly DNS record generation per website.</li>
+                        <li class="list-group-item px-0 border-0 mb-0 pb-0 fs-6">Monitor up to <mark>10 websites</mark>.</li>
+                        <li class="list-group-item px-0 border-0 mb-0 pb-0 fs-6">Monitor up to <mark>10 webpages</mark> per website.</li>
+                        <li class="list-group-item px-0 border-0 mb-0 pb-0 fs-6"><mark>Weekly</mark> screenshot generation per webpage.</li>
+                        <li class="list-group-item px-0 border-0 mb-0 pb-0 fs-6"><mark>Weekly</mark> source code generation per webpage.</li>
+                        <li class="list-group-item px-0 border-0 mb-0 pb-0 fs-6"><mark>Weekly</mark> DNS record generation per website.</li>
                     </ul>
                 </div>
             </div>
             <% if plan.interval == "yearly"%>
-                <%= link_to "Sign Up", new_user_registration_path, class: "mt-auto btn btn-lg btn-primary btn-block" %>
+                <%= link_to "Sign Up (Get 2 Months Free)", new_user_registration_path, class: "mt-auto btn d-block btn-primary btn-block" %>
             <% else %>
-                <%= link_to "Sign Up ", new_user_registration_path, class: "mt-auto btn btn-lg btn-primary btn-block" %>
+                <%= link_to "Sign Up", new_user_registration_path, class: "mt-auto btn d-block btn-outline-secondary btn-block" %>
             <% end %>
         </div>    
     <% end %>
