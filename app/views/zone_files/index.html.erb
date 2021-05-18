@@ -1,19 +1,15 @@
 <% content_for :page_title do %>
     Previous DNS Records
 <% end %>
+<% content_for :page_title_button do %>
+    <%= render partial: "websites/url", locals: { url: @website.url }  %>
+<% end %>
 <% @zone_files.each do |zone_file| %>
+    <h5 class="text-secondary mb-4 pb-3 border-bottom">
+        DNS Records on <%= zone_file.created_at.strftime("%m/%d/%y") %>
+    </h5>        
     <div class="card border-0 shadow-sm mb-4">
         <div class="card-body">
-            <h5 class="card-title d-flex justify-content-center align-items-center pb-3 border-bottom">
-                DNS Records on <%= zone_file.created_at.strftime("%m/%d/%y") %>
-                <%= link_to @website.url, target: "_blank", class: "d-flex align-items-center ml-3 font-weight-light" do  %>
-                    <span class="mr-2"><%= @website.url %></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
-                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                    </svg>
-                <% end %>  
-            </h5>        
             <div class="table-responsive">
                 <table class="table table-borderless">
                     <thead>
@@ -31,6 +27,6 @@
         </div>
     </div>
 <% end %>
-<div class="d-flex justify-content-center">
+<div class="d-flex">
     <%== pagy_bootstrap_nav(@pagy) %>
 </div>

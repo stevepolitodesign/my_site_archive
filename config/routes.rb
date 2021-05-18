@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resource :resume_subscription, only: [:update]
   resources :posts
   resources :websites do
+    resources :html_documents, only: [:show]
     resources :webpages, only: [:show, :edit, :create, :update, :destroy] do
       resources :screenshots, only: [:index, :show]
     end
