@@ -1,34 +1,33 @@
 <% content_for :page_title do "Log in" end %>
-  <% content_for :column_one do %>
-  TODO: Add a CTA
-  <% end %>
-  <% content_for :column_two do %>
-    <div class="card shadow-sm border-0">
-      <div class="card-body">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="mb-3">
-            <%= f.label :email, class: "form-label" %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-          </div>
+<% content_for :sub_head do %>
+  <h2 class="text-secondary fw-light fs-3">Welcome back!</h2>
+<% end %>
+<% content_for :column_two do %>
+  <div class="card shadow-sm border-0">
+    <div class="card-body">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="mb-3">
+          <%= f.label :email, class: "form-label" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        </div>
 
-          <div class="mb-3">
-            <%= f.label :password, class: "form-label" %>
-            <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-          </div>
+        <div class="mb-3">
+          <%= f.label :password, class: "form-label" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+        </div>
 
-          <% if devise_mapping.rememberable? %>
-            <div class="mb-3 form-check">
-              <%= f.check_box :remember_me, class: "form-check-input" %>
-              <%= f.label :remember_me, class: "form-label form-check-label" %>
-            </div>
-          <% end %>
-
-          <div class="mb-3">
-            <%= f.submit "Log in", class: "btn btn-primary" %>
+        <% if devise_mapping.rememberable? %>
+          <div class="mb-3 form-check">
+            <%= f.check_box :remember_me, class: "form-check-input" %>
+            <%= f.label :remember_me, class: "form-label form-check-label" %>
           </div>
         <% end %>
-          <%= render "devise/shared/links" %>
-      </div>
+
+        <div class="mb-3">
+          <%= f.submit "Log in", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+        <%= render "devise/shared/links" %>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
