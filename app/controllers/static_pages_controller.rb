@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
     include Schemable
-    layout "landing", only: [:home]
+    layout "landing", only: [:home, :features]
 
     before_action do |controller|
         set_schema_dot_org(

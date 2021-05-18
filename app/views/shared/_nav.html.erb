@@ -9,7 +9,6 @@
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <% unless current_user %>
           <li><%= link_to "Pricing", pricing_path, class: "nav-link px-2 link-secondary" %></li>
-          <li><%= link_to "Features", features_path, class: "nav-link px-2 link-secondary" %></li>
           <li><%= link_to "FAQs", faqs_path, class: "nav-link px-2 link-secondary" %></li>
           <li><%= link_to "Resources", posts_path, class: "nav-link px-2 link-secondary" %></li>
         <% else %>
