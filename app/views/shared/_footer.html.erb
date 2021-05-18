@@ -2,12 +2,14 @@
   <li class="nav-item">
     <span class="nav-link fw-bolder text-white">About</span>
     <ul class="nav flex-column">
+      <% unless current_user%>
+        <li class="nav-item">
+          <%= link_to "Pricing", pricing_path, class: "nav-link text-white"%>
+        </li>    
+      <% end %>
       <li class="nav-item">
         <%= link_to "FAQs", faqs_path, class: "nav-link text-white"%>  
       </li>
-      <li class="nav-item">
-        <%= link_to "Features", features_path, class: "nav-link text-white"%>
-      </li>    
     </ul>
   </li>
   <li class="nav-item">
