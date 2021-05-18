@@ -3,6 +3,8 @@ require 'test_helper'
 class CreateScreenshotsJobTest < ActiveJob::TestCase
   def setup
     Website.destroy_all
+    Webpage.destroy_all
+    Screenshot.destroy_all
     @subscribed_user          = users(:subscribed_user_with_websites)
     @subscribed_user_website  = @subscribed_user.websites.create(title: "title", url: "https://www.example.com")
     @subscribed_userwebpage   = @subscribed_user_website.webpages.create(title: "title", url: "https://www.example.com")
