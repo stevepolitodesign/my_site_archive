@@ -1,8 +1,11 @@
 <article class="mb-4">
-    <h2><%= link_to post.title, post, class: "text-dark" %></h2>
-    <%= image_tag post.featured_image.variant(resize_to_fill: [1200, 400, { gravity: 'North' }]), class: "mb-2 img-fluid" if post.featured_image.attached? %>
-    <p class="text-dark">Last updated on <%= post.updated_at.strftime("%B %e, %Y") %></p>
-    <hr/>
+    <div class="">
+        <h2 class=""><%= link_to post.title, post, class: "text-secondary text-decoration-none d-block" %></h2>
+        <p class="lh-1 text-muted mb-4 pb-3 border-bottom">Last updated on <%= post.updated_at.strftime("%B %e, %Y") %></p>
+    </div>
+    <%= link_to post do %>
+        <%= image_tag post.featured_image.variant(resize_to_fill: [1200, 400, { gravity: 'North' }]), class: "mb-4 img-fluid w-100 rounded shadow" %>
+    <% end if post.featured_image.attached? %>
     <p><%= truncate(post.content.to_plain_text, length: 160) %></p>
     <div class="flex">
         <%= link_to "Read More", post %>
