@@ -11,6 +11,7 @@ class Webpage < ApplicationRecord
   	validates :url, url: true
 	validate :url_should_match_website_url
 	validate :user_webpage_limit, on: :create
+	validates :width, numericality: { only_integer: true, greater_than_or_equal_to: 320, less_than_or_equal_to: 3000, allow_nil: true }
 
 	scope :with_active_subscribers, -> {
 		joins(website: [:user, user: [:subscriptions]])

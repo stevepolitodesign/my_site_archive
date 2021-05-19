@@ -55,6 +55,19 @@ class WebpageTest < ActiveSupport::TestCase
     end
     @webpage = @website.webpages.create(title: "title", url: "https://www.example.com/#{webpage_limit+1}")
     assert_not @webpage.valid?
-  end  
+  end
+  
+  test "width should be between 320 and 3000" do
+    invalid_widths = [-1, 319, 3001]
+    invalid_widths.each do |invalid_width|
+      @webpage.width = invalid_width
+      assert_not @webpage.valid?
+    end
+  end
+
+  test "should have default width of 1024" do
+    @webpage.save
+    assert_equal 1024, @webpage.reload.width 
+  end
   
 end
