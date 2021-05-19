@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_08_002828) do
+ActiveRecord::Schema.define(version: 2021_05_19_112938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,15 @@ ActiveRecord::Schema.define(version: 2021_01_08_002828) do
     t.index ["webpage_id"], name: "index_screenshots_on_webpage_id"
   end
 
+  create_table "stats", force: :cascade do |t|
+    t.jsonb "payload", default: {}
+    t.jsonb "score", default: {}
+    t.bigint "screenshot_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["screenshot_id"], name: "index_stats_on_screenshot_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -175,6 +184,7 @@ ActiveRecord::Schema.define(version: 2021_01_08_002828) do
     t.string "url", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "width", default: 1024
     t.index ["website_id"], name: "index_webpages_on_website_id"
   end
 
@@ -198,6 +208,7 @@ ActiveRecord::Schema.define(version: 2021_01_08_002828) do
   add_foreign_key "dns_records", "zone_files"
   add_foreign_key "html_documents", "screenshots"
   add_foreign_key "screenshots", "webpages"
+  add_foreign_key "stats", "screenshots"
   add_foreign_key "webpages", "websites"
   add_foreign_key "websites", "users"
   add_foreign_key "zone_files", "websites"

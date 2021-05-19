@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  payload: 
+  score: 
+  screenshot: one
+
+two:
+  payload: 
+  score: 
+  screenshot: two
