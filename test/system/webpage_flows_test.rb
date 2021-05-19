@@ -13,11 +13,11 @@ class WebpageFlowsTest < ApplicationSystemTestCase
     VCR.eject_cassette
   end
 
-  test "creating a webpage and associated screenshot and html_document" do
+  test "creating a webpage and associated screenshot, html_document, stat" do
     sign_in @user
 
     visit website_path(@website)
-    assert_difference ->{ Screenshot.count } => 1, ->{ HtmlDocument.count } => 1 do
+    assert_difference ->{ Screenshot.count } => 1, ->{ HtmlDocument.count } => 1, ->{ Stat.count } => 1 do
       fill_in "Title", with: "Title"
       click_button "Create Webpage"
       sleep 5
