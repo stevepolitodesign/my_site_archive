@@ -48,6 +48,6 @@ class WebpagesController < ApplicationController
         end
 
         def webpage_params
-            params.require(:webpage).permit(:title, :url)
+            params.require(:webpage).permit(:title, :url, :width)
         end
 end
