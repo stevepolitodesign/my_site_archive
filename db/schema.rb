@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_102525) do
     t.bigint "webpage_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "width", default: 10204
+    t.integer "width", default: 1024
     t.index ["webpage_id"], name: "index_screenshots_on_webpage_id"
   end
 
