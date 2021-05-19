@@ -9,6 +9,10 @@
                 <%= f.label :url, class: "form-label" %>
                 <%= f.url_field :url, required: true, value: @website.url, class: "form-control" %>
             </div>
+            <div class="mb-3">
+                <%= f.label :width, class: "form-label" %>
+                <%= f.number_field :width, min: 320, max: 3000, class: "form-control" %>
+            </div>            
             <%= f.submit class: "btn btn-primary" %>
             <%= link_to "Delete Webpage", website_webpage_path(@website, @webpage), method: :delete, class: "btn btn-link text-danger", data: { confirm: "This will delete all associated screenshots and source code." } %>
         </div>
@@ -23,6 +27,10 @@
         <div class="mb-3">
             <%= f.label :url, class: "form-label" %>
             <%= f.url_field :url, required: true, value: @website.url, class: "form-control" %>
+        </div>
+        <div class="mb-3">
+            <%= f.label :width, class: "form-label" %>
+            <%= f.number_field :width, value: Webpage.new.width, min: 320, max: 3000, class: "form-control" %>
         </div>
         <%= f.submit class: "btn btn-primary" %>
     <% end %>
