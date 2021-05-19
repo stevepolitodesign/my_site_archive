@@ -5,7 +5,9 @@ require 'uri'
 class Browserless::Api::ScreenshotJob < ApplicationJob
   queue_as :default
 
-  def perform(url)
+  def perform(url, options={})
+    width = options[:width] || Webpage.new.width
+    byebug
     uri = URI("https://chrome.browserless.io/screenshot?token=#{Rails.application.credentials.dig(:browserless, :private_key) }")
     res = Net::HTTP.post(
       uri,
@@ -14,6 +16,7 @@ class Browserless::Api::ScreenshotJob < ApplicationJob
         "options" => {
           "fullPage" => "true",
           "type" => "png",
+          "width" => "#{width}"
         }
       }.to_json,
       {
