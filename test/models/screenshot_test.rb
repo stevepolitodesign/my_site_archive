@@ -17,4 +17,17 @@ class ScreenshotTest < ActiveSupport::TestCase
       @screenshot.destroy
     end
   end
+
+  test "width should be between 320 and 3000" do
+    invalid_widths = [-1, 319, 3001]
+    invalid_widths.each do |invalid_width|
+      @screenshot.width = invalid_width
+      assert_not @screenshot.valid?
+    end
+  end
+
+  test "should have default width of 1024" do
+    @screenshot.save
+    assert_equal 1024, @screenshot.reload.width 
+  end
 end
