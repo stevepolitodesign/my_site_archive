@@ -13,7 +13,7 @@ class WebpageFlowsTest < ApplicationSystemTestCase
     VCR.eject_cassette
   end
 
-  test "creating a webpage and associated screenshot html_document stat" do
+  test "creating a webpage and associated screenshot html_documen stat" do
     sign_in @user
 
     visit website_path(@website)
