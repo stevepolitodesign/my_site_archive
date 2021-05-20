@@ -18,7 +18,7 @@ class CreateScreenshotsJobTest < ActiveJob::TestCase
     VCR.eject_cassette
   end
 
-  test "should create screenshots and html_documents" do
+  test "should create screenshots html_documents and stats" do
     perform_enqueued_jobs do
       CreateScreenshotsJob.perform_now
       assert_equal 2, Screenshot.count

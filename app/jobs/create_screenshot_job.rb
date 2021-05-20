@@ -19,8 +19,8 @@ class CreateScreenshotJob < ApplicationJob
       if @screenshot.save
         @screenshot.create_html_document(source_code: markup)
         @stat = @screenshot.build_stat(payload: stat)
-        Stat::SCORE_METRICS.each do |score_metric|
-          @stat.score_metric= stat["categories"][score_metric.dasherize]["score"]
+        Stat::SCORES.each do |score|
+          @stat.send "#{score}=", stat["categories"]["#{score.to_s.dasherize}"]["score"]
         end
         @stat.save
       end
