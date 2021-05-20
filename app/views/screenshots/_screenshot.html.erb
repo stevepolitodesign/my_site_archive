@@ -35,9 +35,11 @@
         </svg>
     <% end %>
     <% if screenshot.stat.present? %>
-        <ul>
+        <ul class="list-unstyled mt-3 text-secondary">
             <% Stat::SCORES.each do |score| %>
-            <li><span class="<%= performance_badge( (screenshot.stat.send("#{score}")*100).round(0) ) %>"><%= (screenshot.stat.send("#{score}")*100).round(0) %></span><%= score %></li>
+            <li class="d-flex align-items-center mb-2">
+                <div style="width: 38px; height:38px;" class="<%= performance_badge( (screenshot.stat.send("#{score}")*100).round(0) ) %>"><span class="text-gray-700"><%= (screenshot.stat.send("#{score}")*100).round(0) %></span></div><span class="ms-3"><%= score.to_s.humanize %></span>
+            </li>
             <% end %>
         </ul> 
     <% end %>
