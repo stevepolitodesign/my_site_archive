@@ -3,11 +3,9 @@ class ArchiveJob < ApplicationJob
   queue_as :default
 
   def perform(website, original_url)
-    ActiveRecord::Base.transaction do
-      website.capture_new_zone_file
-      webpage = website.webpages.create(url: original_url, title: original_url)
-      webpage.capture_new_screenshot
-      website
-    end
+    website.capture_new_zone_file
+    webpage = website.webpages.create(url: original_url, title: original_url)
+    webpage.capture_new_screenshot
+    website
   end
 end

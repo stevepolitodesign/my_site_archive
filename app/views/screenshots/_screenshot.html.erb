@@ -28,13 +28,15 @@
         </div>
     <% end %>
     <% if screenshot.stat.present? %>
-        <ul class="list-unstyled text-secondary d-flex justify-content-around">
-            <% Stat::SCORES.each do |score| %>
+      <ul class="list-unstyled text-secondary d-flex justify-content-around">
+        <% Stat::SCORES.each do |score| %>
+          <% unless screenshot.stat.send("#{score}").nil? %>
             <li class="d-flex align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="<%= score.to_s.humanize %>">
                 <div style="width: 38px; height:38px;" class="<%= performance_badge( (screenshot.stat.send("#{score}")*100).round(0) ) %>"><span><%= (screenshot.stat.send("#{score}")*100).round(0) %></span></div><span class="visually-hidden"><%= score.to_s.humanize %></span>
             </li>
-            <% end %>
-        </ul> 
+          <% end %>
+        <% end %>
+      </ul> 
     <% end %>
     <%= link_to screenshot.webpage.url, target: "_blank", class: "d-flex align-items-center text-secondary" do  %>
         <span class="mr-2"><%= screenshot.webpage.url %></span>
