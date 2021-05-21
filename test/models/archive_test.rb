@@ -4,23 +4,23 @@ class ArchiveTest < ActiveSupport::TestCase
   def setup
   end
 
-  test "should be valid"
+  test "should be valid" do
     flunk
   end
 
-  test "should have a user"
+  test "should have a user" do
     flunk
   end
 
-  test "should have a valid url"
+  test "should have a valid url" do
     flunk
   end
 
-  test "user cannot have more than 5 archives" 
+  test "user cannot have more than 5 archives" do
     flunk
   end
 
-  test "should destroy assoociated website"
+  test "should destroy assoociated website" do
     flunk
   end
 

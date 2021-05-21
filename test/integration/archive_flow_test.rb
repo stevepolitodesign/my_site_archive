@@ -5,7 +5,7 @@ class ArchiveFlowTest < ActionDispatch::IntegrationTest
     get "/free-website-archive-tool"
     assert_response :success
     assert_select "form"
-    assert_difference(["Archive.count","Website.count", "Webpage.count", "Screenshot.count", "ZoneFile.count"], 1) do
+    assert_difference(["Archive.count","Website.count", "Webpage.count", "Screenshot.count", "ZoneFile.count", "HtmlDocument", "Stat"], 1) do
       post archives_path, params: {
         archive: {
           url: "http://example.com/foo.html"
