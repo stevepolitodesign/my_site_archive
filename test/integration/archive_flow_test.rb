@@ -30,4 +30,8 @@ class ArchiveFlowTest < ActionDispatch::IntegrationTest
     # TODO: Create some fixture data for this. 
     flunk
   end
+
+  test "redirect user to registration form when they hit their limit" do
+    flunk
+  end
 end
