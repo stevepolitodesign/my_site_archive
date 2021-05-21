@@ -8,6 +8,8 @@ class Archive < ApplicationRecord
   validates :user, :url, presence: true
   validates :url, url: true
 
+  scope :from_guest_account, -> { joins(:user).where( { user: User.guest.not_confirmed } ) }
+
   def generate_report(website, original_url)
     ArchiveJob.perform_later(website, original_url)
   end
