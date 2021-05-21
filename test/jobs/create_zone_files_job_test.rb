@@ -3,6 +3,7 @@ require 'test_helper'
 class CreateZoneFilesJobTest < ActiveJob::TestCase
   def setup
     Website.destroy_all
+    ZoneFile.destroy_all
     @subscribed_user            = users(:subscribed_user_with_websites)
     @subscribed_user_website    = @subscribed_user.websites.create(title: "title", url: "https://www.example.com")
     @free_trial_user            = users(:sample_user_on_generic_trial)

@@ -17,4 +17,12 @@ class ScreenshotTest < ActiveSupport::TestCase
       @screenshot.destroy
     end
   end
+
+  test "should destroy associated stats" do
+    @screenshot.save
+    @screenshot.create_stat
+    assert_difference("Stat.count", -1) do
+      @screenshot.destroy
+    end
+  end  
 end

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <%= render partial: "shared/head" %>
+  <body class="bg-gray-600">
+    <%= render "shared/flash" %>
+    <%= render partial: "shared/nav" %>
+    <section class="bg-gray-200 overflow-auto">
+      <div class="container">
+        <%= render partial: "shared/free_trial_expiration" if current_user && (current_user.on_generic_trial? && !current_user.subscribed?) %>
+      </div>
+    </section>
+    <main class="py-5 bg-gray-100">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </main>
+    <footer class="py-5">
+      <div class="container">
+        <%= render partial: "shared/footer" %>
+      </div>
+    </footer>
+  </body>
+</html>

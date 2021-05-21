@@ -1,10 +1,10 @@
 class WebpagesController < ApplicationController
     before_action :set_webpage, only: [:show, :edit, :update, :destroy]
-    before_action :set_website, only: [:create, :edit, :update]
+    before_action :set_website, only: [:show, :create, :edit, :update]
 
     def show
         authorize @webpage
-        @pagy, @screenshots = pagy(@webpage.screenshots.order(created_at: :desc).with_attached_image.includes([:html_document]))
+        @pagy, @screenshots = pagy(@webpage.screenshots.order(created_at: :desc).with_attached_image.includes([:html_document, :stat]))
     end
 
     def edit

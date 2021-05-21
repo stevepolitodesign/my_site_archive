@@ -1,11 +1,11 @@
 <%= form_with url: credit_card_path, local: true, method: :put, id: "payment-form" do |f| %>
-    <div class="form-group">
-        <%= f.label "Credit Card" %>
+    <div class="mb-3">
+        <%= f.label "Credit Card", class: "form-label" %>
         <div id="card-element" class="MyCardElement form-control"></div>
         <div id="card-errors" role="alert"></div>
     </div>
-    <div class="form-group">
-        <%= f.label :name_on_card %>
+    <div class="mb-3">
+        <%= f.label :name_on_card, class: "form-label" %>
         <%= f.text_field :name_on_card, class: "form-control" %>
     </div>
     <%= f.submit "Update My Card", class: "btn btn-primary" %>

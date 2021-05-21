@@ -1,0 +1,10 @@
+<% 10.times do |x| %>
+charge_<%= x %>:
+  owner: sample_user (User)
+  processor: stripe
+  processor_id: 123
+  amount: 49000
+  card_type: Visa
+  card_last4: 4242
+  created_at: <%= x.months.ago %>
+<% end %>

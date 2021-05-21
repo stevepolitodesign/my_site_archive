@@ -1,9 +1,13 @@
 class Website < ApplicationRecord
     include Domainable
+    include FileNameable
+    
     belongs_to :archive, optional: true
     belongs_to :user
+
     has_many :webpages, dependent: :destroy
     has_many :zone_files, dependent: :destroy
+    
     has_one :latest_zone_file, -> { order(created_at: :desc) }, class_name: "ZoneFile"
     has_one :first_webpage, -> { order(created_at: :asc) }, class_name: "Webpage"
     has_one_attached :image

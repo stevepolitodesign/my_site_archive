@@ -1,10 +1,11 @@
 <% content_for :page_title do %>
     Edit Website
 <% end %>
-<div class="row row-cols-lg-3 justify-content-center">
+<%= image_tag @website.image, class: "img-fluid rounded shadow-sm border"  if @website.image.attached?%>
+<% content_for :column_two do %>
   <div class="card shadow-sm border-0">
         <div class="card-body">
             <%= render "form" %>
         </div>
     </div>
-</div>
+<% end %>

@@ -1,11 +1,13 @@
 <% content_for :page_title do %>
     <% @webpage.title %>
 <% end %>
-<div class="row row-cols-lg-3 justify-content-center mb-4">
-    <div class="card shadow-sm border-0">
+<% if @webpage.latest_screenshot.present? && @webpage.latest_screenshot.image.attached? %>
+    <%= image_tag @webpage.latest_screenshot.image, class: "img-fluid rounded shadow-sm border" %>
+<% end %>
+<% content_for :column_two do %>
+  <div class="card shadow-sm border-0">
         <div class="card-body">
-            <h5 class="card-title">Edit Webpage</h5>
             <%= render "form" %>
         </div>
     </div>
-</div>
+<% end %>

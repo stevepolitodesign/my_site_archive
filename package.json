@@ -2,14 +2,13 @@
   "name": "my_site_archive",
   "private": true,
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
     "@rails/actioncable": "^6.0.0",
     "@rails/actiontext": "^6.0.3-4",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
-    "bootstrap": "^4.5.3",
-    "jquery": "^3.5.1",
-    "popper.js": "^1.16.1",
+    "bootstrap": "^5.0.1",
     "trix": "^1.2.0",
     "turbolinks": "^5.2.0"
   },

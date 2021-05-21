@@ -1,0 +1,16 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% 1.upto(9) do |i| %>
+<% 1.upto(9) do |j| %>
+<% 1.upto(25) do |x| %>
+sample_user_website_<%= i %>_webpage_<%= j %>_html_document_<%= x %>:
+  screenshot: sample_user_website_<%= i %>_webpage_<%= j %>_screenshot_<%= x %>
+  score:
+    performance: <%= rand(0.0...0.49) %>
+    accessibility: <%= rand(0.5...0.89) %>
+    best_practices: <%= rand(0.9...1.0) %>
+    seo: <%= rand(0.0...1.0) %>
+    pwa: <%= rand(0.0...1.0) %>
+<% end %>
+<% end %>
+<% end %>  

@@ -1,48 +1,48 @@
 <% content_for :page_title do %>
     Billing
 <% end %>
-<div class="row">
-    <div class="col-md-4 mb-5 mb-md-0">
-        <div class="card shadow-sm border-0 mb-4">
-            <div class="card-body">
-                <p class="card-title"><strong>Current Plan:</strong> <%= @current_plan.formatted_name %></p>
-                <% unless current_user.subscription.ends_at.present? %>
-                    <%= link_to "Pause My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-block btn-sm btn-danger" %>
-                    <%= link_to "Change My Subscription", edit_subscription_path, class: "btn btn-block btn-sm btn-primary" %>
-                <% else %>
-                    <p>Your subscription is set to end on <%= current_user.subscription.ends_at.strftime("%m/%d/%y") %></p>
-                    <%= link_to "Resume My Subscription", resume_subscription_path, method: :put, class: "btn btn-success" %>    
-                <% end %>
-            </div>
-        </div>
+<% content_for :column_one do %>
+    <% if @charges.present? %>
+        <h5 class="mb-4 pb-3 border-bottom text-secondary">Charges</h5>
         <div class="card shadow-sm border-0">
-            <div class="card-body pb-3 border-bottom">
-                <p class="card-title"><strong>Card On File:</strong> <%= current_user.card_on_file %></p>
-                <%= render "credit_cards/form" %>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-8">
-        <% if @charges.present? %>
-            <div class="card shadow-sm border-0">
-                <div class="card-body">
-                    <h5 class="card-title pb-3 border-bottom text-center">Charges</h5>
-                    <div class="table-responsive">
-                        <table class="table table-borderless">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Ammount</th>
-                                    <th scope="col">Card</th>
-                                    <th scope="col">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%= render partial: "charges/charge", collection: @charges %>
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ammount</th>
+                                <th scope="col">Card</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%= render partial: "charges/charge", collection: @charges %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        <% end %>
+        </div>
+    <% end %>
+<% end %>
+<% content_for :column_two do %>
+    <h5 class="text-secondary text-truncate mb-4 pb-3 border-bottom">Current Plan</h5>
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <p class="card-title mb-3"><strong><%= @current_plan.formatted_name %></strong></p>
+            <% unless current_user.subscription.ends_at.present? %>
+                <%= link_to "Pause My Subscription", subscription_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-block btn-sm btn-outline-danger" %>
+                <%= link_to "Change My Subscription", edit_subscription_path, class: "btn btn-block btn-sm btn-outline-primary" %>
+            <% else %>
+                <p>Your subscription is set to end on <%= current_user.subscription.ends_at.strftime("%m/%d/%y") %></p>
+                <%= link_to "Resume My Subscription", resume_subscription_path, method: :put, class: "btn btn-success" %>    
+            <% end %>
+        </div>
     </div>
-</div>
+    <h5 class="text-secondary text-truncate mb-4 pb-3 border-bottom">Card On File:</h5>
+    <div class="card shadow-sm border-0">
+        <div class="card-body pb-3 border-bottom">
+            <p class="card-title mb-3"><strong><%= current_user.card_on_file %></strong></p>
+            <%= render "credit_cards/form" %>
+        </div>
+    </div>
+<% end %>

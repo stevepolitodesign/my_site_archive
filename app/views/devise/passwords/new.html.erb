@@ -1,18 +1,18 @@
 <% content_for :page_title do %>
   Forgot your password?
 <% end %>
-<div class="row row-cols-lg-3 justify-content-center">
+<% content_for :column_two do %>
   <div class="card shadow-sm border-0">
     <div class="card-body">
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div class="form-group">
-          <%= f.label :email %>
+        <div class="mb-3">
+          <%= f.label :email, class: "form-label" %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
         </div>
 
-        <div class="form-group">
+        <div class="mb-3">
           <%= f.submit "Send me reset password instructions", class: "btn btn-primary" %>
         </div>
       <% end %>
@@ -20,4 +20,4 @@
       <%= render "devise/shared/links" %>
     </div>
   </div>
-</div>
+<% end %>

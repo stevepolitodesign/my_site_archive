@@ -13,9 +13,13 @@ rails development_setup:perform
 `rails credentials:edit --environment=test`
 
 ```
+browserless:
+  private_key: 123
+
 recaptcha:
   site_key: abc123
   secret_key: abc123
+>>>>>>> main
 
 stripe:
   private_key: sk_test_123
@@ -26,6 +30,9 @@ stripe:
 `rails credentials:edit --environment=development`
 
 ```
+browserless:
+  private_key: 123
+
 recaptcha:
   site_key: abc123
   secret_key: abc123
@@ -39,6 +46,9 @@ stripe:
 `rails credentials:edit`
 
 ```
+browserless:
+  private_key: 123
+
 digitalocean:
   access_key_id: 123abc
   secret_access_key: 123abc
