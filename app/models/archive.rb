@@ -1,6 +1,8 @@
 class Archive < ApplicationRecord
   include Domainable
 
+  GUEST_USER_LIMIT = "5".freeze
+
   belongs_to :user
   has_one :website, dependent: :destroy
 
