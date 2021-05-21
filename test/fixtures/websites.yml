@@ -23,3 +23,9 @@ sample_user_with_pending_data_website_<%= i %>:
   url: http://example.com/
   user: sample_user_with_pending_data
 <% end %>
+
+archive:
+  title: Archive
+  url: http://example.com/
+  user: guest_user
+  archive: one

@@ -17,3 +17,7 @@ sample_user_website_<%= i %>_webpage_<%= j %>_html_document_<%= x %>:
 <% end %>
 <% end %>
 <% end %>
+
+archive:
+  screenshot: archive
+  source_code: <p>some html</p>

@@ -1,22 +1,11 @@
 <% content_for :page_title do %>
   <% @title %>
 <% end %>
-<% if @screenshot.present? %>
-  <div class="card-deck justify-content-center">
-    <%= render partial: "screenshots/screenshot", locals: { screenshot: @screenshot } %>
-  </div>
-<% else %>
-  <div class="d-flex justify-content-center align-items-center mb-4">
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-    <span class="ml-3">Generating screenshot. Check back later.</span>
-  </div>
-<% end %>
-<% if @zone_file.present? %>
+<% content_for :column_one do %>
+  <% if @zone_file.present? %>
+    <h5 class="text-secondary mb-4 border-bottom pb-3">Current DNS Records</h5>
   <div class="card border-0 shadow-sm mb-5">
     <div class="card-body">
-        <h5 class="card-title d-flex justify-content-center align-items-center pb-3 border-bottom">Current DNS Records</h5>
         <div class="table-responsive">
           <table class="table table-borderless">
             <thead>
@@ -36,8 +25,21 @@
 <% else %>
   <div class="d-flex justify-content-center align-items-center mb-4">
       <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
+        <span class="visually-hidden">Loading...</span>
       </div>
       <span class="ml-3">Retrieving DNS Records. Check back later.</span>
   </div>
 <% end %>
+<% end %>
+<% content_for :column_two do %>
+  <% if @screenshot.present? %>
+    <%= render partial: "screenshots/screenshot", locals: { screenshot: @screenshot } %>
+  <% else %>
+    <div class="d-flex justify-content-center align-items-center mb-4">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <span class="ml-3">Generating screenshot. Check back later.</span>
+    </div>
+  <% end %>
+<% end %> 

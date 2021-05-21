@@ -6,7 +6,7 @@
 <% end %>
 <% if @screenshots.present? %>
     <div class="row">
-        <%= render @screenshots %>
+        <%= render partial: "screenshots/screenshot",  collection: @screenshots, layout: "screenshots/layouts/column" %>
     </div>
     <div class="d-flex">
         <%== pagy_bootstrap_nav(@pagy) %>

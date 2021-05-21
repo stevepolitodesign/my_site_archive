@@ -23,3 +23,11 @@ sample_user_website_<%= i %>_zone_file_<%= j %>_dns_record_<%= x %>:
 <% end %>
 <% end %>
 <% end %>
+
+<% 1.upto(10) do |i| %>
+archive_<%= i %>:
+  zone_file: archive
+  content: <%= Faker::Internet.ip_v4_address %>
+  priority: <%= rand(1..10) %>
+  record_type: <%= DnsRecord.record_types.keys.sample %>
+<% end %>
