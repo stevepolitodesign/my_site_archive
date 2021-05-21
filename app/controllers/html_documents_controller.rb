@@ -5,6 +5,7 @@ class HtmlDocumentsController < ApplicationController
   before_action :set_html_document
 
   def show
+    # TODO: Allow access for archives
     authorize @website
     render plain: @html_document.source_code.html_safe
   end

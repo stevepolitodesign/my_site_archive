@@ -1,6 +1,10 @@
 class WebsitePolicy < ApplicationPolicy
   def show?
-    (user_on_generic_trial? || user_subscribed?) && is_record_owner?
+    if record.archive.present?
+      return true
+    else
+      return (user_on_generic_trial? || user_subscribed?) && is_record_owner?
+    end
   end
   
   def new?
