@@ -1,7 +1,7 @@
 class PurgeGuestAccountsJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
-    # Do something later
+  def perform
+    User.guest.not_confirmed.destroy_all
   end
 end
