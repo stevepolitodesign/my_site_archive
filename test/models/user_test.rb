@@ -34,4 +34,10 @@ class UserTest < ActiveSupport::TestCase
       @user.destroy
     end
   end
+
+  test "should destroy associated archives" do
+    assert_difference("Archive.count", -1) do
+      users(:guest_user).destroy
+    end
+  end  
 end

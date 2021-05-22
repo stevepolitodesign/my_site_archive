@@ -12,3 +12,6 @@ sample_user_website_<%= i %>_zone_file_<%= j %>:
   website: sample_user_website_<%= i %>
 <% end %>
 <% end %>
+
+archive:
+  website: archive

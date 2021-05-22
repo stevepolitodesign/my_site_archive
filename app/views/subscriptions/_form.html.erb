@@ -1,19 +1,17 @@
 <%= form_with url: subscription_path, local: true, id: "payment-form" do |f| %>
-    <div class="form-group">
-        <%= f.label :plan %>
+    <div class="mb-3">
+        <%= f.label :plan, class: "form-label" %>
         <%= f.collection_select :plan, Plan.available, :processor_id, :formatted_name, {}, class: "form-control" unless @private_plan.present? %>
         <%= select_tag :plan, options_for_select([[@private_plan.formatted_name, @private_plan.processor_id]], @private_plan.processor_id), class: "form-control" if @private_plan.present? %>
     </div>
-    <div class="form-group">
-        <%= f.label "Credit Card" %>
+    <div class="mb-3">
+        <%= f.label "Credit Card", class: "form-label" %>
         <div id="card-element" class="MyCardElement form-control"></div>
         <div id="card-errors" role="alert"></div>
     </div>
-    <div class="form-group">
-        <%= f.label :name_on_card %>
+    <div class="mb-3">
+        <%= f.label :name_on_card, class: "form-label" %>
         <%= f.text_field :name_on_card, class: "form-control" %>
     </div>
-    <div class="form-group">
-        <%= f.submit "Sign Up", class: "btn btn-primary" %>
-    </div>
+    <%= f.submit "Sign Up", class: "btn btn-primary" %>
 <% end %>

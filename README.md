@@ -16,6 +16,11 @@ rails development_setup:perform
 browserless:
   private_key: 123
 
+recaptcha:
+  site_key: abc123
+  secret_key: abc123
+>>>>>>> main
+
 stripe:
   private_key: sk_test_123
   public_key: pk_test_123
@@ -27,6 +32,10 @@ stripe:
 ```
 browserless:
   private_key: 123
+
+recaptcha:
+  site_key: abc123
+  secret_key: abc123
 
 stripe:
   private_key: sk_test_123
@@ -45,6 +54,10 @@ digitalocean:
   secret_access_key: 123abc
   region: nyc3
   bucket: 123abc
+
+recaptcha:
+  site_key: abc123
+  secret_key: abc123
 
 sendgrid:
   username: apikey

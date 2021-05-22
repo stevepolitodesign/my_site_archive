@@ -1,17 +1,20 @@
-require 'uri'
-
 class Website < ApplicationRecord
+    include Domainable
     include FileNameable
-
+    
+    belongs_to :archive, optional: true
     belongs_to :user
+
     has_many :webpages, dependent: :destroy
     has_many :zone_files, dependent: :destroy
+    
     has_one :latest_zone_file, -> { order(created_at: :desc) }, class_name: "ZoneFile"
+    has_one :first_webpage, -> { order(created_at: :asc) }, class_name: "Webpage"
     has_one_attached :image
 
     validates :title, :url, presence: true
     validates :url, url: true
-    validate :associated_user_should_have_an_active_subscription_or_free_trial
+    validate :associated_user_should_have_an_active_subscription_or_free_trial, on: :create
     validate :user_website_limit, on: :create
     
     scope :with_active_subscribers, -> {
@@ -65,10 +68,6 @@ class Website < ApplicationRecord
 
         def duration
             self.user.current_plan_job_schedule_frequency
-        end
-
-        def remove_path_from_url
-            self.url = URI.join(self.url, "/").to_s
         end
 
         def user_website_limit

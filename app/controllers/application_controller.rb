@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
     private
+        
+        def archives_controller?
+            controller_name == "archives" || controller_path == "archives/websites"
+        end
 
         def authenticate_subscription
             redirect_to new_subscription_path, alert: "Please subscribe to access this feature." unless current_user.on_generic_trial? || current_user.subscribed?
@@ -19,15 +23,15 @@ class ApplicationController < ActionController::Base
         end
 
         def exempt_devise_controllers
-            devise_controller? || static_pages_controller? || posts_controller?
+            devise_controller? || static_pages_controller? || posts_controller? || archives_controller?
         end
 
         def exempt_subscription_controllers
-            devise_controller? || resume_subscriptions_controller? || static_pages_controller? || subscriptions_controller? || posts_controller?
+            devise_controller? || resume_subscriptions_controller? || static_pages_controller? || subscriptions_controller? || posts_controller? || archives_controller? 
         end
 
         def exempt_pundit_controllers
-            credit_cards_controller? || devise_controller? || resume_subscriptions_controller? || static_pages_controller? || subscriptions_controller? || websites_controller?
+            credit_cards_controller? || devise_controller? || resume_subscriptions_controller? || static_pages_controller? || subscriptions_controller? || websites_controller? || archives_controller? 
         end
          
         def posts_controller?

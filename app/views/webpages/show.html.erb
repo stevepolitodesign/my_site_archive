@@ -6,7 +6,7 @@
 <% end %>
 <% if @screenshots.present? %>
     <div class="row">
-        <%= render @screenshots %>
+        <%= render partial: "screenshots/screenshot",  collection: @screenshots, layout: "screenshots/layouts/column" %>
     </div>
     <div class="d-flex">
         <%== pagy_bootstrap_nav(@pagy) %>
@@ -16,6 +16,6 @@
         <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
-        <span class="ml-3">Generating screenshot. Check back later.</span>
+        <span class="m-3">Generating screenshot. Check back later.</span>
     </div>
 <% end %>

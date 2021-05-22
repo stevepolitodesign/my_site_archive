@@ -1,0 +1,22 @@
+<div class="text-center mx-auto">
+  <h1 class="display-5 fw-bold">Archive Your Website For Free</h1>
+  <div class="col-lg-8 mx-auto">
+    <p class="lead">This free tool will take a screenshot, capture the source code and run a performance audit of any webpage. It also does a DNS look-up on the root domain.</p>
+    <p class="lead fw-bolder">Think of it like the Wayback Machine on steroids.</p>
+  </div>
+  <%= form_with model: @archive, local: true, class: "row row-cols-lg-auto g-3 justify-content-center flex-column" do |f| %>
+    <div class="mx-auto">
+      <%= render partial: "shared/form_errors", locals: { object: f.object } %>
+    </div>
+    <div class="d-flex flex-column align-items-center">
+      <div class="d-flex mb-3">
+        <%= f.label :url, class: "visually-hidden" %>
+        <%= f.url_field :url, required: true, placeholder: "https://www.your-domain.com", class: "form-control form-control-lg border-r-0 rounded-start rounded-0" %>
+        <%= f.submit class: "btn btn-primary rounded-end rounded-0" %>
+      </div>
+      <div>
+        <%= recaptcha_tags %>
+      </div>
+    </div>
+  <% end %>
+</div>

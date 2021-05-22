@@ -27,3 +27,8 @@ sample_user_with_pending_data_website_<%= i %>_webpage_<%= j %>:
   url: http://example.com/
 <% end %>
 <% end %>
+
+archive:
+  website: archive
+  title: Archive
+  url: http://example.com/

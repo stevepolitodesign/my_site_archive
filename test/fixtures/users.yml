@@ -77,4 +77,9 @@ sample_user_on_expired_generic_trial:
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   confirmed_at: <%= Time.zone.now %>
   accepted_terms: true
-  trial_ends_at: <%= 30.days.ago %>  
+  trial_ends_at: <%= 30.days.ago %>
+
+guest_user:
+  email: $LABEL@example.com
+  accepted_terms: true
+  guest: true

@@ -6,12 +6,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :trackable
 
+  has_many :archives, dependent: :destroy
   has_many :websites, dependent: :destroy
-
 
   validates :accepted_terms, inclusion: { in: [true] }
   validates :accepted_terms, exclusion: { in: [nil,false] }
-
+  
+  scope :confirmed, -> { where.not(confirmed_at: nil) }
+  scope :guest, -> { where(guest: true) }
+  scope :not_confirmed, -> { where(confirmed_at: nil) }
   scope :with_active_subscriptions, -> { joins(:subscriptions).where({ pay_subscriptions: { status: "active" } }).distinct }
   scope :with_free_trial_ending_on, -> (date) { where(trial_ends_at: date) }
   scope :with_websites, -> { joins(:websites).distinct }

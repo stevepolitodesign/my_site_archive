@@ -9,6 +9,6 @@
     <p><%= truncate(post.content.to_plain_text, length: 160) %></p>
     <div class="flex">
         <%= link_to "Read More", post %>
-        <%= link_to "Edit", edit_post_path(post), class: "ml-2" if policy(post).edit? %>
+        <%= link_to "Edit", edit_post_path(post), class: "ms-2" if policy(post).edit? %>
     </div>
 </article>
