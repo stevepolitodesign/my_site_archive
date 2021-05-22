@@ -8,6 +8,7 @@ class ArchivesController < ApplicationController
 
   def new
     @archive = Archive.new
+    set_meta_tags  title: "Archive Your Website For Free", description: "This free tool will take a screenshot, capture the source code and run a performance audit of any webpage. It also does a DNS look-up on the root domain."
   end
 
   # TODO: Need to rate limit this action.
