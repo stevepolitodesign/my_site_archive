@@ -2,6 +2,9 @@ require 'test_helper'
 
 class ArchiveFlowTest < ActionDispatch::IntegrationTest
   def setup
+    @archive_website        = websites(:archive)
+    @archive_html_document  = html_documents(:archive)
+    @guest_user             = users(:guest_user)
     VCR.insert_cassette name
   end
 
@@ -23,15 +26,20 @@ class ArchiveFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "can view source code" do
-    # TODO: Create some fixture data for this. 
-    flunk
+    get root_path
+    session[:guest_user_id] = @guest_user.id
+    sign_in @guest_user
+    get website_html_document_path(@archive_website, @archive_html_document)
+    assert_response :success
   end
 
   test "redirect user to registration form when they hit their limit" do
     get "/free-website-archive-tool"
     0.upto(Archive::GUEST_USER_LIMIT) do |index|
       create_archive
+      get "/free-website-archive-tool"
     end
+    get "/free-website-archive-tool"
     assert_no_difference("Archive.count") do
       create_archive
     end
