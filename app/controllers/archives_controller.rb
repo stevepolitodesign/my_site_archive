@@ -1,5 +1,5 @@
 class ArchivesController < ApplicationController
-  layout "landing"
+  layout "landing", only: [:new, :create]
   include GuestUser
   include Schemable
 
