@@ -19,7 +19,6 @@ browserless:
 recaptcha:
   site_key: abc123
   secret_key: abc123
->>>>>>> main
 
 stripe:
   private_key: sk_test_123
