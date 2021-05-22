@@ -36,6 +36,8 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should destroy associated archives" do
-    flunk
+    assert_difference("Archive.count", -1) do
+      users(:guest_user).destroy
+    end
   end  
 end

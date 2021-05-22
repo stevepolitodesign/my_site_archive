@@ -74,7 +74,4 @@ class WebsiteTest < ActiveSupport::TestCase
     assert_not @website.valid?
   end
 
-  test "can belong to an archive" do
-    flunk
-  end
 end
