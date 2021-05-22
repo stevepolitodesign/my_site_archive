@@ -1,5 +1,7 @@
 class ArchivesController < ApplicationController
+  layout "landing"
   include GuestUser
+  include Schemable
 
   before_action :set_guest_user, only: :create
   before_action :set_archive, only: [:show]
