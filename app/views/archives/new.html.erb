@@ -1,7 +1,14 @@
-<%= form_with model: @archive, local: true do |f| %>
+<h1>Archive Your Website For Free</h1>
+<%= form_with model: @archive, local: true, class: "row row-cols-lg-auto g-3 align-items-center" do |f| %>
   <%= render partial: "shared/form_errors", locals: { object: f.object } %>
-  <%= f.label :url %>
-  <%= f.url_field :url, required: true %>
-  <%= recaptcha_tags %>
-  <%= f.submit %>
+  <div class="d-flex flex-column align-items-center">
+    <div class="d-flex mb-3">
+      <%= f.label :url, class: "visually-hidden" %>
+      <%= f.url_field :url, required: true, placeholder: "https://www.your-domain.com", class: "form-control form-control-lg border-r-0 rounded-start rounded-0" %>
+      <%= f.submit class: "btn btn-primary rounded-end rounded-0" %>
+    </div>
+    <div>
+      <%= recaptcha_tags %>
+    </div>
+  </div>
 <% end %>
