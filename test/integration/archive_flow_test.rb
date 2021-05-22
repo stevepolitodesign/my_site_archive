@@ -26,9 +26,6 @@ class ArchiveFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "can view source code" do
-    get root_path
-    session[:guest_user_id] = @guest_user.id
-    sign_in @guest_user
     get website_html_document_path(@archive_website, @archive_html_document)
     assert_response :success
   end
