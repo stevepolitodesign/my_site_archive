@@ -34,7 +34,7 @@
                 <%= link_to "Change My Subscription", edit_subscription_path, class: "btn btn-block btn-sm btn-outline-primary" %>
             <% else %>
                 <p>Your subscription is set to end on <%= current_user.subscription.ends_at.strftime("%m/%d/%y") %></p>
-                <%= link_to "Resume My Subscription", resume_subscription_path, method: :put, class: "btn btn-success" %>    
+                <%= link_to "Resume My Subscription", resume_subscription_path, method: :put, class: "btn btn-success text-white" %>    
             <% end %>
         </div>
     </div>

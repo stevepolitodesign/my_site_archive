@@ -1,10 +1,10 @@
 <% content_for :page_title do %>
     Sign Up
 <% end %>
-<div class="row row-cols-lg-3 justify-content-center mb-4">
+<% content_for :column_two do %>
     <div class="card shadow-sm border-0">
         <div class="card-body">
             <%= render "form" %>
         </div>
     </div>
-</div>
+<% end %>
