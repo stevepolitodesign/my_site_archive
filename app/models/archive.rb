@@ -1,7 +1,7 @@
 class Archive < ApplicationRecord
   include Domainable
 
-  GUEST_USER_LIMIT = "5".freeze
+  GUEST_USER_LIMIT = 5.freeze
 
   belongs_to :user, counter_cache: true
   has_one :website, dependent: :destroy
@@ -9,6 +9,7 @@ class Archive < ApplicationRecord
   # TODO: Consider adding a validation to prevent anonymous users from running too many reports.
   validates :user, :url, presence: true
   validates :url, url: true
+  validate :limit_guest_user_archives, on: :create 
 
   scope :from_guest_account, -> { joins(:user).where( { user: User.guest.not_confirmed } ) }
 
@@ -24,4 +25,10 @@ class Archive < ApplicationRecord
       website
     end
   end
+
+  private
+
+    def limit_guest_user_archives
+      errors.add(:user, "limit reached") if self.user.present? && self.user.archives_count >= GUEST_USER_LIMIT
+    end
 end

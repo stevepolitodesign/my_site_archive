@@ -14,7 +14,7 @@ class Website < ApplicationRecord
 
     validates :title, :url, presence: true
     validates :url, url: true
-    validate :associated_user_should_have_an_active_subscription_or_free_trial
+    validate :associated_user_should_have_an_active_subscription_or_free_trial, on: :create
     validate :user_website_limit, on: :create
     
     scope :with_active_subscribers, -> {
