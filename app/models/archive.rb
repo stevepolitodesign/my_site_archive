@@ -3,7 +3,7 @@ class Archive < ApplicationRecord
 
   GUEST_USER_LIMIT = "5".freeze
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_one :website, dependent: :destroy
 
   # TODO: Consider adding a validation to prevent anonymous users from running too many reports.
