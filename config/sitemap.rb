@@ -46,5 +46,6 @@ SitemapGenerator::Sitemap.create do
   add pricing_path
   add faqs_path
   add features_path
+  add demo_path
 end
 

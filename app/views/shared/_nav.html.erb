@@ -8,9 +8,10 @@
       <% end %>
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <% unless current_user %>
-          <li><%= link_to "Pricing", pricing_path, class: "nav-link px-2 link-secondary" %></li>
-          <li><%= link_to "FAQs", faqs_path, class: "nav-link px-2 link-secondary" %></li>
+          <li><%= link_to "Demo", demo_path, class: "nav-link px-2 link-secondary" %></li>
           <li><%= link_to "Resources", posts_path, class: "nav-link px-2 link-secondary" %></li>
+          <li><%= link_to "FAQs", faqs_path, class: "nav-link px-2 link-secondary" %></li>
+          <li><%= link_to "Pricing", pricing_path, class: "nav-link px-2 link-secondary" %></li>
         <% else %>
         <% if current_user.on_generic_trial? || current_user.subscribed? %>
           <li><%= link_to "My Sites", websites_path, class: "nav-link px-2 link-secondary" %></li>
