@@ -14,11 +14,7 @@ class ArchiveFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "form"
     assert_difference(["Archive.count","Website.count", "Webpage.count", "Screenshot.count", "ZoneFile.count", "HtmlDocument.count", "Stat.count"], 1) do
-      post archives_path, params: {
-        archive: {
-          url: "https://www.google.com/"
-        }
-      }
+      create_archive
       perform_enqueued_jobs
     end
     assert_redirected_to Archive.last
@@ -32,6 +28,23 @@ class ArchiveFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "redirect user to registration form when they hit their limit" do
-    flunk
+    get "/free-website-archive-tool"
+    0.upto(Archive::GUEST_USER_LIMIT) do |index|
+      create_archive
+    end
+    assert_no_difference("Archive.count") do
+      create_archive
+    end
+    assert_redirected_to new_user_registration_path
   end
+
+  private
+
+    def create_archive
+      post archives_path, params: {
+        archive: {
+          url: "https://www.google.com/"
+        }
+      }      
+    end
 end

@@ -11,8 +11,7 @@ class ArchivesController < ApplicationController
   # TODO: Need to rate limit this action.
   def create
     @archive = @guest_user.archives.build(archive_params)
-    # TODO
-    # if ArchivePolicy.new(set_guest_user, @archive).new?
+    if ArchivePolicy.new(set_guest_user, @archive).new?
       if verify_recaptcha(model: @archive) && @archive.save
         @website = @archive.create_website_for_report
         @archive.generate_report(@website, archive_params[:url])
@@ -20,9 +19,9 @@ class ArchivesController < ApplicationController
       else
         render :new
       end
-    # else
-      # redirect_to new_user_registration_path, alert: "You've hit your limit"
-    # end
+    else
+      redirect_to new_user_registration_path, alert: "You've hit your limit. Please create an account."
+    end
   end
 
   def show
