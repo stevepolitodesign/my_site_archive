@@ -25,7 +25,7 @@ class ArchiveTest < ActiveSupport::TestCase
     assert_not @archive.valid?
   end
 
-  test "user cannot have more than 5 archives" do
+  test "user archive limit" do
     @guest_user.archives.destroy_all
     0.upto(Archive::GUEST_USER_LIMIT) do |index|
       @guest_user.archives.create(url: "https://www.example.com")

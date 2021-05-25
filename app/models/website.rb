@@ -69,7 +69,7 @@ class Website < ApplicationRecord
         def duration
             self.user.current_plan_job_schedule_frequency
         end
-
+        # TODO: Use counter cache
         def user_website_limit
             if self.user.current_plan.present? && self.user.current_plan.website_limit.present?
                 errors.add(:base, "You have reached your website limit.") if self.user.websites.count >= self.user.current_plan.website_limit
