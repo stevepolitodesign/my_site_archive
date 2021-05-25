@@ -58,7 +58,7 @@ class Webpage < ApplicationRecord
 				errors.add(:url, "not valid")
 			end
 		end
-		
+		# TODO: Use counter cache
 		def user_webpage_limit
 			if self.website.user.current_plan.present? && self.website.user.current_plan.webpage_limit.present?
 				errors.add(:base, "You have reached your webpage limit.") if self.website.webpages.count >= self.website.user.current_plan.webpage_limit
