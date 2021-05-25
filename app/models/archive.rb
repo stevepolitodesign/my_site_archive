@@ -1,7 +1,7 @@
 class Archive < ApplicationRecord
   include Domainable
 
-  GUEST_USER_LIMIT = 5.freeze
+  GUEST_USER_LIMIT = 2.freeze
 
   belongs_to :user, counter_cache: true
   has_one :website, dependent: :destroy
