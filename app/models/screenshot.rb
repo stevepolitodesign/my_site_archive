@@ -5,7 +5,7 @@ class Screenshot < ApplicationRecord
   has_one_attached :image
 
   after_create_commit :broadcast_later
-  
+
   private
   
     # TODO: Ensure this is scoped to the current user. I need to make sure the latest screenshot created isn't rendered on the page.
