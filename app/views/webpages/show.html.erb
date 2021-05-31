@@ -4,7 +4,7 @@
 <% content_for :page_title_button do %>
     <%= render partial: "websites/url", locals: { url: @webpage.url }  %>
 <% end %>
-<%= turbo_stream_from(@webpage.website.user, :screenshots) %>
+<%= turbo_stream_from(@webpage.website.user, :stats) %>
 <% if @screenshots.present? %>
     <div class="row">
         <%= render partial: "screenshots/screenshot",  collection: @screenshots, layout: "screenshots/layouts/column" %>
