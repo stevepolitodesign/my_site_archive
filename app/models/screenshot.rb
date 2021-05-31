@@ -14,7 +14,7 @@ class Screenshot < ApplicationRecord
       self.broadcast_action_to(
         [self.webpage.website.user, :screenshots],
         action: :replace,
-        target: "screenshots",
+        target: "webpage_#{self.webpage.id}",
         partial: "screenshots/screenshot",
         layout: "screenshots/layouts/column",
       )

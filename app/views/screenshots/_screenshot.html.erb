@@ -26,9 +26,11 @@
         </div>
     </div>
 <% end %>
-<div id="stats">
-    <%= render partial: "stats/stat", locals: { stat: screenshot.stat } if screenshot.stat.present? %> 
-</div>
+<% if screenshot.stat.present? %>
+    <%= render partial: "stats/stat", locals: { stat: screenshot.stat }  %> 
+<% else %>
+    <div id="<%= dom_id(screenshot) %>"></div>
+<% end %>
 <%= link_to screenshot.webpage.url, target: "_blank", class: "d-flex align-items-center text-secondary" do  %>
     <span class="me-2"><%= screenshot.webpage.url %></span>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
