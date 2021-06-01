@@ -1,5 +1,6 @@
 <%= turbo_stream_from(@webpage.website.user, :screenshots) %>
 <%= turbo_stream_from(@webpage.website.user, :stats) %>
+<%= turbo_stream_from(@webpage.website.user, :html_documents) %>
 
 <% content_for :page_title do %>
     <% @webpage.title %>
@@ -16,7 +17,7 @@
     </div>    
 <% else %>
     <div class="row">
-        <div id="<%= dom_id(@webpage) %>" class="d-flex justify-content-center align-items-center mb-4">
+        <div id="<%= dom_id(@webpage) %>_screenshot" class="d-flex justify-content-center align-items-center mb-4">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
