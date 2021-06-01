@@ -16,9 +16,9 @@
     </div>
 </div>    
 <% if screenshot.image.attached? %>
-    <%= image_tag screenshot.image.variant(resize_to_fill: [480, 480, { gravity: 'North' }]), class: "img-fluid rounded shadow-sm border mb-3" %>
+    <%= render partial: "screenshots/image", locals: { image: screenshot.image } %>
 <% else %>
-    <div class="ratio ratio-1x1 bg-dark rounded mb-3">
+    <div id="<%= dom_id(screenshot) %>_image" class="ratio ratio-1x1 bg-dark rounded mb-3">
         <div class="d-flex align-items-center justify-content-center">
             <div class="spinner-border text-light" role="status">
                 <span class="visually-hidden">Loading...</span>
