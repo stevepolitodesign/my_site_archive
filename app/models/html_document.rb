@@ -15,7 +15,7 @@ class HtmlDocument < ApplicationRecord
         action: :replace,
         target: "screenshot_#{self.screenshot.id}_html_document",
         partial: "html_documents/html_document",
-        locals: { screenshot: self.screenshot}
+        locals: { screenshot: self.screenshot, html_document: self }
       )
     end  
 end

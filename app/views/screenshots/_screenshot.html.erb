@@ -9,7 +9,7 @@
             </svg>            
         <% end if screenshot.image.attached?%>
         <% if screenshot.html_document.present? %>
-            <%= render partial: "html_documents/html_document", locals: { screenshot: screenshot } %>
+            <%= render partial: "html_documents/html_document", locals: { screenshot: screenshot, html_document: screenshot.html_document } %>
         <% else %>
             <div id="<%= dom_id(screenshot) %>_html_document"></div>
         <% end %>
