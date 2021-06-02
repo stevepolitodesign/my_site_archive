@@ -11,7 +11,7 @@
     <% if @website.latest_zone_file.present? %>
         <%= render partial: "zone_files/zone_file", locals: { zone_file:  @website.latest_zone_file, link_to_index: true, headline: "Current DNS Records" } %>
     <% else %>
-        <div class="d-flex justify-content-center align-items-center mb-4">
+        <div id="<%= dom_id(@website) %>_zone_file" class="d-flex justify-content-center align-items-center mb-4">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
