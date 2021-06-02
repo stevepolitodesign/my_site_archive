@@ -1,6 +1,4 @@
-<% if local_assigns[:headline].present? %>
-    <h5 class="text-secondary mb-4 border-bottom pb-3"><%= local_assigns[:headline] %></h5>
-<% end %>
+<h5 class="text-secondary mb-4 border-bottom pb-3"><%= local_assigns[:headline].present? ? local_assigns[:headline] :zone_file.created_at.strftime("%m/%d/%y") %></h5>
 <div class="card border-0 shadow-sm mb-5">
     <div class="card-body">
         <div class="table-responsive">

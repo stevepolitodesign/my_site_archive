@@ -4,29 +4,7 @@
 <% content_for :page_title_button do %>
     <%= render partial: "websites/url", locals: { url: @website.url }  %>
 <% end %>
-<% @zone_files.each do |zone_file| %>
-    <h5 class="text-secondary mb-4 pb-3 border-bottom">
-        DNS Records on <%= zone_file.created_at.strftime("%m/%d/%y") %>
-    </h5>        
-    <div class="card border-0 shadow-sm mb-4">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-borderless">
-                    <thead>
-                        <tr>
-                            <th scope="col">Record Type</th>
-                            <th scope="col">Content</th>
-                            <th scope="col">Priority</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%= render partial: "dns_records/dns_record", collection: zone_file.dns_records.ordered.unique, as: "dns_record" %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-<% end %>
+<%= render @zone_files %>
 <div class="d-flex">
     <%== pagy_bootstrap_nav(@pagy) %>
 </div>
