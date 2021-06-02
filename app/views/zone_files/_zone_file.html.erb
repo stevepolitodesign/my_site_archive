@@ -1,0 +1,22 @@
+<% if local_assigns[:headline].present? %>
+    <h5 class="text-secondary mb-4 border-bottom pb-3"><%= local_assigns[:headline] %></h5>
+<% end %>
+<div class="card border-0 shadow-sm mb-5">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                <thead>
+                    <tr class="">
+                        <th scope="col">Record Type</th>
+                        <th scope="col">Content</th>
+                        <th scope="col">Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%= render partial: "dns_records/dns_record", collection: zone_file.dns_records.ordered.unique, as: "dns_record" %>
+                </tbody>
+            </table>
+        </div>
+        <%= link_to "View Previous Records", website_zone_files_path(zone_file.website), class: "text-secondary" if local_assigns[:link_to_index] == true%>
+    </div>
+</div>
