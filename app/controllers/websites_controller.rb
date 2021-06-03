@@ -29,7 +29,7 @@ class WebsitesController < ApplicationController
             @website.capture_screenshot
             @website.capture_new_zone_file
         else
-            render "new"
+            render :new, status: :unprocessable_entity
         end
     end
 
@@ -38,7 +38,7 @@ class WebsitesController < ApplicationController
         if @website.update(website_params)
             redirect_to @website, notice: "Website updated."
         else
-            render :edit
+            render :edit, status: :unprocessable_entity
         end
     end
 

@@ -27,7 +27,7 @@ class WebpagesController < ApplicationController
         if @webpage.update(webpage_params)
             redirect_to website_webpage_path(@website, @webpage), notice: "Webpage updated."
         else
-            render :edit
+            render :edit, status: :unprocessable_entity
         end
     end
 

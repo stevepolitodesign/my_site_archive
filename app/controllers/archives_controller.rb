@@ -20,7 +20,7 @@ class ArchivesController < ApplicationController
         @archive.generate_report(@website, archive_params[:url])
         redirect_to @archive
       else
-        render :new
+        render :new, status: :unprocessable_entity
       end
     else
       redirect_to new_user_registration_path, alert: "You've hit your limit. Please create an account."
