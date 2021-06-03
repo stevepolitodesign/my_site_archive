@@ -7,6 +7,7 @@ class ZoneFile < ApplicationRecord
   private
 
     def broadcast_later
+      sleep 3
       if self.website.archive.present?
         self.broadcast_action_to(
           [self.website.user, :zone_files],
