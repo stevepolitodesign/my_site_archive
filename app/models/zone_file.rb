@@ -7,12 +7,22 @@ class ZoneFile < ApplicationRecord
   private
 
     def broadcast_later
-      self.broadcast_action_to(
-        [self.website.user, :zone_files],
-        action: :replace,
-        target: "archive_zone_file",
-        partial: "zone_files/zone_file",
-        locals: { zone_file:  self, link_to_index: true, headline: "Current DNS Records" },
-      )
+      if self.website.archive.present?
+        self.broadcast_action_to(
+          [self.website.user, :zone_files],
+          action: :replace,
+          target: "archive_zone_file",
+          partial: "zone_files/zone_file",
+          locals: { zone_file:  self, link_to_index: false, headline: "Current DNS Records" },
+        )        
+      else
+        self.broadcast_action_to(
+          [self.website.user, :zone_files],
+          action: :replace,
+          target: "archive_zone_file",
+          partial: "zone_files/zone_file",
+          locals: { zone_file:  self, link_to_index: true, headline: "Current DNS Records" },
+        )
+      end
     end
 end
