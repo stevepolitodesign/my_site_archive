@@ -5,7 +5,8 @@
   <% if @zone_file.present? %>
     <%= render partial: "zone_files/zone_file", locals: { zone_file:  @zone_file, headline: "Current DNS Records" } %>
   <% else %>
-    <div class="d-flex justify-content-center align-items-center mb-4">
+    <%= turbo_stream_from(@archive.user, :zone_files) %>
+    <div id="archive_zone_file" class="d-flex justify-content-center align-items-center mb-4">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
