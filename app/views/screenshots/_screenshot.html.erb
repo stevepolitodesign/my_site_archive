@@ -11,14 +11,14 @@
         <% if screenshot.html_document.present? %>
             <%= render partial: "html_documents/html_document", locals: { screenshot: screenshot, html_document: screenshot.html_document } %>
         <% else %>
-            <div id="<%= dom_id(screenshot) %>_html_document"></div>
+            <div id="archive_html_document"></div>
         <% end %>
     </div>
 </div>    
 <% if screenshot.image.attached? %>
     <%= render partial: "screenshots/image", locals: { image: screenshot.image } %>
 <% else %>
-    <div id="<%= dom_id(screenshot) %>_image" class="ratio ratio-1x1 bg-dark rounded mb-3">
+    <div id="archive_image" class="ratio ratio-1x1 bg-dark rounded mb-3">
         <div class="d-flex align-items-center justify-content-center">
             <div class="spinner-border text-light" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -29,7 +29,7 @@
 <% if screenshot.stat.present? %>
     <%= render partial: "stats/stat", locals: { stat: screenshot.stat }  %> 
 <% else %>
-    <div id="<%= dom_id(screenshot) %>"></div>
+    <div id="archive_stat"></div>
 <% end %>
 <%= link_to screenshot.webpage.url, target: "_blank", class: "d-flex align-items-center text-secondary" do  %>
     <span class="me-2"><%= screenshot.webpage.url %></span>

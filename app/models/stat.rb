@@ -14,7 +14,7 @@ class Stat < ApplicationRecord
       self.broadcast_action_to(
         [self.screenshot.webpage.website.user, :stats],
         action: :replace,
-        target: "screenshot_#{self.screenshot.id}",
+        target: "archive_stat",
         partial: "stats/stat",
       )
     end

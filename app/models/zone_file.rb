@@ -10,7 +10,7 @@ class ZoneFile < ApplicationRecord
       self.broadcast_action_to(
         [self.website.user, :zone_files],
         action: :replace,
-        target: "website_#{self.website.id}_zone_file",
+        target: "archive_zone_file",
         partial: "zone_files/zone_file",
         locals: { zone_file:  self, link_to_index: true, headline: "Current DNS Records" },
       )

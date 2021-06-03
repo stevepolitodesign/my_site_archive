@@ -13,7 +13,7 @@ class HtmlDocument < ApplicationRecord
       self.broadcast_action_to(
         [self.screenshot.webpage.website.user, :html_documents],
         action: :replace,
-        target: "screenshot_#{self.screenshot.id}_html_document",
+        target: "archive_html_document",
         partial: "html_documents/html_document",
         locals: { screenshot: self.screenshot, html_document: self }
       )

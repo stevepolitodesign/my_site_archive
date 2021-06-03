@@ -12,7 +12,7 @@
         <%= render partial: "zone_files/zone_file", locals: { zone_file:  @website.latest_zone_file, link_to_index: true, headline: "Current DNS Records" } %>
     <% else %>
         <%= turbo_stream_from(@website.user, :zone_files) %>
-        <div id="<%= dom_id(@website) %>_zone_file" class="d-flex justify-content-center align-items-center mb-4">
+        <div id="archive_zone_file" class="d-flex justify-content-center align-items-center mb-4">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>

@@ -3,39 +3,24 @@
 <% end %>
 <% content_for :column_one do %>
   <% if @zone_file.present? %>
-    <h5 class="text-secondary mb-4 border-bottom pb-3">Current DNS Records</h5>
-  <div class="card border-0 shadow-sm mb-5">
-    <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-borderless">
-            <thead>
-              <tr>
-                <th scope="col">Record Type</th>
-                <th scope="col">Content</th>
-                <th scope="col">Priority</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%= render partial: "dns_records/dns_record", collection: @zone_file.dns_records.ordered.unique, as: "dns_record" %>
-            </tbody>
-          </table>
+    <%= render partial: "zone_files/zone_file", locals: { zone_file:  @zone_file, headline: "Current DNS Records" } %>
+  <% else %>
+    <div class="d-flex justify-content-center align-items-center mb-4">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
+        <span class="ms-3">Retrieving DNS Records. Check back later.</span>
     </div>
-  </div>
-<% else %>
-  <div class="d-flex justify-content-center align-items-center mb-4">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <span class="ms-3">Retrieving DNS Records. Check back later.</span>
-  </div>
-<% end %>
+  <% end %>
 <% end %>
 <% content_for :column_two do %>
   <% if @screenshot.present? %>
     <%= render partial: "screenshots/screenshot", locals: { screenshot: @screenshot } %>
   <% else %>
-    <div class="d-flex justify-content-center align-items-center mb-4">
+    <%= turbo_stream_from(@archive.user, :screenshots) %>
+    <%= turbo_stream_from(@archive.user, :stats) %>
+    <%= turbo_stream_from(@archive.user, :html_documents) %>  
+    <div id="archive_screenshot" class="d-flex justify-content-center align-items-center mb-4">
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
