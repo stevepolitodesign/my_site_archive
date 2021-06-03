@@ -10,7 +10,8 @@
                         <th scope="col">Priority</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="dns_records">
+                    <%= turbo_stream_from(zone_file.website.user, :dns_records) %>
                     <%= render partial: "dns_records/dns_record", collection: zone_file.dns_records.ordered.unique, as: "dns_record" %>
                 </tbody>
             </table>

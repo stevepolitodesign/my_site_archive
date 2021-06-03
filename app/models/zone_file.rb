@@ -14,5 +14,5 @@ class ZoneFile < ApplicationRecord
         partial: "zone_files/zone_file",
         locals: { zone_file:  self, link_to_index: true, headline: "Current DNS Records" },
       )
-    end  
+    end
 end
