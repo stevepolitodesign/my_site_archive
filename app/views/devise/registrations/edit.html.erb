@@ -46,7 +46,7 @@
   <div class="card border-danger" >
     <div class="card-body text-danger">
         <p>This will delete all your data, and cannot be undone.</p>
-        <%= button_to "Cancel my account and subscription", registration_path(resource_name), data: { confirm: "This will delete all your data, and cannot be undone." }, method: :delete, class: "btn btn-danger" %>
+        <%= button_to "Cancel my account and subscription", registration_path(resource_name), data: { turbo: "false", confirm: "This will delete all your data, and cannot be undone." }, method: :delete, class: "btn btn-danger" %>
     </div>
   </div>
 <% end %>
