@@ -14,13 +14,19 @@ import 'bootstrap/js/dist/alert'
 import 'bootstrap/js/dist/popover'
 import Tooltip from 'bootstrap/js/dist/tooltip'
 
-// TODO: Need to listen for Turbo Events.
 document.addEventListener("turbo:load", function(){
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new Tooltip(tooltipTriggerEl)
-    })
+  loadToolTips();
 })
+document.addEventListener("turbo:before-stream-render", function(){
+  loadToolTips();
+})
+
+const loadToolTips = () => {
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new Tooltip(tooltipTriggerEl)
+  })
+}
 
 import "../stylesheets/application";
 
