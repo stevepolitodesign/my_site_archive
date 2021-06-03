@@ -6,7 +6,6 @@ class Archive < ApplicationRecord
   belongs_to :user, counter_cache: true
   has_one :website, dependent: :destroy
 
-  # TODO: Consider adding a validation to prevent anonymous users from running too many reports.
   validates :user, :url, presence: true
   validates :url, url: true
   validate :limit_guest_user_archives, on: :create 
