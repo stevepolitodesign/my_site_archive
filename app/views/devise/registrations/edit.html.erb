@@ -5,7 +5,7 @@
   <h5 class="mb-4 pb-3 border-bottom text-secondary">Edit my account</h5>
   <div class="card shadow-sm border-0 mb-5">
     <div class="card-body">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: { turbo: "false" }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="mb-3">
