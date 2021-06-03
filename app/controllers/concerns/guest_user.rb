@@ -5,6 +5,7 @@ module GuestUser
 
     def create_guest_user
       user = User.new(email: "#{SecureRandom.uuid}@#{SecureRandom.uuid}.com", accepted_terms: true, guest: true)
+      user.skip_confirmation!
       user.save!(validate: false)
       session[:guest_user_id] = user.id
       user
