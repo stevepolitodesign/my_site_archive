@@ -17,8 +17,10 @@ class ArchiveFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "form"
     assert_difference(["Archive.count","Website.count", "Webpage.count", "Screenshot.count", "ZoneFile.count", "HtmlDocument.count", "Stat.count"], 1) do
-      create_archive
-      perform_enqueued_jobs
+      assert_emails 0 do
+        create_archive
+        perform_enqueued_jobs
+      end
     end
     assert_redirected_to Archive.last
     follow_redirect!

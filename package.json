@@ -2,6 +2,7 @@
   "name": "my_site_archive",
   "private": true,
   "dependencies": {
+    "@hotwired/turbo-rails": "^7.0.0-beta.5",
     "@popperjs/core": "^2.9.2",
     "@rails/actioncable": "^6.0.0",
     "@rails/actiontext": "^6.0.3-4",
@@ -9,8 +10,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
     "bootstrap": "^5.0.1",
-    "trix": "^1.2.0",
-    "turbolinks": "^5.2.0"
+    "trix": "^1.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {

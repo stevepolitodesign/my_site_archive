@@ -4,7 +4,7 @@
 <% content_for :column_two do %>
   <div class="card shadow-sm border-0">
     <div class="card-body">
-      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }, data: { turbo: "false" }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <%= f.hidden_field :reset_password_token %>
 

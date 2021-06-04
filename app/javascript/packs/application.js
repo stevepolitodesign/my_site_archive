@@ -4,21 +4,29 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("trix")
 require("@rails/actiontext")
+require("@hotwired/turbo-rails")
 
 import 'bootstrap/js/dist/alert'
 import 'bootstrap/js/dist/popover'
 import Tooltip from 'bootstrap/js/dist/tooltip'
-document.addEventListener("turbolinks:load", function(){
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new Tooltip(tooltipTriggerEl)
-    })
+
+document.addEventListener("turbo:load", function(){
+  loadToolTips();
 })
+document.addEventListener("turbo:before-stream-render", function(){
+  loadToolTips();
+})
+
+const loadToolTips = () => {
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new Tooltip(tooltipTriggerEl)
+  })
+}
 
 import "../stylesheets/application";
 

@@ -7,4 +7,17 @@ class DnsRecord < ApplicationRecord
   
   scope :ordered, -> { order(record_type: :asc) }
   scope :unique, -> { select(:content, :record_type, :priority).distinct }
+
+  after_create_commit :broadcast_later
+
+  private
+
+    def broadcast_later
+      self.broadcast_action_to(
+        [self.zone_file.website.user, :dns_records],
+        action: :append,
+        target: "dns_records",
+        partial: "dns_records/dns_record",
+      )
+    end
 end
