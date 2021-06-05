@@ -16,7 +16,9 @@
         <% if @website.persisted? %>
             <%= f.url_field :url, required: true, placeholder: "https://www.example.com", class: "form-control", disabled: :true %>
         <% else %>
-            <%= f.url_field :url, required: true, placeholder: "https://www.example.com", class: "form-control" %>
+            <div data-controller="url">
+                <%= f.url_field :url, required: true, placeholder: "https://www.example.com", class: "form-control", data: { url_target: "input", action: "url#handleChange" } %>
+            </div>
         <% end %>
     </div>
     <%= f.submit class: "btn btn-primary" %>
