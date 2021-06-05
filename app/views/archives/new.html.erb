@@ -4,7 +4,7 @@
     <p class="lead">This free tool will take a screenshot, capture the source code and run a performance audit of any webpage. It also does a DNS look-up on the root domain.</p>
     <p class="lead fw-bolder">Think of it like the Wayback Machine on steroids.</p>
   </div>
-  <%= form_with model: @archive, local: true, class: "row row-cols-lg-auto g-3 justify-content-center flex-column" do |f| %>
+  <%= form_with model: @archive, local: true,  data: { turbo: "false" }, class: "row row-cols-lg-auto g-3 justify-content-center flex-column" do |f| %>
     <div class="mx-auto">
       <%= render partial: "shared/form_errors", locals: { object: f.object } %>
     </div>
