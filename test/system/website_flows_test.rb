@@ -18,7 +18,7 @@ class WebsiteFlowsTest < ApplicationSystemTestCase
 
     assert_difference ->{ Website.count } => 1, ->{ ZoneFile.count } => 1 do
       fill_in "Title", with: "Title"
-      fill_in "URL", with: "https://www.example.com"
+      fill_in "URL", with: "www.example.com"
       click_button "Create Website"
       sleep 5
     end
