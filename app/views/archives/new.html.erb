@@ -8,10 +8,10 @@
     <div class="mx-auto">
       <%= render partial: "shared/form_errors", locals: { object: f.object } %>
     </div>
-    <div class="d-flex flex-column align-items-center">
+    <div class="d-flex flex-column align-items-center" data-controller="url">
       <div class="d-flex mb-3">
         <%= f.label :url, class: "visually-hidden" %>
-        <%= f.url_field :url, required: true, placeholder: "https://www.your-domain.com", class: "form-control form-control-lg border-r-0 rounded-start rounded-0" %>
+        <%= f.url_field :url, required: true, placeholder: "https://www.your-domain.com", class: "form-control form-control-lg border-r-0 rounded-start rounded-0", data: { url_target: "input", action: "url#handleChange" } %>
         <%= f.submit class: "btn btn-primary rounded-end rounded-0" %>
       </div>
       <div>
