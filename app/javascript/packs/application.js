@@ -40,3 +40,5 @@ import "../stylesheets/application";
 // const imagePath = (name) => images(name, true)
 import "./subscriptions";
 import "./richtext";
+
+import "controllers"
