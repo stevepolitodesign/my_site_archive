@@ -13,9 +13,11 @@ class ArchivesController < ApplicationController
       description: "This free tool will take a screenshot, capture the source code and run a performance audit of any webpage. It also does a DNS look-up on the root domain.",
       og: {
         image: "https://mugshotbot.com/m/HBQnrzXu",
+        title: "A Better Wayback Machine",
       },
       twitter: {
           card: "summary_large_image",
+          title: "A Better Wayback Machine",
       }
     )
   end
