@@ -8,7 +8,18 @@ class ArchivesController < ApplicationController
 
   def new
     @archive = Archive.new
-    set_meta_tags  title: "Archive Your Website For Free", description: "This free tool will take a screenshot, capture the source code and run a performance audit of any webpage. It also does a DNS look-up on the root domain."
+    set_meta_tags(
+      title: "Archive Your Website For Free",
+      description: "This free tool will take a screenshot, capture the source code and run a performance audit of any webpage. It also does a DNS look-up on the root domain.",
+      og: {
+        image: "https://mugshotbot.com/m/HBQnrzXu",
+        title: "A Better Wayback Machine",
+      },
+      twitter: {
+          card: "summary_large_image",
+          title: "A Better Wayback Machine",
+      }
+    )
   end
 
   # TODO: Need to rate limit this action.
@@ -23,7 +34,7 @@ class ArchivesController < ApplicationController
         render :new, status: :unprocessable_entity
       end
     else
-      redirect_to new_user_registration_path, alert: "You've hit your limit. Please create an account."
+      redirect_to new_user_registration_path, alert: "You've reached your daily limit. Want unlimited access? Sign up today for a 30 day free trial today!"
     end
   end
 

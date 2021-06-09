@@ -28,6 +28,6 @@ class Archive < ApplicationRecord
   private
 
     def limit_guest_user_archives
-      errors.add(:user, "limit reached") if self.user.present? && self.user.archives_count >= GUEST_USER_LIMIT
+      errors.add(:base, "You've reached your daily limit. Want unlimited access? Sign up today for a 30 day free trial today!") if self.user.present? && self.user.archives_count >= GUEST_USER_LIMIT
     end
 end
