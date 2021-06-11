@@ -10,7 +10,7 @@
     </div>   
     <%= turbo_stream_from(@website.user, :zone_files) %>
     <% if @website.latest_zone_file.present? %>
-        <%= render partial: "zone_files/zone_file", locals: { zone_file:  @website.latest_zone_file, link_to_index: true, headline: "Current DNS Records" } %>
+        <%= render partial: "zone_files/zone_file", locals: { zone_file:  @website.latest_zone_file, link_to_index: true, headline: "Current DNS Records", next_scheduled_zone_file_capture: @website.next_scheduled_zone_file_capture } %>
     <% else %>
         <div id="archive_zone_file" class="d-flex justify-content-center align-items-center mb-4">
             <div class="spinner-border" role="status">

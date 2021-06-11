@@ -1,5 +1,5 @@
 <div class="mb-4 pb-3 border-bottom d-flex justify-content-between">
-    <h5 class="text-secondary text-truncate mb-0"><%= screenshot.created_at.strftime("%m/%d/%y") %></h5>
+    <h5 class="text-secondary text-truncate mb-0"><%= screenshot.created_at.strftime("%B %e, %Y") %></h5>
     <div class="">
         <%= link_to url_for(screenshot.image), target: "_blank", class: "text-secondary text-decoration-none", title: "View full size", data: { controller: "tooltip", tooltip_target: "element", bs_toggle: "tooltip", bs_placement: "top"  } do %>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-zoom-in" viewBox="0 0 16 16">
