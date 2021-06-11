@@ -1,4 +1,12 @@
-<h5 class="text-secondary mb-4 border-bottom pb-3"><%= local_assigns[:headline].present? ? local_assigns[:headline] :zone_file.created_at.strftime("%m/%d/%y") %></h5>
+<div class="mb-4 border-bottom pb-3 d-flex align-items-center">
+    <h5 class="text-secondary mb-0"><%= local_assigns[:headline].present? ? local_assigns[:headline] : zone_file.created_at.strftime("%B %e, %Y") %></h5>
+    <% if local_assigns[:next_scheduled_zone_file_capture].present? %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="ms-2 text-secondary bi bi-calendar-check" viewBox="0 0 16 16" data-controller="tooltip" data-tooltip-target="element" data-bs-toggle="tooltip" data-bs-placement="top" title="Next Archive: <%= next_scheduled_zone_file_capture.strftime("%B %e, %Y") %>">
+            <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+        </svg>
+    <% end %>
+</div>
 <div class="card border-0 shadow-sm mb-5">
     <div class="card-body">
         <div class="table-responsive">
