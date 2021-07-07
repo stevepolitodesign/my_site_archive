@@ -26,7 +26,14 @@ class ArchivesController < ApplicationController
   def create
     @archive = @guest_user.archives.build(archive_params)
     if ArchivePolicy.new(set_guest_user, @archive).new?
-      if verify_recaptcha(model: @archive) && @archive.save
+
+      validated = false
+
+      if verify_recaptcha == true
+        validated = true
+      end
+
+      if validated == true && @archive.save
         @website = @archive.create_website_for_report
         @archive.generate_report(@website, archive_params[:url])
         redirect_to @archive
