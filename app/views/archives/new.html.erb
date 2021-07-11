@@ -16,9 +16,9 @@
       </div>
       <div>
         <% if @show_checkbox_recaptcha %>
-          <%= recaptcha_tags %>
+          <%= recaptcha_tags(site_key: Rails.application.credentials.dig(:recaptcha_v2, :site_key)) %>
         <% else %>
-          <%= recaptcha_v3(action: 'archive', site_key: Rails.application.credentials.dig(:recaptcha, :site_key)) %>
+          <%= recaptcha_v3(action: 'archive', site_key: Rails.application.credentials.dig(:recaptcha_v3, :site_key)) %>
         <% end %>
       </div>
     </div>

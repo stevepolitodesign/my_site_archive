@@ -16,7 +16,11 @@ rails development_setup:perform
 browserless:
   private_key: 123
 
-recaptcha:
+recaptcha_v2:
+  site_key: abc123
+  secret_key: abc123
+
+recaptcha_v3:
   site_key: abc123
   secret_key: abc123
 
@@ -32,7 +36,11 @@ stripe:
 browserless:
   private_key: 123
 
-recaptcha:
+recaptcha_v2:
+  site_key: abc123
+  secret_key: abc123
+
+recaptcha_v3:
   site_key: abc123
   secret_key: abc123
 
@@ -54,7 +62,11 @@ digitalocean:
   region: nyc3
   bucket: 123abc
 
-recaptcha:
+recaptcha_v2:
+  site_key: abc123
+  secret_key: abc123
+
+recaptcha_v3:
   site_key: abc123
   secret_key: abc123
 

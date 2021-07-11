@@ -25,8 +25,8 @@ class ArchivesController < ApplicationController
   # TODO: Need to rate limit this action.
   def create
 
-    success = verify_recaptcha(action: 'archive', minimum_score: 0.5, secret_key: Rails.application.credentials.dig(:recaptcha, :secret_key))
-    checkbox_success = verify_recaptcha unless success
+    success = verify_recaptcha(action: 'archive', minimum_score: 0.5, secret_key: Rails.application.credentials.dig(:recaptcha_v3, :secret_key))
+    checkbox_success = verify_recaptcha(secret_key: Rails.application.credentials.dig(:recaptcha_v2, :secret_key)) unless success
 
     if success || checkbox_success
       @archive = @guest_user.archives.build(archive_params)
@@ -44,6 +44,7 @@ class ArchivesController < ApplicationController
     else
       if !success
         @show_checkbox_recaptcha = true
+        @archive = Archive.new
       end
       render 'new'
     end
