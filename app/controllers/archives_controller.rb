@@ -24,25 +24,30 @@ class ArchivesController < ApplicationController
 
   # TODO: Need to rate limit this action.
   def create
-    @archive = @guest_user.archives.build(archive_params)
-    if ArchivePolicy.new(set_guest_user, @archive).new?
 
-      validated = false
+    success = verify_recaptcha(action: 'archive', minimum_score: 0.5, secret_key: Rails.application.credentials.dig(:recaptcha, :secret_key))
+    checkbox_success = verify_recaptcha unless success
 
-      if verify_recaptcha == true
-        validated = true
-      end
-
-      if validated == true && @archive.save
-        @website = @archive.create_website_for_report
-        @archive.generate_report(@website, archive_params[:url])
-        redirect_to @archive
+    if success || checkbox_success
+      @archive = @guest_user.archives.build(archive_params)
+      if ArchivePolicy.new(set_guest_user, @archive).new?
+        if @archive.save
+          @website = @archive.create_website_for_report
+          @archive.generate_report(@website, archive_params[:url])
+          redirect_to @archive
+        else
+          render :new, status: :unprocessable_entity
+        end
       else
-        render :new, status: :unprocessable_entity
+        redirect_to new_user_registration_path, alert: "You've reached your daily limit. Want unlimited access? Sign up today for a 30 day free trial today!"
       end
     else
-      redirect_to new_user_registration_path, alert: "You've reached your daily limit. Want unlimited access? Sign up today for a 30 day free trial today!"
+      if !success
+        @show_checkbox_recaptcha = true
+      end
+      render 'new'
     end
+
   end
 
   def show
