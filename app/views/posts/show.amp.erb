@@ -8,14 +8,14 @@
 <% end %>
 <% if @post.featured_image.attached?%>
   <div>
-    <amp-img src="<%= url_for @post.featured_image.variant(resize_to_fill: [1200, 400, { gravity: 'North' }]) %>" width="1200" height="400"></amp-image>
+    <amp-img src="<%= url_for @post.featured_image.variant(resize_to_fill: [1200, 400, { gravity: 'North' }]) %>" width="1200" height="400" layout="responsive"></amp-image>
   </div>
 <% end %>
 <% if policy(@post).edit? %>
   <%= link_to "Edit", edit_post_path(@post) %>
   <hr/>
 <% end %>
-<article>
+<article class="prose">
   <%= sanitize @post.content.body.to_html, tags: %w(div strong em a strike h1 blockquote pre ul ol li br), attributes: %w(href) %>
 </article>
 <%= render partial: "shared/cta", formats: :html unless current_user %>
