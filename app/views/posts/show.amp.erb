@@ -14,6 +14,6 @@
   <hr/>
 <% end %>
 <article class="prose">
-  <%= sanitize @post.content.body.to_html, tags: %w(div strong em a strike h1 blockquote pre ul ol li br), attributes: %w(href) %>
+  <%= sanitize @post.content.body.to_html, tags: %w(div strong em a strike h1 h2 h3 h4 h5 h6 blockquote pre ul ol li br), attributes: %w(href) %>
 </article>
 <%= render partial: "shared/cta", formats: :html unless current_user %>
