@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     end
 
     def show
-        # fresh_when @post
+        fresh_when @post
         authorize @post
         set_meta_tags   title: @post.title,
                         description: @post.meta_description,
