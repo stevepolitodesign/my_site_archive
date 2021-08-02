@@ -14,13 +14,6 @@
         <%= f.url_field :url, required: true, placeholder: "https://www.your-domain.com", class: "form-control form-control-lg border-r-0 rounded-start rounded-0", data: { url_target: "input", action: "url#handleChange" } %>
         <%= f.submit class: "btn btn-primary rounded-end rounded-0" %>
       </div>
-      <div>
-        <% if @show_checkbox_recaptcha %>
-          <%= recaptcha_tags(site_key: Rails.application.credentials.dig(:recaptcha_v2, :site_key)) %>
-        <% else %>
-          <%= recaptcha_v3(action: 'archive', site_key: Rails.application.credentials.dig(:recaptcha_v3, :site_key)) %>
-        <% end %>
-      </div>
     </div>
   <% end %>
 </div>

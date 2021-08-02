@@ -71,7 +71,4 @@ gem "stripe_event", "~> 2.3"
 gem "strong_migrations", "~> 0.7.1"
 gem "validate_url", "~> 1.0"
 gem "friendly_id", "~> 5.4"
-
-gem "recaptcha", "~> 5.7"
-
 gem "turbo-rails", "~> 0.5.9"
