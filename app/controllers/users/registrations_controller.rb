@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    resource.update(trial_ends_at: 30.days.from_now)
+    resource.update(trial_ends_at: 14.days.from_now)
   end
 
   # GET /resource/edit

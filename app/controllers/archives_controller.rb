@@ -34,7 +34,7 @@ class ArchivesController < ApplicationController
         render :new, status: :unprocessable_entity
       end
     else
-      redirect_to new_user_registration_path, alert: "You've reached your daily limit. Want unlimited access? Sign up today for a 30 day free trial today!"
+      redirect_to new_user_registration_path, alert: "You've reached your daily limit. Want unlimited access? Sign up today for a 14 day free trial today!"
     end
   end
 
