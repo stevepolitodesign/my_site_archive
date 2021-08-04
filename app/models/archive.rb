@@ -28,6 +28,10 @@ class Archive < ApplicationRecord
     end
   end
 
+  def to_param
+    self.uuid
+  end
+
   private
 
     def limit_guest_user_archives

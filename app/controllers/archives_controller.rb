@@ -1,4 +1,6 @@
 class ArchivesController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :handle_missing_archive
+
   layout "landing", only: [:new, :create]
   include GuestUser
   include Schemable
@@ -53,8 +55,12 @@ class ArchivesController < ApplicationController
       params.require(:archive).permit(:url)
     end
 
+    def handle_missing_archive
+      redirect_to demo_path
+    end
+
     def set_archive
-      @archive = Archive.find(params[:id])
+      @archive = Archive.find_by!(uuid: params[:uuid])
     end
 
 end
