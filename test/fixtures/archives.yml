@@ -3,3 +3,4 @@
 one:
   url: http://example.com/
   user: guest_user
+  uuid: 123
