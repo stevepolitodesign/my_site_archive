@@ -45,6 +45,11 @@ class ArchiveFlowTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_registration_path
   end
 
+  test "handle 404" do
+    get archive_path "not_a_real_uuid"
+    assert_redirected_to demo_path
+  end
+
   private
 
     def create_archive
