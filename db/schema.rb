@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_22_021137) do
+ActiveRecord::Schema.define(version: 2021_08_04_095404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,9 @@ ActiveRecord::Schema.define(version: 2021_05_22_021137) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "uuid"
     t.index ["user_id"], name: "index_archives_on_user_id"
+    t.index ["uuid"], name: "index_archives_on_uuid", unique: true
   end
 
   create_table "dns_records", force: :cascade do |t|

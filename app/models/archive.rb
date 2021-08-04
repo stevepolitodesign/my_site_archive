@@ -3,11 +3,14 @@ class Archive < ApplicationRecord
 
   GUEST_USER_LIMIT = 1.freeze
 
+  before_validation :set_uuid, if: :should_set_uuid?
+
   belongs_to :user, counter_cache: true
   has_one :website, dependent: :destroy
 
-  validates :user, :url, presence: true
+  validates :user, :url, :uuid, presence: true
   validates :url, url: true
+  validates :uuid, uniqueness: true
   validate :limit_guest_user_archives, on: :create 
 
   scope :from_guest_account, -> { joins(:user).where( { user: User.guest.not_confirmed } ) }
@@ -29,5 +32,13 @@ class Archive < ApplicationRecord
 
     def limit_guest_user_archives
       errors.add(:base, "You've reached your daily limit. Want unlimited access? Sign up today for a 14 day free trial today!") if self.user.present? && self.user.archives_count >= GUEST_USER_LIMIT
+    end
+
+    def set_uuid
+      self.uuid = SecureRandom.alphanumeric
+    end
+
+    def should_set_uuid?
+      self.uuid.nil?
     end
 end

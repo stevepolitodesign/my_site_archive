@@ -41,5 +41,24 @@ class ArchiveTest < ActiveSupport::TestCase
       @archive.destroy
     end
   end
+  
+  test "should set uuid on create" do
+    assert_nil @archive.uuid
+    @archive.save
+    assert_not_nil @archive.uuid
+  end
+
+  test "should not set uuid on update" do
+    @archive.save
+    @archive.update(url: "https://www.url.com")
+    assert_not_includes @archive.changed, "uuid"
+  end
+
+  test "uuid shoud be unique" do
+    @archive.save
+    @archive_with_duplicate_uuid = @guest_user.archives.create(url: "https://www.example.com")
+    @archive_with_duplicate_uuid.uuid = @archive.uuid
+    assert_not @archive_with_duplicate_uuid.valid?
+  end
 
 end
