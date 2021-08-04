@@ -14,9 +14,6 @@
         <%= f.url_field :url, required: true, placeholder: "https://www.your-domain.com", class: "form-control form-control-lg border-r-0 rounded-start rounded-0", data: { url_target: "input", action: "url#handleChange" } %>
         <%= f.submit class: "btn btn-primary rounded-end rounded-0" %>
       </div>
-      <div>
-        <%= recaptcha_tags %>
-      </div>
     </div>
   <% end %>
 </div>

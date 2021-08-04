@@ -1,7 +1,7 @@
 class Archive < ApplicationRecord
   include Domainable
 
-  GUEST_USER_LIMIT = 2.freeze
+  GUEST_USER_LIMIT = 1.freeze
 
   before_validation :set_uuid, if: :should_set_uuid?
 
