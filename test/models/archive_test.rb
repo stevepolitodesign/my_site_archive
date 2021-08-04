@@ -48,7 +48,7 @@ class ArchiveTest < ActiveSupport::TestCase
     assert_not_nil @archive.uuid
   end
 
-  test "should not update uuid on update" do
+  test "should not set uuid on update" do
     @archive.save
     @archive.update(url: "https://www.url.com")
     assert_not_includes @archive.changed, "uuid"

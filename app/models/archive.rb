@@ -3,12 +3,12 @@ class Archive < ApplicationRecord
 
   GUEST_USER_LIMIT = 2.freeze
 
-  before_create :set_uuid
+  before_validation :set_uuid, if: :should_set_uuid?
 
   belongs_to :user, counter_cache: true
   has_one :website, dependent: :destroy
 
-  validates :user, :url, presence: true
+  validates :user, :url, :uuid, presence: true
   validates :url, url: true
   validates :uuid, uniqueness: true
   validate :limit_guest_user_archives, on: :create 
@@ -36,5 +36,9 @@ class Archive < ApplicationRecord
 
     def set_uuid
       self.uuid = SecureRandom.uuid
+    end
+
+    def should_set_uuid?
+      self.uuid.nil?
     end
 end
