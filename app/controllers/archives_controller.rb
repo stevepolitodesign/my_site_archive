@@ -54,7 +54,7 @@ class ArchivesController < ApplicationController
     end
 
     def set_archive
-      @archive = Archive.find(params[:id])
+      @archive = Archive.find_by!(uuid: params[:uuid])
     end
 
 end
