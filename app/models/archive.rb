@@ -35,7 +35,7 @@ class Archive < ApplicationRecord
     end
 
     def set_uuid
-      self.uuid = SecureRandom.uuid
+      self.uuid = SecureRandom.alphanumeric
     end
 
     def should_set_uuid?
