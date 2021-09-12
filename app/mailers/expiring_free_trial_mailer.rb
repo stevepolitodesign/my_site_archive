@@ -9,7 +9,7 @@ class ExpiringFreeTrialMailer < ApplicationMailer
   def reminder(user:)
     @user       = user
     @expiration = @user.trial_ends_at
-    @subject    = "Your free trail to My Site Archive expires in #{time_ago_in_words(@expiration)}."
+    @subject    = "Your free trial to My Site Archive expires in #{time_ago_in_words(@expiration)}."
 
     mail to: @user.email, subject: @subject
   end
