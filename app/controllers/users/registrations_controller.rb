@@ -12,15 +12,39 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    build_resource(sign_up_params)
+
     if @redemption_code.present?
-      ActiveRecord::Base.transaction do
-        create_redemption!
-        resource.update(trial_ends_at: @redemption_code.ends_at)
+      resource.skip_confirmation!
+      if resource.save
+        begin
+          create_redemption!
+          resource.update!(trial_ends_at: @redemption_code.ends_at)
+        rescue ActiveRecord::RecordInvalid => error
+          resource.destroy
+          redirect_to root_path, alert: error and return 
+        end
       end
     else
+      resource.save
       resource.update(trial_ends_at: 14.days.from_now)
     end
+    yield resource if block_given?
+    if resource.persisted?
+      if resource.active_for_authentication?
+        set_flash_message! :notice, :signed_up
+        sign_up(resource_name, resource)
+        respond_with resource, location: after_sign_up_path_for(resource)
+      else
+        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      respond_with resource
+    end    
   end
 
   # GET /resource/edit
@@ -76,7 +100,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create_redemption!
-    resource.create_redemption!(redemption_code: @redemption_code) 
+    resource.create_redemption!(redemption_code: @redemption_code)
   end
 
 end

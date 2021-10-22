@@ -6,16 +6,43 @@ class RedemptionCodeRegistrationTest < ActionDispatch::IntegrationTest
   end
 
   test "should grant subscription when registering with a redemption code" do
-    post user_registration_path, params: {
-      user: {
-        email: "unique-email@example.com",
-        password: "password",
-        password_confirmation: "password",
-        accepted_terms: 1
-      },
-      redemption_code: @redemption_code.value
-    }
-    assert User.find_by(email: "unique-email@example.com").on_trial?
+    assert_no_emails do
+      post user_registration_path, params: {
+        user: {
+          email: "unique-email@example.com",
+          password: "password",
+          password_confirmation: "password",
+          accepted_terms: 1
+        },
+        redemption_code: @redemption_code.value
+      }
+    end
+
+    @user = User.find_by(email: "unique-email@example.com")
+
+    assert @user.on_trial?
+    assert @user.confirmed?
+  end
+
+  test "should handle previously redeemed code" do
+    @user = users(:sample_user)
+    @redemption = @redemption_code.create_redemption!(user: @user)
+
+    assert_no_difference("User.count") do
+      post user_registration_path, params: {
+        user: {
+          email: "unique-email@example.com",
+          password: "password",
+          password_confirmation: "password",
+          accepted_terms: 1
+        },
+        redemption_code: @redemption_code.value
+      }
+    end
+
+    assert_redirected_to root_path
+    follow_redirect!
+    assert_match "Redemption code has already been taken", @response.body
   end
 
   test "should conditionally render redemption code field on registration page" do
