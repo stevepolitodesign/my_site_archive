@@ -3,6 +3,8 @@ require 'securerandom'
 class Plan < ApplicationRecord
     include ActionView::Helpers::NumberHelper
 
+    has_many :redemption_codes, dependent: :restrict_with_error
+
     enum interval: [:monthly, :yearly]
     enum job_schedule_frequency: [:week]
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_04_120034) do
+ActiveRecord::Schema.define(version: 2021_10_21_111647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,9 +54,6 @@ ActiveRecord::Schema.define(version: 2021_08_04_120034) do
     t.string "uuid", null: false
     t.index ["user_id"], name: "index_archives_on_user_id"
     t.index ["uuid"], name: "index_archives_on_uuid", unique: true
-  end
-
-  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
   create_table "dns_records", force: :cascade do |t|
@@ -143,6 +140,24 @@ ActiveRecord::Schema.define(version: 2021_08_04_120034) do
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 
+  create_table "redemption_codes", force: :cascade do |t|
+    t.bigint "plan_id", null: false
+    t.string "value", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["plan_id"], name: "index_redemption_codes_on_plan_id"
+    t.index ["value"], name: "index_redemption_codes_on_value", unique: true
+  end
+
+  create_table "redemptions", force: :cascade do |t|
+    t.bigint "redemption_code_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["redemption_code_id"], name: "index_redemptions_on_redemption_code_id"
+    t.index ["user_id"], name: "index_redemptions_on_user_id"
+  end
+
   create_table "screenshots", force: :cascade do |t|
     t.bigint "webpage_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -199,7 +214,6 @@ ActiveRecord::Schema.define(version: 2021_08_04_120034) do
     t.string "url", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "width", default: 1024
     t.index ["website_id"], name: "index_webpages_on_website_id"
   end
 
@@ -225,6 +239,9 @@ ActiveRecord::Schema.define(version: 2021_08_04_120034) do
   add_foreign_key "archives", "users"
   add_foreign_key "dns_records", "zone_files"
   add_foreign_key "html_documents", "screenshots"
+  add_foreign_key "redemption_codes", "plans"
+  add_foreign_key "redemptions", "redemption_codes"
+  add_foreign_key "redemptions", "users"
   add_foreign_key "screenshots", "webpages"
   add_foreign_key "stats", "screenshots"
   add_foreign_key "webpages", "websites"
