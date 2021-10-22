@@ -21,9 +21,10 @@ class RedemptionTest < ActiveSupport::TestCase
     assert_not @redemption.valid?
   end
 
-  test "should be unique between user and redemption_code" do
+  test "redemption_code cannot be used more than once" do
     @redemption.save!
-    @duplicate_redemption = Redemption.new(user: @redemption.user, redemption_code: @redemption.redemption_code)
+    @another_user = users(:unsubscribed_user)
+    @duplicate_redemption = Redemption.new(user: @another_user, redemption_code: @redemption.redemption_code)
 
     assert_not @duplicate_redemption.valid?
   end
