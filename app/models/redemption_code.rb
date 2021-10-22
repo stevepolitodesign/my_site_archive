@@ -4,14 +4,5 @@ class RedemptionCode < ApplicationRecord
   has_one :user, through: :redemption, source: :user
 
   validates :value, presence: true
-  validates :value, uniqueness: true  
-
-  def ends_at
-    case self.plan.interval
-    when "monthly"
-        1.month.from_now
-    when "yearly"
-        1.year.from_now
-    end
-  end  
+  validates :value, uniqueness: true
 end

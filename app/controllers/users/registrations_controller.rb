@@ -19,7 +19,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if resource.save
         begin
           create_redemption!
-          resource.update!(trial_ends_at: @redemption_code.ends_at)
+          if @redemption_code.trial_ends_at.present?
+            resource.update!(trial_ends_at: @redemption_code.trial_ends_at)
+          else
+            resource.update!(
+              processor: :fake_processor,
+              processor_id: rand(1_000_000),
+              pay_fake_processor_allowed: true
+            )
+            resource.subscribe(plan: @redemption_code.plan.processor_id)
+          end
         rescue ActiveRecord::RecordInvalid => error
           resource.destroy
           redirect_to root_path, alert: error and return 

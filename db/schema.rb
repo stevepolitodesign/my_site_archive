@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_111647) do
   create_table "redemption_codes", force: :cascade do |t|
     t.bigint "plan_id", null: false
     t.string "value", null: false
+    t.datetime "trial_ends_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["plan_id"], name: "index_redemption_codes_on_plan_id"
