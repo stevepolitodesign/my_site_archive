@@ -2,4 +2,8 @@
 
 one:
   plan: monthly_plan
-  value: MyString
+  value: 123abc
+
+two:
+  plan: monthly_plan
+  value: 456def

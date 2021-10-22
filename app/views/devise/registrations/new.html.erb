@@ -65,6 +65,13 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
         </div>
 
+        <% if params[:enable_redemption_code] == "true" %>
+          <div class="mb-3">
+            <%= label_tag :redemption_code, nil, class: "form-label" %>
+            <%= text_field_tag :redemption_code, nil, class: "form-control" %>
+          </div>
+        <% end %>
+
         <div class="mb-3 form-check">
           <%= f.check_box :accepted_terms, required: true, class: "form-check-input" %>
           <%= f.label :accepted_terms, class: "form-check-label form-label" do %>

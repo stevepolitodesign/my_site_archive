@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
+  before_action :set_redemption_code, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -12,7 +13,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    resource.update(trial_ends_at: 14.days.from_now)
+    if @redemption_code.present?
+      ActiveRecord::Base.transaction do
+        create_redemption!
+        grant_user_fake_payment_processor!
+        grant_user_subscription(@redemption_code.plan.processor_id)
+      end
+    else
+      resource.update(trial_ends_at: 14.days.from_now)
+    end
   end
 
   # GET /resource/edit
@@ -60,4 +69,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def set_redemption_code
+    @redemption_code = RedemptionCode.find_by(value: params[:redemption_code])
+  end
+
+  def create_redemption!
+    resource.create_redemption!(redemption_code: @redemption_code) 
+  end
+
+  def grant_user_fake_payment_processor!
+    resource.update!(
+      processor: :fake_processor,
+      processor_id: rand(1_000_000),
+      pay_fake_processor_allowed: true
+    ) 
+  end
+
+  def grant_user_subscription(processor_id)
+    resource.payment_processor.subscribe(
+      plan: processor_id,
+    )
+  end
+
 end

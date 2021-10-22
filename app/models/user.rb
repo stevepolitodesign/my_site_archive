@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :archives, dependent: :destroy
   has_many :websites, dependent: :destroy
   has_one :redemption, dependent: :destroy
-  has_one :redeemed_code, through: :redemptions
+  has_one :redeemed_code, through: :redemption, source: :redemption_code
 
   validates :accepted_terms, inclusion: { in: [true] }
   validates :accepted_terms, exclusion: { in: [nil,false] }
