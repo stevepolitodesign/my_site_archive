@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plan: monthly_plan
+  value: 123abc
+
+two:
+  plan: monthly_plan
+  value: 456def

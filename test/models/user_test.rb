@@ -39,5 +39,18 @@ class UserTest < ActiveSupport::TestCase
     assert_difference("Archive.count", -1) do
       users(:guest_user).destroy
     end
-  end  
+  end
+  
+  test "association with redemptions" do
+    @user.save!
+    @redemption_code = redemption_codes(:one)
+
+    assert_difference("Redemption.count", 1) do
+      @user.create_redemption!(redemption_code: @redemption_code)
+    end
+
+    assert_difference("Redemption.count", -1) do
+      @user.destroy
+    end
+  end
 end
