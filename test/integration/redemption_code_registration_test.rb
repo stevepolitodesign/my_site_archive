@@ -15,7 +15,7 @@ class RedemptionCodeRegistrationTest < ActionDispatch::IntegrationTest
       },
       redemption_code: @redemption_code.value
     }
-    assert User.find_by(email: "unique-email@example.com").subscribed?
+    assert User.find_by(email: "unique-email@example.com").on_trial?
   end
 
   test "should conditionally render redemption code field on registration page" do

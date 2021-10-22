@@ -16,8 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @redemption_code.present?
       ActiveRecord::Base.transaction do
         create_redemption!
-        grant_user_fake_payment_processor!
-        grant_user_subscription(@redemption_code.plan.processor_id)
+        resource.update(trial_ends_at: @redemption_code.ends_at)
       end
     else
       resource.update(trial_ends_at: 14.days.from_now)
@@ -78,20 +77,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create_redemption!
     resource.create_redemption!(redemption_code: @redemption_code) 
-  end
-
-  def grant_user_fake_payment_processor!
-    resource.update!(
-      processor: :fake_processor,
-      processor_id: rand(1_000_000),
-      pay_fake_processor_allowed: true
-    ) 
-  end
-
-  def grant_user_subscription(processor_id)
-    resource.payment_processor.subscribe(
-      plan: processor_id,
-    )
   end
 
 end
