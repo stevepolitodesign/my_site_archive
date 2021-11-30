@@ -16,5 +16,8 @@ module MySiteArchive
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.active_job.queue_adapter = :sidekiq
+    
+    # https://guides.rubyonrails.org/active_storage_overview.html#transforming-images
+    config.active_storage.variant_processor = :vips
   end
 end
