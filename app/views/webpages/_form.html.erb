@@ -7,7 +7,7 @@
             </div>
             <div class="mb-3" data-controller="url">
                 <%= f.label :url, class: "form-label" %>
-                <%= f.url_field :url, required: true, value: @website.url, class: "form-control", data: { url_target: "input", action: "url#handleChange" } %>
+                <%= f.url_field :url, required: true, value: @webpage.url, class: "form-control", data: { url_target: "input", action: "url#handleChange" } %>
             </div>
             <%= f.submit class: "btn btn-primary" %>
             <%= link_to "Delete Webpage", website_webpage_path(@website, @webpage), method: :delete, class: "btn btn-link text-danger", data: { confirm: "This will delete all associated screenshots and source code." } %>
