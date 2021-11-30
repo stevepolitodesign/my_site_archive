@@ -16,7 +16,7 @@
         </div>
         <%= link_to website_webpage_path(@website, webpage), class: "d-block mb-3" do %>
             <% if webpage.latest_screenshot.present? && webpage.latest_screenshot.image.attached? %>
-                <%= image_tag webpage.latest_screenshot.image.variant(resize_to_fill: [480, 480, { gravity: 'North' }]), class: "img-fluid rounded shadow-sm border" %>
+                <%= image_tag webpage.latest_screenshot.image.variant(resize_to_fill: [960, 960, { gravity: 'North' }]), class: "img-fluid rounded shadow-sm border" %>
             <% else %>    
                 <div class="ratio ratio-1x1 bg-dark rounded">
                     <div class="d-flex align-items-center justify-content-center">
